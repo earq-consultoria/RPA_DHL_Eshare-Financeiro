@@ -1,0 +1,786 @@
+<Activity mc:Ignorable="sap sap2010" x:Class="Adicionar_itens_do_PPD_no_orchestrator" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:njl="clr-namespace:Newtonsoft.Json.Linq;assembly=Newtonsoft.Json" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <x:Members>
+    <x:Property Name="in_Config" Type="InArgument(scg:Dictionary(x:String, x:Object))" />
+    <x:Property Name="DataExecucao" Type="OutArgument(x:String)" />
+  </x:Members>
+  <VisualBasic.Settings>
+    <x:Null />
+  </VisualBasic.Settings>
+  <sap:VirtualizedContainerService.HintSize>1314.4,12309.6</sap:VirtualizedContainerService.HintSize>
+  <sap2010:WorkflowViewState.IdRef>Adicionar_itens_do_PPD_no_orchestrator_1</sap2010:WorkflowViewState.IdRef>
+  <TextExpression.NamespacesForImplementation>
+    <scg:List x:TypeArguments="x:String" Capacity="48">
+      <x:String>GlobalConstantsNamespace</x:String>
+      <x:String>GlobalVariablesNamespace</x:String>
+      <x:String>Microsoft.VisualBasic</x:String>
+      <x:String>Microsoft.VisualBasic.Activities</x:String>
+      <x:String>Microsoft.VisualBasic.CompilerServices</x:String>
+      <x:String>Newtonsoft.Json</x:String>
+      <x:String>Newtonsoft.Json.Linq</x:String>
+      <x:String>System</x:String>
+      <x:String>System.Activities</x:String>
+      <x:String>System.Activities.Expressions</x:String>
+      <x:String>System.Activities.Statements</x:String>
+      <x:String>System.Activities.Validation</x:String>
+      <x:String>System.Activities.XamlIntegration</x:String>
+      <x:String>System.Collections</x:String>
+      <x:String>System.Collections.Generic</x:String>
+      <x:String>System.Collections.ObjectModel</x:String>
+      <x:String>System.Data</x:String>
+      <x:String>System.Diagnostics</x:String>
+      <x:String>System.Drawing</x:String>
+      <x:String>System.IO</x:String>
+      <x:String>System.Linq</x:String>
+      <x:String>System.Net.Mail</x:String>
+      <x:String>System.Text</x:String>
+      <x:String>System.Windows.Markup</x:String>
+      <x:String>System.Xml</x:String>
+      <x:String>System.Xml.Linq</x:String>
+      <x:String>UiPath.Core</x:String>
+      <x:String>UiPath.Core.Activities</x:String>
+      <x:String>UiPath.Platform.ResourceHandling</x:String>
+      <x:String>System.Runtime.Serialization</x:String>
+      <x:String>System.Security</x:String>
+      <x:String>UiPath.Web</x:String>
+      <x:String>UiPath.Web.Activities</x:String>
+    </scg:List>
+  </TextExpression.NamespacesForImplementation>
+  <TextExpression.ReferencesForImplementation>
+    <scg:List x:TypeArguments="AssemblyReference" Capacity="40">
+      <AssemblyReference>Microsoft.VisualBasic</AssemblyReference>
+      <AssemblyReference>mscorlib</AssemblyReference>
+      <AssemblyReference>Newtonsoft.Json</AssemblyReference>
+      <AssemblyReference>PresentationCore</AssemblyReference>
+      <AssemblyReference>PresentationFramework</AssemblyReference>
+      <AssemblyReference>System</AssemblyReference>
+      <AssemblyReference>System.Activities</AssemblyReference>
+      <AssemblyReference>System.Collections</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.Composition</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.TypeConverter</AssemblyReference>
+      <AssemblyReference>System.Core</AssemblyReference>
+      <AssemblyReference>System.Data</AssemblyReference>
+      <AssemblyReference>System.Data.DataSetExtensions</AssemblyReference>
+      <AssemblyReference>System.Drawing</AssemblyReference>
+      <AssemblyReference>System.Linq</AssemblyReference>
+      <AssemblyReference>System.ObjectModel</AssemblyReference>
+      <AssemblyReference>System.Private.CoreLib</AssemblyReference>
+      <AssemblyReference>System.ServiceModel</AssemblyReference>
+      <AssemblyReference>System.ValueTuple</AssemblyReference>
+      <AssemblyReference>System.Xaml</AssemblyReference>
+      <AssemblyReference>System.Xml</AssemblyReference>
+      <AssemblyReference>System.Xml.Linq</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.UiAutomation.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Web.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Workflow</AssemblyReference>
+      <AssemblyReference>WindowsBase</AssemblyReference>
+      <AssemblyReference>UiPath.Studio.Constants</AssemblyReference>
+      <AssemblyReference>UiPath.Platform</AssemblyReference>
+      <AssemblyReference>System.Private.ServiceModel</AssemblyReference>
+      <AssemblyReference>System.Runtime.Serialization.Formatters</AssemblyReference>
+      <AssemblyReference>System.Private.DataContractSerialization</AssemblyReference>
+      <AssemblyReference>System.Runtime.Serialization.Primitives</AssemblyReference>
+      <AssemblyReference>System.Security.Permissions</AssemblyReference>
+      <AssemblyReference>System.Runtime.InteropServices</AssemblyReference>
+      <AssemblyReference>UiPath.Web</AssemblyReference>
+    </scg:List>
+  </TextExpression.ReferencesForImplementation>
+  <Sequence sap:VirtualizedContainerService.HintSize="899.2,12204.8" sap2010:WorkflowViewState.IdRef="Sequence_10">
+    <sap:WorkflowViewStateService.ViewState>
+      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+      </scg:Dictionary>
+    </sap:WorkflowViewStateService.ViewState>
+    <Sequence DisplayName="Adicionar itens do PPD no orchestrator" sap:VirtualizedContainerService.HintSize="836.8,12092.8" sap2010:WorkflowViewState.IdRef="Sequence_1">
+      <Sequence.Variables>
+        <Variable x:TypeArguments="x:String" Name="response" />
+        <Variable x:TypeArguments="njl:JArray" Name="items" />
+        <Variable x:TypeArguments="x:Int32" Name="statusCode" />
+        <Variable x:TypeArguments="x:String" Name="proxyHeader" />
+      </Sequence.Variables>
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+      <Assign sap:VirtualizedContainerService.HintSize="774.4,81.6" sap2010:WorkflowViewState.IdRef="Assign_10">
+        <Assign.To>
+          <OutArgument x:TypeArguments="x:String">[proxyHeader]</OutArgument>
+        </Assign.To>
+        <Assign.Value>
+          <InArgument x:TypeArguments="x:String">["Basic " + Convert.ToBase64String(System.Text.Encoding.UTF8.GetBytes("PHX-DC\rpa0dtentry:"+in_Config("HttpPsw").ToString))]</InArgument>
+        </Assign.Value>
+      </Assign>
+      <Assign sap:VirtualizedContainerService.HintSize="774.4,81.6" sap2010:WorkflowViewState.IdRef="Assign_29">
+        <Assign.To>
+          <OutArgument x:TypeArguments="x:String">[DataExecucao]</OutArgument>
+        </Assign.To>
+        <Assign.Value>
+          <InArgument x:TypeArguments="x:String">[System.DateTime.Now.ToString("ddMMyyyy")]</InArgument>
+        </Assign.Value>
+      </Assign>
+      <Sequence DisplayName="Chamada do EndPoint Novo" sap:VirtualizedContainerService.HintSize="774.4,5530.4" sap2010:WorkflowViewState.IdRef="Sequence_11">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+        <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="664,142.4" sap2010:WorkflowViewState.IdRef="LogMessage_3" Level="Info" Message="[&quot;Inicio request endpoint eShare Fiscal&quot;]" />
+        <ui:HttpClient Body="{x:Null}" ConsumerKey="{x:Null}" ConsumerSecret="{x:Null}" ContinueOnError="{x:Null}" FileAttachments="{x:Null}" OAuth1Token="{x:Null}" OAuth1TokenSecret="{x:Null}" OAuth2Token="{x:Null}" ResourcePath="{x:Null}" ResponseAttachment="{x:Null}" ResponseHeaders="{x:Null}" SecureClientCertificatePassword="{x:Null}" SecurePassword="{x:Null}" AcceptFormat="ANY" AuthenticationType="None" BodyFormat="application/json" ClientCertificate="[Nothing]" ClientCertificatePassword="[Nothing]" DisplayName="HTTP Request" EnableSSLVerification="True" EndPoint="[in_Config(&quot;PPDUrl&quot;+&quot;_&quot;+in_Config(&quot;Mode&quot;).ToString).ToString]" sap:VirtualizedContainerService.HintSize="664,71.2" sap2010:WorkflowViewState.IdRef="HttpClient_7" Method="POST" Password="[Nothing]" Result="[response]" StatusCode="[statusCode]" TimeoutMS="1800000" Username="[Nothing]">
+          <ui:HttpClient.Attachments>
+            <scg:Dictionary x:TypeArguments="x:String, InArgument(x:String)" />
+          </ui:HttpClient.Attachments>
+          <ui:HttpClient.Cookies>
+            <scg:Dictionary x:TypeArguments="x:String, InArgument(x:String)" />
+          </ui:HttpClient.Cookies>
+          <ui:HttpClient.Headers>
+            <InArgument x:TypeArguments="x:String" x:Key="Login">[in_Config("PPDLogin"+"_"+in_Config("Mode").ToString).ToString]</InArgument>
+            <InArgument x:TypeArguments="x:String" x:Key="Senha">[in_Config("PPDPassword"+"_"+in_Config("Mode").ToString).ToString]</InArgument>
+            <InArgument x:TypeArguments="x:String" x:Key="Proxy-Authorization">[proxyHeader]</InArgument>
+          </ui:HttpClient.Headers>
+          <ui:HttpClient.Parameters>
+            <scg:Dictionary x:TypeArguments="x:String, InArgument(x:String)" />
+          </ui:HttpClient.Parameters>
+          <ui:HttpClient.UrlSegments>
+            <scg:Dictionary x:TypeArguments="x:String, InArgument(x:String)" />
+          </ui:HttpClient.UrlSegments>
+        </ui:HttpClient>
+        <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="664,142.4" sap2010:WorkflowViewState.IdRef="LogMessage_4" Level="Info" Message="[&quot;Fim request endpoint eShare Fiscal    Status: &quot;+statusCode.ToString]" />
+        <While sap:VirtualizedContainerService.HintSize="664,656" sap2010:WorkflowViewState.IdRef="While_1" Condition="[statusCode = 407]">
+          <Sequence sap:VirtualizedContainerService.HintSize="449.6,496" sap2010:WorkflowViewState.IdRef="Sequence_5">
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+            <Delay Duration="00:00:30" sap:VirtualizedContainerService.HintSize="387.2,90.4" sap2010:WorkflowViewState.IdRef="Delay_1" />
+            <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="387.2,142.4" sap2010:WorkflowViewState.IdRef="LogMessage_2" Level="Info" Message="[&quot;Resposta por mais itens no ppd: &quot; + statusCode.ToString]" />
+            <ui:HttpClient Body="{x:Null}" ConsumerKey="{x:Null}" ConsumerSecret="{x:Null}" ContinueOnError="{x:Null}" FileAttachments="{x:Null}" OAuth1Token="{x:Null}" OAuth1TokenSecret="{x:Null}" OAuth2Token="{x:Null}" ResourcePath="{x:Null}" ResponseAttachment="{x:Null}" ResponseHeaders="{x:Null}" SecureClientCertificatePassword="{x:Null}" SecurePassword="{x:Null}" AcceptFormat="ANY" AuthenticationType="None" BodyFormat="application/json" ClientCertificate="[Nothing]" ClientCertificatePassword="[Nothing]" DisplayName="HTTP Request" EnableSSLVerification="True" EndPoint="[in_Config(&quot;PPDUrl&quot;+&quot;_&quot;+in_Config(&quot;Mode&quot;).ToString).ToString]" sap:VirtualizedContainerService.HintSize="387.2,71.2" sap2010:WorkflowViewState.IdRef="HttpClient_8" Method="POST" Password="[Nothing]" Result="[response]" StatusCode="[statusCode]" TimeoutMS="[CInt(in_Config(&quot;TimeoutLong&quot;).ToString)]" Username="[Nothing]">
+              <ui:HttpClient.Attachments>
+                <scg:Dictionary x:TypeArguments="x:String, InArgument(x:String)" />
+              </ui:HttpClient.Attachments>
+              <ui:HttpClient.Cookies>
+                <scg:Dictionary x:TypeArguments="x:String, InArgument(x:String)" />
+              </ui:HttpClient.Cookies>
+              <ui:HttpClient.Headers>
+                <InArgument x:TypeArguments="x:String" x:Key="Login">[in_Config("PPDLogin"+"_"+in_Config("Mode").ToString).ToString]</InArgument>
+                <InArgument x:TypeArguments="x:String" x:Key="Senha">[in_Config("PPDPassword"+"_"+in_Config("Mode").ToString).ToString]</InArgument>
+                <InArgument x:TypeArguments="x:String" x:Key="Proxy-Authorization">[proxyHeader]</InArgument>
+              </ui:HttpClient.Headers>
+              <ui:HttpClient.Parameters>
+                <scg:Dictionary x:TypeArguments="x:String, InArgument(x:String)" />
+              </ui:HttpClient.Parameters>
+              <ui:HttpClient.UrlSegments>
+                <scg:Dictionary x:TypeArguments="x:String, InArgument(x:String)" />
+              </ui:HttpClient.UrlSegments>
+            </ui:HttpClient>
+          </Sequence>
+        </While>
+        <If Condition="[statusCode = 200]" sap:VirtualizedContainerService.HintSize="664,4246.4" sap2010:WorkflowViewState.IdRef="If_1">
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+              <x:Boolean x:Key="IsPinned">False</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+          <If.Then>
+            <Sequence sap:VirtualizedContainerService.HintSize="630.4,3920.8" sap2010:WorkflowViewState.IdRef="Sequence_2">
+              <sap:WorkflowViewStateService.ViewState>
+                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                  <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                </scg:Dictionary>
+              </sap:WorkflowViewStateService.ViewState>
+              <ui:DeserializeJsonArray DisplayName="Deserialize JSON Array" sap:VirtualizedContainerService.HintSize="587.2,60" sap2010:WorkflowViewState.IdRef="DeserializeJsonArray_1" JsonArray="[items]" JsonString="[response]" />
+              <ui:ForEach x:TypeArguments="njl:JToken" CurrentIndex="{x:Null}" DisplayName="For Each" sap:VirtualizedContainerService.HintSize="587.2,3731.2" sap2010:WorkflowViewState.IdRef="ForEach`1_2" Values="[items]">
+                <ui:ForEach.Body>
+                  <ActivityAction x:TypeArguments="njl:JToken">
+                    <ActivityAction.Argument>
+                      <DelegateInArgument x:TypeArguments="njl:JToken" Name="item" />
+                    </ActivityAction.Argument>
+                    <Sequence sap:VirtualizedContainerService.HintSize="553.6,3543.2" sap2010:WorkflowViewState.IdRef="Sequence_3">
+                      <Sequence.Variables>
+                        <Variable x:TypeArguments="x:String" Name="id" />
+                        <Variable x:TypeArguments="x:String" Name="codigoTomador" />
+                        <Variable x:TypeArguments="x:String" Name="dataVencimentoEshare" />
+                        <Variable x:TypeArguments="x:String" Name="cnpjFilial" />
+                        <Variable x:TypeArguments="x:String" Name="numeroDocumento" />
+                        <Variable x:TypeArguments="x:String" Name="pastaOrigem" />
+                        <Variable x:TypeArguments="x:String" Name="razaoSocialFornecedor" />
+                        <Variable x:TypeArguments="x:String" Name="riOracle" />
+                        <Variable x:TypeArguments="ui:GenericValue" Name="codigoFilialOracle" />
+                        <Variable x:TypeArguments="x:String" Name="DocumentoId" />
+                      </Sequence.Variables>
+                      <sap:WorkflowViewStateService.ViewState>
+                        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                        </scg:Dictionary>
+                      </sap:WorkflowViewStateService.ViewState>
+                      <If Condition="[Not item(&quot;id&quot;) is Nothing]" sap:VirtualizedContainerService.HintSize="510.4,264.8" sap2010:WorkflowViewState.IdRef="If_2">
+                        <sap:WorkflowViewStateService.ViewState>
+                          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                          </scg:Dictionary>
+                        </sap:WorkflowViewStateService.ViewState>
+                        <If.Then>
+                          <Assign sap:VirtualizedContainerService.HintSize="433.6,81.6" sap2010:WorkflowViewState.IdRef="Assign_1">
+                            <Assign.To>
+                              <OutArgument x:TypeArguments="x:String">[id]</OutArgument>
+                            </Assign.To>
+                            <Assign.Value>
+                              <InArgument x:TypeArguments="x:String">[item("id").ToString]</InArgument>
+                            </Assign.Value>
+                          </Assign>
+                        </If.Then>
+                        <If.Else>
+                          <Sequence DisplayName="" sap2010:WorkflowViewState.IdRef="Sequence_19" />
+                        </If.Else>
+                      </If>
+                      <If Condition="[Not item(&quot;DocumentoId&quot;) is Nothing]" sap:VirtualizedContainerService.HintSize="510.4,264.8" sap2010:WorkflowViewState.IdRef="If_11">
+                        <If.Then>
+                          <Assign sap:VirtualizedContainerService.HintSize="433.6,81.6" sap2010:WorkflowViewState.IdRef="Assign_13">
+                            <Assign.To>
+                              <OutArgument x:TypeArguments="x:String">[DocumentoId]</OutArgument>
+                            </Assign.To>
+                            <Assign.Value>
+                              <InArgument x:TypeArguments="x:String">[item("DocumentoId").ToString]</InArgument>
+                            </Assign.Value>
+                          </Assign>
+                        </If.Then>
+                        <If.Else>
+                          <Sequence DisplayName="" sap2010:WorkflowViewState.IdRef="Sequence_33" />
+                        </If.Else>
+                      </If>
+                      <If Condition="[Not item(&quot;cnpjFilial&quot;) is Nothing]" sap:VirtualizedContainerService.HintSize="510.4,264.8" sap2010:WorkflowViewState.IdRef="If_3">
+                        <If.Then>
+                          <Assign sap:VirtualizedContainerService.HintSize="433.6,81.6" sap2010:WorkflowViewState.IdRef="Assign_2">
+                            <Assign.To>
+                              <OutArgument x:TypeArguments="x:String">[cnpjFilial]</OutArgument>
+                            </Assign.To>
+                            <Assign.Value>
+                              <InArgument x:TypeArguments="x:String">[item("cnpjFilial").ToString]</InArgument>
+                            </Assign.Value>
+                          </Assign>
+                        </If.Then>
+                        <If.Else>
+                          <Sequence DisplayName="" sap2010:WorkflowViewState.IdRef="Sequence_34" />
+                        </If.Else>
+                      </If>
+                      <If Condition="[Not item(&quot;codigoTomador&quot;) is Nothing]" sap:VirtualizedContainerService.HintSize="510.4,264.8" sap2010:WorkflowViewState.IdRef="If_4">
+                        <If.Then>
+                          <Assign sap:VirtualizedContainerService.HintSize="433.6,81.6" sap2010:WorkflowViewState.IdRef="Assign_3">
+                            <Assign.To>
+                              <OutArgument x:TypeArguments="x:String">[codigoTomador]</OutArgument>
+                            </Assign.To>
+                            <Assign.Value>
+                              <InArgument x:TypeArguments="x:String">[item("codigoTomador").toString]</InArgument>
+                            </Assign.Value>
+                          </Assign>
+                        </If.Then>
+                        <If.Else>
+                          <Sequence DisplayName="" sap2010:WorkflowViewState.IdRef="Sequence_35" />
+                        </If.Else>
+                      </If>
+                      <If Condition="[Not item(&quot;dataLancamentoOracle&quot;) is Nothing]" sap:VirtualizedContainerService.HintSize="510.4,264.8" sap2010:WorkflowViewState.IdRef="If_5">
+                        <If.Then>
+                          <Assign sap:VirtualizedContainerService.HintSize="433.6,81.6" sap2010:WorkflowViewState.IdRef="Assign_4">
+                            <Assign.To>
+                              <OutArgument x:TypeArguments="x:String">[dataVencimentoEshare]</OutArgument>
+                            </Assign.To>
+                            <Assign.Value>
+                              <InArgument x:TypeArguments="x:String">[item("dataLancamentoOracle").toString]</InArgument>
+                            </Assign.Value>
+                          </Assign>
+                        </If.Then>
+                        <If.Else>
+                          <Sequence DisplayName="" sap2010:WorkflowViewState.IdRef="Sequence_36" />
+                        </If.Else>
+                      </If>
+                      <If Condition="[Not item(&quot;numeroDocumento&quot;) is Nothing]" sap:VirtualizedContainerService.HintSize="510.4,264.8" sap2010:WorkflowViewState.IdRef="If_6">
+                        <If.Then>
+                          <Assign sap:VirtualizedContainerService.HintSize="433.6,81.6" sap2010:WorkflowViewState.IdRef="Assign_5">
+                            <Assign.To>
+                              <OutArgument x:TypeArguments="x:String">[numeroDocumento]</OutArgument>
+                            </Assign.To>
+                            <Assign.Value>
+                              <InArgument x:TypeArguments="x:String">[item("numeroDocumento").ToString]</InArgument>
+                            </Assign.Value>
+                          </Assign>
+                        </If.Then>
+                        <If.Else>
+                          <Sequence DisplayName="" sap2010:WorkflowViewState.IdRef="Sequence_37" />
+                        </If.Else>
+                      </If>
+                      <If Condition="[Not item(&quot;pastaOrigem&quot;) is Nothing]" sap:VirtualizedContainerService.HintSize="510.4,476" sap2010:WorkflowViewState.IdRef="If_7">
+                        <If.Then>
+                          <Sequence sap:VirtualizedContainerService.HintSize="476.8,292.8" sap2010:WorkflowViewState.IdRef="Sequence_4">
+                            <sap:WorkflowViewStateService.ViewState>
+                              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                              </scg:Dictionary>
+                            </sap:WorkflowViewStateService.ViewState>
+                            <Assign sap:VirtualizedContainerService.HintSize="433.6,81.6" sap2010:WorkflowViewState.IdRef="Assign_6">
+                              <Assign.To>
+                                <OutArgument x:TypeArguments="x:String">[pastaOrigem]</OutArgument>
+                              </Assign.To>
+                              <Assign.Value>
+                                <InArgument x:TypeArguments="x:String">[item("pastaOrigem").ToString.Replace("/","\")]</InArgument>
+                              </Assign.Value>
+                            </Assign>
+                            <Assign sap:VirtualizedContainerService.HintSize="433.6,81.6" sap2010:WorkflowViewState.IdRef="Assign_9">
+                              <Assign.To>
+                                <OutArgument x:TypeArguments="x:String">[pastaOrigem]</OutArgument>
+                              </Assign.To>
+                              <Assign.Value>
+                                <InArgument x:TypeArguments="x:String">[pastaOrigem.Replace(in_Config("filePrefix").ToString, in_Config("rootPath").ToString)]</InArgument>
+                              </Assign.Value>
+                            </Assign>
+                          </Sequence>
+                        </If.Then>
+                        <If.Else>
+                          <Sequence DisplayName="" sap:VirtualizedContainerService.HintSize="300,82.4" sap2010:WorkflowViewState.IdRef="Sequence_38">
+                            <sap:WorkflowViewStateService.ViewState>
+                              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                              </scg:Dictionary>
+                            </sap:WorkflowViewStateService.ViewState>
+                          </Sequence>
+                        </If.Else>
+                      </If>
+                      <If Condition="[Not item(&quot;RazaoSocialFornecedor&quot;) is Nothing]" sap:VirtualizedContainerService.HintSize="510.4,264.8" sap2010:WorkflowViewState.IdRef="If_8">
+                        <If.Then>
+                          <Assign sap:VirtualizedContainerService.HintSize="433.6,81.6" sap2010:WorkflowViewState.IdRef="Assign_7">
+                            <Assign.To>
+                              <OutArgument x:TypeArguments="x:String">[razaoSocialFornecedor]</OutArgument>
+                            </Assign.To>
+                            <Assign.Value>
+                              <InArgument x:TypeArguments="x:String">[item("RazaoSocialFornecedor").ToString]</InArgument>
+                            </Assign.Value>
+                          </Assign>
+                        </If.Then>
+                        <If.Else>
+                          <Sequence DisplayName="" sap2010:WorkflowViewState.IdRef="Sequence_39" />
+                        </If.Else>
+                      </If>
+                      <If Condition="[Not item(&quot;rioracle&quot;) is Nothing]" sap:VirtualizedContainerService.HintSize="510.4,264.8" sap2010:WorkflowViewState.IdRef="If_9">
+                        <sap:WorkflowViewStateService.ViewState>
+                          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                          </scg:Dictionary>
+                        </sap:WorkflowViewStateService.ViewState>
+                        <If.Then>
+                          <Assign sap:VirtualizedContainerService.HintSize="433.6,81.6" sap2010:WorkflowViewState.IdRef="Assign_8">
+                            <Assign.To>
+                              <OutArgument x:TypeArguments="x:String">[riOracle]</OutArgument>
+                            </Assign.To>
+                            <Assign.Value>
+                              <InArgument x:TypeArguments="x:String">[item("rioracle").ToString]</InArgument>
+                            </Assign.Value>
+                          </Assign>
+                        </If.Then>
+                        <If.Else>
+                          <Sequence DisplayName="" sap2010:WorkflowViewState.IdRef="Sequence_40" />
+                        </If.Else>
+                      </If>
+                      <If Condition="[Not item(&quot;codigoFilialOracle&quot;) is Nothing]" sap:VirtualizedContainerService.HintSize="510.4,264.8" sap2010:WorkflowViewState.IdRef="If_10">
+                        <If.Then>
+                          <Assign sap:VirtualizedContainerService.HintSize="433.6,81.6" sap2010:WorkflowViewState.IdRef="Assign_11">
+                            <Assign.To>
+                              <OutArgument x:TypeArguments="ui:GenericValue">[codigoFilialOracle]</OutArgument>
+                            </Assign.To>
+                            <Assign.Value>
+                              <InArgument x:TypeArguments="ui:GenericValue">[item("codigoFilialOracle").ToString]</InArgument>
+                            </Assign.Value>
+                          </Assign>
+                        </If.Then>
+                        <If.Else>
+                          <Sequence DisplayName="" sap2010:WorkflowViewState.IdRef="Sequence_41" />
+                        </If.Else>
+                      </If>
+                      <ui:AddQueueItem ServiceBaseAddress="{x:Null}" DisplayName="Add Queue Item" sap:VirtualizedContainerService.HintSize="510.4,194.4" sap2010:WorkflowViewState.IdRef="AddQueueItem_1" Priority="Normal" QueueType="[in_Config(&quot;OrchestratorQueueName&quot;+&quot;_&quot;+in_Config(&quot;Mode&quot;).ToString).ToString]">
+                        <ui:AddQueueItem.ItemInformation>
+                          <InArgument x:TypeArguments="x:String" x:Key="id">[id]</InArgument>
+                          <InArgument x:TypeArguments="x:String" x:Key="cnpjFilial">[cnpjFilial]</InArgument>
+                          <InArgument x:TypeArguments="x:String" x:Key="codigoTomador">[codigoTomador]</InArgument>
+                          <InArgument x:TypeArguments="x:String" x:Key="dataDeVencimentoEShare">[dataVencimentoEshare]</InArgument>
+                          <InArgument x:TypeArguments="x:String" x:Key="numeroDocumento">[numeroDocumento]</InArgument>
+                          <InArgument x:TypeArguments="x:String" x:Key="pastaOrigem">[pastaOrigem]</InArgument>
+                          <InArgument x:TypeArguments="x:String" x:Key="razaoSocialFornecedor">[razaoSocialFornecedor]</InArgument>
+                          <InArgument x:TypeArguments="x:String" x:Key="riOracle">[riOracle]</InArgument>
+                          <InArgument x:TypeArguments="x:String" x:Key="codigoFilialOracle">[codigoFilialOracle]</InArgument>
+                          <InArgument x:TypeArguments="x:String" x:Key="DocumentoId">[DocumentoId]</InArgument>
+                          <InArgument x:TypeArguments="x:String" x:Key="DataExecucao">[DataExecucao]</InArgument>
+                        </ui:AddQueueItem.ItemInformation>
+                        <ui:AddQueueItem.Reference>
+                          <InArgument x:TypeArguments="x:String" />
+                        </ui:AddQueueItem.Reference>
+                        <ui:AddQueueItem.TimeoutMS>
+                          <InArgument x:TypeArguments="x:Int32" />
+                        </ui:AddQueueItem.TimeoutMS>
+                      </ui:AddQueueItem>
+                    </Sequence>
+                  </ActivityAction>
+                </ui:ForEach.Body>
+              </ui:ForEach>
+            </Sequence>
+          </If.Then>
+          <If.Else>
+            <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="334.4,142.4" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Info" Message="[&quot;Requisição no ppd por mais itens do eshare financeiro respondeu: &quot; + statusCode.ToString]" />
+          </If.Else>
+        </If>
+      </Sequence>
+      <If Condition="[in_Config(&quot;Mode&quot;).ToString=&quot;PROD&quot;]" sap:VirtualizedContainerService.HintSize="774.4,6167.2" sap2010:WorkflowViewState.IdRef="If_23">
+        <If.Then>
+          <Sequence DisplayName="Chamada do EndPoint Legado" sap:VirtualizedContainerService.HintSize="740.8,5901.6" sap2010:WorkflowViewState.IdRef="Sequence_16">
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                <x:Boolean x:Key="IsPinned">False</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+            <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="697.6,142.4" sap2010:WorkflowViewState.IdRef="LogMessage_5" Level="Info" Message="[&quot;Inicio request endpoint eShare Fiscal_LEGADO&quot;]" />
+            <ui:HttpClient Body="{x:Null}" ConsumerKey="{x:Null}" ConsumerSecret="{x:Null}" ContinueOnError="{x:Null}" FileAttachments="{x:Null}" OAuth1Token="{x:Null}" OAuth1TokenSecret="{x:Null}" OAuth2Token="{x:Null}" ResourcePath="{x:Null}" ResponseAttachment="{x:Null}" ResponseHeaders="{x:Null}" SecureClientCertificatePassword="{x:Null}" SecurePassword="{x:Null}" AcceptFormat="ANY" AuthenticationType="None" BodyFormat="application/json" ClientCertificate="[Nothing]" ClientCertificatePassword="[Nothing]" DisplayName="HTTP Request" EnableSSLVerification="True" EndPoint="[in_Config(&quot;PPDUrl_LEGADO&quot;).ToString]" sap:VirtualizedContainerService.HintSize="697.6,71.2" sap2010:WorkflowViewState.IdRef="HttpClient_9" Method="POST" Password="[Nothing]" Result="[response]" StatusCode="[statusCode]" TimeoutMS="1800000" Username="[Nothing]">
+              <ui:HttpClient.Attachments>
+                <scg:Dictionary x:TypeArguments="x:String, InArgument(x:String)" />
+              </ui:HttpClient.Attachments>
+              <ui:HttpClient.Cookies>
+                <scg:Dictionary x:TypeArguments="x:String, InArgument(x:String)" />
+              </ui:HttpClient.Cookies>
+              <ui:HttpClient.Headers>
+                <InArgument x:TypeArguments="x:String" x:Key="Login">[in_Config("PPDLogin"+"_"+in_Config("Mode").ToString).ToString]</InArgument>
+                <InArgument x:TypeArguments="x:String" x:Key="Senha">[in_Config("PPDPassword"+"_"+in_Config("Mode").ToString).ToString]</InArgument>
+                <InArgument x:TypeArguments="x:String" x:Key="Proxy-Authorization">[proxyHeader]</InArgument>
+              </ui:HttpClient.Headers>
+              <ui:HttpClient.Parameters>
+                <scg:Dictionary x:TypeArguments="x:String, InArgument(x:String)" />
+              </ui:HttpClient.Parameters>
+              <ui:HttpClient.UrlSegments>
+                <scg:Dictionary x:TypeArguments="x:String, InArgument(x:String)" />
+              </ui:HttpClient.UrlSegments>
+            </ui:HttpClient>
+            <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="697.6,142.4" sap2010:WorkflowViewState.IdRef="LogMessage_6" Level="Info" Message="[&quot;Fim request endpoint eShare Fiscal_LEGADO    Status: &quot;+statusCode.ToString]" />
+            <While sap:VirtualizedContainerService.HintSize="697.6,655.2" sap2010:WorkflowViewState.IdRef="While_2" Condition="[statusCode = 407]">
+              <Sequence sap:VirtualizedContainerService.HintSize="449.6,496" sap2010:WorkflowViewState.IdRef="Sequence_12">
+                <sap:WorkflowViewStateService.ViewState>
+                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                    <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                  </scg:Dictionary>
+                </sap:WorkflowViewStateService.ViewState>
+                <Delay Duration="00:00:30" sap:VirtualizedContainerService.HintSize="387.2,90.4" sap2010:WorkflowViewState.IdRef="Delay_2" />
+                <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="387.2,142.4" sap2010:WorkflowViewState.IdRef="LogMessage_7" Level="Info" Message="[&quot;Resposta por mais itens no ppd: &quot; + statusCode.ToString]" />
+                <ui:HttpClient Body="{x:Null}" ConsumerKey="{x:Null}" ConsumerSecret="{x:Null}" ContinueOnError="{x:Null}" FileAttachments="{x:Null}" OAuth1Token="{x:Null}" OAuth1TokenSecret="{x:Null}" OAuth2Token="{x:Null}" ResourcePath="{x:Null}" ResponseAttachment="{x:Null}" ResponseHeaders="{x:Null}" SecureClientCertificatePassword="{x:Null}" SecurePassword="{x:Null}" AcceptFormat="ANY" AuthenticationType="None" BodyFormat="application/json" ClientCertificate="[Nothing]" ClientCertificatePassword="[Nothing]" DisplayName="HTTP Request" EnableSSLVerification="True" EndPoint="[in_Config(&quot;PPDUrl&quot;+&quot;_&quot;+in_Config(&quot;Mode&quot;).ToString).ToString]" sap:VirtualizedContainerService.HintSize="387.2,71.2" sap2010:WorkflowViewState.IdRef="HttpClient_10" Method="POST" Password="[Nothing]" Result="[response]" StatusCode="[statusCode]" TimeoutMS="[CInt(in_Config(&quot;TimeoutLong&quot;).ToString)]" Username="[Nothing]">
+                  <ui:HttpClient.Attachments>
+                    <scg:Dictionary x:TypeArguments="x:String, InArgument(x:String)" />
+                  </ui:HttpClient.Attachments>
+                  <ui:HttpClient.Cookies>
+                    <scg:Dictionary x:TypeArguments="x:String, InArgument(x:String)" />
+                  </ui:HttpClient.Cookies>
+                  <ui:HttpClient.Headers>
+                    <InArgument x:TypeArguments="x:String" x:Key="Login">[in_Config("PPDLogin"+"_"+in_Config("Mode").ToString).ToString]</InArgument>
+                    <InArgument x:TypeArguments="x:String" x:Key="Senha">[in_Config("PPDPassword"+"_"+in_Config("Mode").ToString).ToString]</InArgument>
+                    <InArgument x:TypeArguments="x:String" x:Key="Proxy-Authorization">[proxyHeader]</InArgument>
+                  </ui:HttpClient.Headers>
+                  <ui:HttpClient.Parameters>
+                    <scg:Dictionary x:TypeArguments="x:String, InArgument(x:String)" />
+                  </ui:HttpClient.Parameters>
+                  <ui:HttpClient.UrlSegments>
+                    <scg:Dictionary x:TypeArguments="x:String, InArgument(x:String)" />
+                  </ui:HttpClient.UrlSegments>
+                </ui:HttpClient>
+              </Sequence>
+            </While>
+            <If Condition="[statusCode = 200]" sap:VirtualizedContainerService.HintSize="697.6,4640.8" sap2010:WorkflowViewState.IdRef="If_22">
+              <sap:WorkflowViewStateService.ViewState>
+                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                  <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                </scg:Dictionary>
+              </sap:WorkflowViewStateService.ViewState>
+              <If.Then>
+                <Sequence sap:VirtualizedContainerService.HintSize="664,4315.2" sap2010:WorkflowViewState.IdRef="Sequence_15">
+                  <sap:WorkflowViewStateService.ViewState>
+                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                      <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                    </scg:Dictionary>
+                  </sap:WorkflowViewStateService.ViewState>
+                  <ui:DeserializeJsonArray DisplayName="Deserialize JSON Array" sap:VirtualizedContainerService.HintSize="620.8,60" sap2010:WorkflowViewState.IdRef="DeserializeJsonArray_2" JsonArray="[items]" JsonString="[response]" />
+                  <ui:ForEach x:TypeArguments="njl:JToken" CurrentIndex="{x:Null}" DisplayName="For Each" sap:VirtualizedContainerService.HintSize="620.8,4125.6" sap2010:WorkflowViewState.IdRef="ForEach`1_3" Values="[items]">
+                    <ui:ForEach.Body>
+                      <ActivityAction x:TypeArguments="njl:JToken">
+                        <ActivityAction.Argument>
+                          <DelegateInArgument x:TypeArguments="njl:JToken" Name="item" />
+                        </ActivityAction.Argument>
+                        <Sequence sap:VirtualizedContainerService.HintSize="587.2,3937.6" sap2010:WorkflowViewState.IdRef="Sequence_14">
+                          <Sequence.Variables>
+                            <Variable x:TypeArguments="x:String" Name="id" />
+                            <Variable x:TypeArguments="x:String" Name="codigoTomador" />
+                            <Variable x:TypeArguments="x:String" Name="dataVencimentoEshare" />
+                            <Variable x:TypeArguments="x:String" Name="cnpjFilial" />
+                            <Variable x:TypeArguments="x:String" Name="numeroDocumento" />
+                            <Variable x:TypeArguments="x:String" Name="pastaOrigem" />
+                            <Variable x:TypeArguments="x:String" Name="razaoSocialFornecedor" />
+                            <Variable x:TypeArguments="x:String" Name="riOracle" />
+                            <Variable x:TypeArguments="x:String" Name="codigoFilialOracle" />
+                            <Variable x:TypeArguments="x:String" Name="DocumentoId" />
+                          </Sequence.Variables>
+                          <sap:WorkflowViewStateService.ViewState>
+                            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                            </scg:Dictionary>
+                          </sap:WorkflowViewStateService.ViewState>
+                          <If Condition="[Not item(&quot;id&quot;) is Nothing]" sap:VirtualizedContainerService.HintSize="544,264.8" sap2010:WorkflowViewState.IdRef="If_12">
+                            <sap:WorkflowViewStateService.ViewState>
+                              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                              </scg:Dictionary>
+                            </sap:WorkflowViewStateService.ViewState>
+                            <If.Then>
+                              <Assign sap:VirtualizedContainerService.HintSize="433.6,81.6" sap2010:WorkflowViewState.IdRef="Assign_14">
+                                <Assign.To>
+                                  <OutArgument x:TypeArguments="x:String">[id]</OutArgument>
+                                </Assign.To>
+                                <Assign.Value>
+                                  <InArgument x:TypeArguments="x:String">[item("id").ToString]</InArgument>
+                                </Assign.Value>
+                              </Assign>
+                            </If.Then>
+                            <If.Else>
+                              <Sequence DisplayName="" sap2010:WorkflowViewState.IdRef="Sequence_20" />
+                            </If.Else>
+                          </If>
+                          <If Condition="[Not item(&quot;DocumentoId&quot;) is Nothing]" sap:VirtualizedContainerService.HintSize="544,659.2" sap2010:WorkflowViewState.IdRef="If_13">
+                            <sap:WorkflowViewStateService.ViewState>
+                              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                              </scg:Dictionary>
+                            </sap:WorkflowViewStateService.ViewState>
+                            <If.Then>
+                              <Sequence sap:VirtualizedContainerService.HintSize="510.4,476" sap2010:WorkflowViewState.IdRef="Sequence_17">
+                                <sap:WorkflowViewStateService.ViewState>
+                                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                    <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                  </scg:Dictionary>
+                                </sap:WorkflowViewStateService.ViewState>
+                                <Assign sap:VirtualizedContainerService.HintSize="467.2,81.6" sap2010:WorkflowViewState.IdRef="Assign_15">
+                                  <Assign.To>
+                                    <OutArgument x:TypeArguments="x:String">[DocumentoId]</OutArgument>
+                                  </Assign.To>
+                                  <Assign.Value>
+                                    <InArgument x:TypeArguments="x:String">[item("DocumentoId").ToString]</InArgument>
+                                  </Assign.Value>
+                                </Assign>
+                                <If Condition="[String.IsNullOrEmpty(DocumentoId)]" sap:VirtualizedContainerService.HintSize="467.2,264.8" sap2010:WorkflowViewState.IdRef="If_24">
+                                  <If.Then>
+                                    <Assign sap:VirtualizedContainerService.HintSize="433.6,81.6" sap2010:WorkflowViewState.IdRef="Assign_26">
+                                      <Assign.To>
+                                        <OutArgument x:TypeArguments="x:String">[DocumentoId]</OutArgument>
+                                      </Assign.To>
+                                      <Assign.Value>
+                                        <InArgument x:TypeArguments="x:String">[String.Empty]</InArgument>
+                                      </Assign.Value>
+                                    </Assign>
+                                  </If.Then>
+                                  <If.Else>
+                                    <Sequence DisplayName="" sap2010:WorkflowViewState.IdRef="Sequence_22" />
+                                  </If.Else>
+                                </If>
+                              </Sequence>
+                            </If.Then>
+                            <If.Else>
+                              <Assign sap:VirtualizedContainerService.HintSize="262,61" sap2010:WorkflowViewState.IdRef="Assign_16">
+                                <Assign.To>
+                                  <OutArgument x:TypeArguments="x:String">[DocumentoId]</OutArgument>
+                                </Assign.To>
+                                <Assign.Value>
+                                  <InArgument x:TypeArguments="x:String">[String.Empty]</InArgument>
+                                </Assign.Value>
+                              </Assign>
+                            </If.Else>
+                          </If>
+                          <If Condition="[Not item(&quot;cnpjFilial&quot;) is Nothing]" sap:VirtualizedContainerService.HintSize="544,264.8" sap2010:WorkflowViewState.IdRef="If_14">
+                            <If.Then>
+                              <Assign sap:VirtualizedContainerService.HintSize="433.6,81.6" sap2010:WorkflowViewState.IdRef="Assign_17">
+                                <Assign.To>
+                                  <OutArgument x:TypeArguments="x:String">[cnpjFilial]</OutArgument>
+                                </Assign.To>
+                                <Assign.Value>
+                                  <InArgument x:TypeArguments="x:String">[item("cnpjFilial").ToString]</InArgument>
+                                </Assign.Value>
+                              </Assign>
+                            </If.Then>
+                            <If.Else>
+                              <Sequence DisplayName="" sap2010:WorkflowViewState.IdRef="Sequence_23" />
+                            </If.Else>
+                          </If>
+                          <If Condition="[Not item(&quot;codigoTomador&quot;) is Nothing]" sap:VirtualizedContainerService.HintSize="544,264.8" sap2010:WorkflowViewState.IdRef="If_15">
+                            <If.Then>
+                              <Assign sap:VirtualizedContainerService.HintSize="433.6,81.6" sap2010:WorkflowViewState.IdRef="Assign_18">
+                                <Assign.To>
+                                  <OutArgument x:TypeArguments="x:String">[codigoTomador]</OutArgument>
+                                </Assign.To>
+                                <Assign.Value>
+                                  <InArgument x:TypeArguments="x:String">[item("codigoTomador").toString]</InArgument>
+                                </Assign.Value>
+                              </Assign>
+                            </If.Then>
+                            <If.Else>
+                              <Sequence DisplayName="" sap2010:WorkflowViewState.IdRef="Sequence_24" />
+                            </If.Else>
+                          </If>
+                          <If Condition="[Not item(&quot;dataLancamentoOracle&quot;) is Nothing]" sap:VirtualizedContainerService.HintSize="544,264.8" sap2010:WorkflowViewState.IdRef="If_16">
+                            <If.Then>
+                              <Assign sap:VirtualizedContainerService.HintSize="433.6,81.6" sap2010:WorkflowViewState.IdRef="Assign_19">
+                                <Assign.To>
+                                  <OutArgument x:TypeArguments="x:String">[dataVencimentoEshare]</OutArgument>
+                                </Assign.To>
+                                <Assign.Value>
+                                  <InArgument x:TypeArguments="x:String">[item("dataLancamentoOracle").toString]</InArgument>
+                                </Assign.Value>
+                              </Assign>
+                            </If.Then>
+                            <If.Else>
+                              <Sequence DisplayName="" sap2010:WorkflowViewState.IdRef="Sequence_25" />
+                            </If.Else>
+                          </If>
+                          <If Condition="[Not item(&quot;numeroDocumento&quot;) is Nothing]" sap:VirtualizedContainerService.HintSize="544,264.8" sap2010:WorkflowViewState.IdRef="If_17">
+                            <If.Then>
+                              <Assign sap:VirtualizedContainerService.HintSize="433.6,81.6" sap2010:WorkflowViewState.IdRef="Assign_20">
+                                <Assign.To>
+                                  <OutArgument x:TypeArguments="x:String">[numeroDocumento]</OutArgument>
+                                </Assign.To>
+                                <Assign.Value>
+                                  <InArgument x:TypeArguments="x:String">[item("numeroDocumento").ToString]</InArgument>
+                                </Assign.Value>
+                              </Assign>
+                            </If.Then>
+                            <If.Else>
+                              <Sequence DisplayName="" sap2010:WorkflowViewState.IdRef="Sequence_26" />
+                            </If.Else>
+                          </If>
+                          <If Condition="[Not item(&quot;pastaOrigem&quot;) is Nothing]" sap:VirtualizedContainerService.HintSize="544,476" sap2010:WorkflowViewState.IdRef="If_18">
+                            <If.Then>
+                              <Sequence sap:VirtualizedContainerService.HintSize="476.8,292.8" sap2010:WorkflowViewState.IdRef="Sequence_13">
+                                <sap:WorkflowViewStateService.ViewState>
+                                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                    <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                  </scg:Dictionary>
+                                </sap:WorkflowViewStateService.ViewState>
+                                <Assign sap:VirtualizedContainerService.HintSize="433.6,81.6" sap2010:WorkflowViewState.IdRef="Assign_21">
+                                  <Assign.To>
+                                    <OutArgument x:TypeArguments="x:String">[pastaOrigem]</OutArgument>
+                                  </Assign.To>
+                                  <Assign.Value>
+                                    <InArgument x:TypeArguments="x:String">[item("pastaOrigem").ToString.Replace("/","\")]</InArgument>
+                                  </Assign.Value>
+                                </Assign>
+                                <Assign sap:VirtualizedContainerService.HintSize="433.6,81.6" sap2010:WorkflowViewState.IdRef="Assign_22">
+                                  <Assign.To>
+                                    <OutArgument x:TypeArguments="x:String">[pastaOrigem]</OutArgument>
+                                  </Assign.To>
+                                  <Assign.Value>
+                                    <InArgument x:TypeArguments="x:String">[pastaOrigem.Replace(in_Config("filePrefix").ToString, in_Config("rootPath").ToString)]</InArgument>
+                                  </Assign.Value>
+                                </Assign>
+                              </Sequence>
+                            </If.Then>
+                            <If.Else>
+                              <Sequence DisplayName="" sap2010:WorkflowViewState.IdRef="Sequence_27" />
+                            </If.Else>
+                          </If>
+                          <If Condition="[Not item(&quot;razaoSocialFornecedor&quot;) is Nothing]" sap:VirtualizedContainerService.HintSize="544,264.8" sap2010:WorkflowViewState.IdRef="If_19">
+                            <If.Then>
+                              <Assign sap:VirtualizedContainerService.HintSize="433.6,81.6" sap2010:WorkflowViewState.IdRef="Assign_23">
+                                <Assign.To>
+                                  <OutArgument x:TypeArguments="x:String">[razaoSocialFornecedor]</OutArgument>
+                                </Assign.To>
+                                <Assign.Value>
+                                  <InArgument x:TypeArguments="x:String">[item("razaoSocialFornecedor").ToString]</InArgument>
+                                </Assign.Value>
+                              </Assign>
+                            </If.Then>
+                            <If.Else>
+                              <Sequence DisplayName="" sap2010:WorkflowViewState.IdRef="Sequence_28" />
+                            </If.Else>
+                          </If>
+                          <If Condition="[Not item(&quot;riOracle&quot;) is Nothing]" sap:VirtualizedContainerService.HintSize="544,264.8" sap2010:WorkflowViewState.IdRef="If_20">
+                            <sap:WorkflowViewStateService.ViewState>
+                              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                              </scg:Dictionary>
+                            </sap:WorkflowViewStateService.ViewState>
+                            <If.Then>
+                              <Assign sap:VirtualizedContainerService.HintSize="433.6,81.6" sap2010:WorkflowViewState.IdRef="Assign_24">
+                                <Assign.To>
+                                  <OutArgument x:TypeArguments="x:String">[riOracle]</OutArgument>
+                                </Assign.To>
+                                <Assign.Value>
+                                  <InArgument x:TypeArguments="x:String">[item("riOracle").ToString]</InArgument>
+                                </Assign.Value>
+                              </Assign>
+                            </If.Then>
+                            <If.Else>
+                              <Sequence DisplayName="" sap2010:WorkflowViewState.IdRef="Sequence_29" />
+                            </If.Else>
+                          </If>
+                          <If Condition="[Not item(&quot;codigoFilialOracle&quot;) is Nothing]" sap:VirtualizedContainerService.HintSize="544,264.8" sap2010:WorkflowViewState.IdRef="If_21">
+                            <If.Then>
+                              <Assign sap:VirtualizedContainerService.HintSize="433.6,81.6" sap2010:WorkflowViewState.IdRef="Assign_25">
+                                <Assign.To>
+                                  <OutArgument x:TypeArguments="x:String">[codigoFilialOracle]</OutArgument>
+                                </Assign.To>
+                                <Assign.Value>
+                                  <InArgument x:TypeArguments="x:String">[item("codigoFilialOracle").ToString]</InArgument>
+                                </Assign.Value>
+                              </Assign>
+                            </If.Then>
+                            <If.Else>
+                              <Sequence DisplayName="" sap2010:WorkflowViewState.IdRef="Sequence_30" />
+                            </If.Else>
+                          </If>
+                          <ui:AddQueueItem ServiceBaseAddress="{x:Null}" TimeoutMS="{x:Null}" DisplayName="Add Queue Item" sap:VirtualizedContainerService.HintSize="544,194.4" sap2010:WorkflowViewState.IdRef="AddQueueItem_2" Priority="Normal" QueueType="[in_Config(&quot;OrchestratorQueueName&quot;+&quot;_&quot;+in_Config(&quot;Mode&quot;).ToString).ToString]">
+                            <ui:AddQueueItem.ItemInformation>
+                              <InArgument x:TypeArguments="x:String" x:Key="id">[id]</InArgument>
+                              <InArgument x:TypeArguments="x:String" x:Key="cnpjFilial">[cnpjFilial]</InArgument>
+                              <InArgument x:TypeArguments="x:String" x:Key="codigoTomador">[codigoTomador]</InArgument>
+                              <InArgument x:TypeArguments="x:String" x:Key="dataDeVencimentoEShare">[dataVencimentoEshare]</InArgument>
+                              <InArgument x:TypeArguments="x:String" x:Key="numeroDocumento">[numeroDocumento]</InArgument>
+                              <InArgument x:TypeArguments="x:String" x:Key="pastaOrigem">[pastaOrigem]</InArgument>
+                              <InArgument x:TypeArguments="x:String" x:Key="razaoSocialFornecedor">[razaoSocialFornecedor]</InArgument>
+                              <InArgument x:TypeArguments="x:String" x:Key="riOracle">[riOracle]</InArgument>
+                              <InArgument x:TypeArguments="x:String" x:Key="codigoFilialOracle">[codigoFilialOracle]</InArgument>
+                              <InArgument x:TypeArguments="x:String" x:Key="DocumentoId">[DocumentoId]</InArgument>
+                              <InArgument x:TypeArguments="x:String" x:Key="DataExecucao">[DataExecucao]</InArgument>
+                            </ui:AddQueueItem.ItemInformation>
+                          </ui:AddQueueItem>
+                        </Sequence>
+                      </ActivityAction>
+                    </ui:ForEach.Body>
+                  </ui:ForEach>
+                </Sequence>
+              </If.Then>
+              <If.Else>
+                <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="334.4,142.4" sap2010:WorkflowViewState.IdRef="LogMessage_8" Level="Info" Message="[&quot;Requisição no ppd por mais itens do eshare financeiro respondeu: &quot; + statusCode.ToString]" />
+              </If.Else>
+            </If>
+          </Sequence>
+        </If.Then>
+        <If.Else>
+          <Sequence DisplayName="" sap:VirtualizedContainerService.HintSize="300,82.4" sap2010:WorkflowViewState.IdRef="Sequence_21">
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+          </Sequence>
+        </If.Else>
+      </If>
+    </Sequence>
+  </Sequence>
+</Activity>

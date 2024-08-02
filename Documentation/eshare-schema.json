@@ -1,0 +1,79 @@
+{
+  "definitions": {},
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "http://example.com/root.json",
+  "type": "object",
+  "title": "The Root Schema",
+  "additionalProperties": { "type": "string" },
+  "required": [
+    "id"
+  ],
+  "properties": {
+    "id": {
+	"$id": "#/properties/id",
+      "type": "string",
+      "title": "id",
+      "pattern": "^(.*)$"
+    },
+    "cnpjFilial": {
+	"$id": "#/properties/cnpjFilial",
+      "type": "string",
+      "title": "cnpjFilial",
+      "pattern": "^(.*)$"
+    },
+    "codigoTomador": {
+	"$id": "#/properties/codigoTomador",
+      "type": "string",
+      "title": "codigoTomador",
+      "pattern": "^(.*)$"
+    },
+    "cnpjFornecedor": {
+	"$id": "#/properties/cnpjFornecedor",
+      "type": "string",
+      "title": "cnpjFornecedor",
+      "pattern": "^(.*)$"
+    },
+    "dataVencimentoEShare": {
+	"$id": "#/properties/dataVencimentoEShare",
+      "type": "string",
+      "title": "dataVencimentoEShare",
+      "pattern": "^(.*)$"
+    },
+    "emailSolicitante": {
+	"$id": "#/properties/emailSolicitante",
+      "type": "string",
+      "title": "emailSolicitante",
+      "pattern": "^(.*)$"
+    },
+    "numeroDocumento": {
+	"$id": "#/properties/numeroDocumento",
+      "type": "string",
+      "title": "numeroDocumento",
+      "pattern": "^(.*)$"
+    },
+    "pastaEspecifica": {
+	"$id": "#/properties/pastaEspecifica",
+      "type": "string",
+      "title": "pastaEspecifica",
+      "pattern": "^(.*)$"
+    },
+    "pastaOrigem": {
+	"$id": "#/properties/pastaOrigem",
+      "type": "string",
+      "title": "pastaOrigem",
+      "pattern": "^(.*)$"
+    },
+    "razaoSocialFornecedor": {
+	"$id": "#/properties/razaoSocialFornecedor",
+      "type": "string",
+      "title": "razaoSocialFornecedor",
+      "pattern": "^(.*)$"
+    },
+    "riOracle": {
+	"$id": "#/properties/riOracle",
+      "type": "string",
+      "title": "riOracle",
+      "pattern": "^(.*)$"
+    }
+  }
+}

@@ -1,0 +1,155 @@
+<Activity mc:Ignorable="sap sap2010" x:Class="Financeiro" this:Financeiro.argDefaultFinancingEmail="izabela.peres@dhl.com" this:Financeiro.argSendExpiration="7" this:Financeiro.argLastSentEmail="13/01/2020" this:Financeiro.argFinancingFolderUrl="https://esharenew.dhl.com/sites/PtPBrazil/PAGAMENTOS%20DE%20EXCEES/Forms/AllItems.aspx?RootFolder=%2Fsites%2FPtPBrazil%2FPAGAMENTOS%20DE%20EXCEES%2F01%20%2D%20TESTE%20ROBOTIZA%C3%87%C3%83O%20%2D%20DATA%20ENTRY%2FHOMOLOGA%C3%87%C3%83O%20FINANCEIRO&amp;FolderCTID=0x0120009AFFE95E56FECF4CB178470E276FD10F&amp;View=%7B30D94690%2D081A%2D4184%2D908F%2D3E0F7DDBA079%7D" this:Financeiro.argEmailCopying="izabela.peres@dhl.com" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:njl="clr-namespace:Newtonsoft.Json.Linq;assembly=Newtonsoft.Json" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib" xmlns:this="clr-namespace:" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <x:Members>
+    <x:Property Name="argDefaultFinancingEmail" Type="InArgument(x:String)" />
+    <x:Property Name="argSendExpiration" Type="InArgument(x:Int32)" />
+    <x:Property Name="argLastSentEmail" Type="InArgument(x:String)" />
+    <x:Property Name="argFinancingFolderUrl" Type="InArgument(x:String)" />
+    <x:Property Name="argEmailCopying" Type="InArgument(x:String)" />
+    <x:Property Name="in_Config" Type="InArgument(scg:Dictionary(x:String, x:Object))" />
+  </x:Members>
+  <VisualBasic.Settings>
+    <x:Null />
+  </VisualBasic.Settings>
+  <sap:VirtualizedContainerService.HintSize>574,1378</sap:VirtualizedContainerService.HintSize>
+  <sap2010:WorkflowViewState.IdRef>Financeiro_1</sap2010:WorkflowViewState.IdRef>
+  <TextExpression.NamespacesForImplementation>
+    <scg:List x:TypeArguments="x:String" Capacity="46">
+      <x:String>Microsoft.VisualBasic</x:String>
+      <x:String>Microsoft.VisualBasic.Activities</x:String>
+      <x:String>Newtonsoft.Json</x:String>
+      <x:String>Newtonsoft.Json.Linq</x:String>
+      <x:String>System</x:String>
+      <x:String>System.Activities</x:String>
+      <x:String>System.Activities.Expressions</x:String>
+      <x:String>System.Activities.Statements</x:String>
+      <x:String>System.Activities.Validation</x:String>
+      <x:String>System.Activities.XamlIntegration</x:String>
+      <x:String>System.Collections</x:String>
+      <x:String>System.Collections.Generic</x:String>
+      <x:String>System.Collections.ObjectModel</x:String>
+      <x:String>System.Data</x:String>
+      <x:String>System.Diagnostics</x:String>
+      <x:String>System.Drawing</x:String>
+      <x:String>System.IO</x:String>
+      <x:String>System.Linq</x:String>
+      <x:String>System.Net.Mail</x:String>
+      <x:String>System.Windows.Markup</x:String>
+      <x:String>System.Xml</x:String>
+      <x:String>System.Xml.Linq</x:String>
+      <x:String>UiPath.Core</x:String>
+      <x:String>UiPath.Core.Activities</x:String>
+    </scg:List>
+  </TextExpression.NamespacesForImplementation>
+  <TextExpression.ReferencesForImplementation>
+    <scg:List x:TypeArguments="AssemblyReference" Capacity="42">
+      <AssemblyReference>Microsoft.VisualBasic</AssemblyReference>
+      <AssemblyReference>mscorlib</AssemblyReference>
+      <AssemblyReference>Newtonsoft.Json</AssemblyReference>
+      <AssemblyReference>PresentationCore</AssemblyReference>
+      <AssemblyReference>PresentationFramework</AssemblyReference>
+      <AssemblyReference>System</AssemblyReference>
+      <AssemblyReference>System.Activities</AssemblyReference>
+      <AssemblyReference>System.Collections</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.Composition</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.TypeConverter</AssemblyReference>
+      <AssemblyReference>System.Core</AssemblyReference>
+      <AssemblyReference>System.Data</AssemblyReference>
+      <AssemblyReference>System.Data.DataSetExtensions</AssemblyReference>
+      <AssemblyReference>System.Drawing</AssemblyReference>
+      <AssemblyReference>System.Linq</AssemblyReference>
+      <AssemblyReference>System.Net.Mail</AssemblyReference>
+      <AssemblyReference>System.ObjectModel</AssemblyReference>
+      <AssemblyReference>System.Private.CoreLib</AssemblyReference>
+      <AssemblyReference>System.ServiceModel</AssemblyReference>
+      <AssemblyReference>System.ValueTuple</AssemblyReference>
+      <AssemblyReference>System.Xaml</AssemblyReference>
+      <AssemblyReference>System.Xml</AssemblyReference>
+      <AssemblyReference>System.Xml.Linq</AssemblyReference>
+      <AssemblyReference>UiPath.Mail.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.UiAutomation.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Workflow</AssemblyReference>
+      <AssemblyReference>WindowsBase</AssemblyReference>
+    </scg:List>
+  </TextExpression.ReferencesForImplementation>
+  <Sequence sap2010:Annotation.AnnotationText="Main robot file that calls all other processes in order to upload files to Eshare." DisplayName="Financeiro" sap:VirtualizedContainerService.HintSize="554,1318" sap2010:WorkflowViewState.IdRef="Sequence_1">
+    <Sequence.Variables>
+      <Variable x:TypeArguments="njl:JArray" Name="vNotasToUpload" />
+      <Variable x:TypeArguments="ui:GenericValue" Name="vCopying" />
+    </Sequence.Variables>
+    <sap:WorkflowViewStateService.ViewState>
+      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+        <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+      </scg:Dictionary>
+    </sap:WorkflowViewStateService.ViewState>
+    <ui:Comment sap:VirtualizedContainerService.HintSize="512,55" sap2010:WorkflowViewState.IdRef="Comment_1" Text="// Calls the carganotafiscal rest service" />
+    <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" sap2010:Annotation.AnnotationText="Rest resquest to get CargaNotaFiscal." DisplayName="Invoke GetNotasToUpload_Mbot workflow" sap:VirtualizedContainerService.HintSize="512,118" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_1" UnSafe="False" WorkflowFileName="FilesUpload\GetNotasToUpload_Mbot.xaml">
+      <ui:InvokeWorkflowFile.Arguments>
+        <OutArgument x:TypeArguments="njl:JArray" x:Key="out_NotasUpload">[vNotasToUpload]</OutArgument>
+        <InArgument x:TypeArguments="x:String" x:Key="in_Url">[in_Config("PPDUrl").ToString]</InArgument>
+      </ui:InvokeWorkflowFile.Arguments>
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+    </ui:InvokeWorkflowFile>
+    <ui:Comment sap:VirtualizedContainerService.HintSize="512,74" sap2010:WorkflowViewState.IdRef="Comment_2" Text="// Deserializes the jsonArray of CargaNotaFiscal" />
+    <ui:ForEach x:TypeArguments="njl:JToken" CurrentIndex="{x:Null}" DisplayName="For Each" sap:VirtualizedContainerService.HintSize="512,548" sap2010:WorkflowViewState.IdRef="ForEach`1_2" Values="[vNotasToUpload]">
+      <ui:ForEach.Body>
+        <ActivityAction x:TypeArguments="njl:JToken">
+          <ActivityAction.Argument>
+            <DelegateInArgument x:TypeArguments="njl:JToken" Name="cargaNotaFiscal" />
+          </ActivityAction.Argument>
+          <Sequence DisplayName="Process to upload files to eshare" sap:VirtualizedContainerService.HintSize="476,414" sap2010:WorkflowViewState.IdRef="Sequence_2">
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+            <TryCatch DisplayName="Try Catch" sap:VirtualizedContainerService.HintSize="434,322" sap2010:WorkflowViewState.IdRef="TryCatch_1">
+              <TryCatch.Try>
+                <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Invoke UploadFinanceiro_MBot workflow" sap:VirtualizedContainerService.HintSize="334,87" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_2" UnSafe="False" WorkflowFileName="FilesUpload\UploadFinanceiro_MBot.xaml">
+                  <ui:InvokeWorkflowFile.Arguments>
+                    <InArgument x:TypeArguments="x:String" x:Key="argFinancingFolderUrl">[argFinancingFolderUrl]</InArgument>
+                    <InArgument x:TypeArguments="x:String" x:Key="argEshareExpirationDate">[cargaNotaFiscal("DataDeVencimentoeShare").ToString]</InArgument>
+                    <InArgument x:TypeArguments="x:String" x:Key="argCodigoTomador">[cargaNotaFiscal("CodigoTomador").ToString]</InArgument>
+                    <InArgument x:TypeArguments="x:String" x:Key="argCnpjFilial">[cargaNotaFiscal("CNPJFilial").ToString]</InArgument>
+                    <InArgument x:TypeArguments="x:String" x:Key="argRazaoSocialFornecedor">[cargaNotaFiscal("RazaoSocialFornecedor").ToString]</InArgument>
+                    <InArgument x:TypeArguments="x:String" x:Key="argNumeroDocumento">[cargaNotaFiscal("NumeroDocumento").ToString]</InArgument>
+                    <InArgument x:TypeArguments="x:String" x:Key="argNumeroRI">[cargaNotaFiscal("RIOracle").ToString]</InArgument>
+                    <InArgument x:TypeArguments="x:String" x:Key="argOriginFolderPath">[cargaNotaFiscal("PastaOrigem").ToString]</InArgument>
+                    <InArgument x:TypeArguments="scg:Dictionary(x:String, x:Object)" x:Key="in_Config">[in_Config]</InArgument>
+                  </ui:InvokeWorkflowFile.Arguments>
+                </ui:InvokeWorkflowFile>
+              </TryCatch.Try>
+              <TryCatch.Catches>
+                <Catch x:TypeArguments="ui:BusinessRuleException" sap:VirtualizedContainerService.HintSize="400,160" sap2010:WorkflowViewState.IdRef="Catch`1_1">
+                  <sap:WorkflowViewStateService.ViewState>
+                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                      <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                      <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                    </scg:Dictionary>
+                  </sap:WorkflowViewStateService.ViewState>
+                  <ActivityAction x:TypeArguments="ui:BusinessRuleException">
+                    <ActivityAction.Argument>
+                      <DelegateInArgument x:TypeArguments="ui:BusinessRuleException" Name="exception" />
+                    </ActivityAction.Argument>
+                    <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="334,91" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Error" Message="[&quot;Ocorreu um erro no upload: &quot; + exception.Message]" />
+                  </ActivityAction>
+                </Catch>
+              </TryCatch.Catches>
+            </TryCatch>
+          </Sequence>
+        </ActivityAction>
+      </ui:ForEach.Body>
+    </ui:ForEach>
+    <ui:Comment sap:VirtualizedContainerService.HintSize="512,55" sap2010:WorkflowViewState.IdRef="Comment_3" Text="// Envia o email semanal" />
+    <ui:SendOutlookMail Bcc="{x:Null}" Cc="{x:Null}" ContinueOnError="{x:Null}" MailMessage="{x:Null}" ReplyTo="{x:Null}" TimeoutMS="{x:Null}" Account="dhlearq2.dhlearq2processassistant@dhl.com" Body="[&quot;Lembrete os documentos já foram lançados no eShare até a data de &quot; + DateTime.Now.ToString(&quot;dd&quot;) + &quot;/&quot; + DateTime.Now.ToString(&quot;MM&quot;) + &quot;/&quot;+ DateTime.Now.ToString(&quot;yyyy&quot;) + Environment.NewLine + &#xA;&quot;Atenciosamente, &quot; + Environment.NewLine + &#xA;&quot;Equipe Recebimento Brasil&quot;]" DisplayName="Send Outlook Mail Message" sap:VirtualizedContainerService.HintSize="512,145" sap2010:WorkflowViewState.IdRef="SendOutlookMail_1" Importance="Normal" IsBodyHtml="False" IsDraft="False" Sensitivity="Normal" Subject="[&quot;Lembrete: Documentos lançados até &quot; + DateTime.Now.ToString(&quot;dd&quot;)+ &quot;/&quot; + DateTime.Now.ToString(&quot;MM&quot;)+ &quot;/&quot; +DateTime.Now.ToString(&quot;yyyy&quot;)]" To="[argDefaultFinancingEmail]">
+      <ui:SendOutlookMail.Files>
+        <scg:List x:TypeArguments="InArgument(x:String)" Capacity="4" />
+      </ui:SendOutlookMail.Files>
+    </ui:SendOutlookMail>
+  </Sequence>
+</Activity>

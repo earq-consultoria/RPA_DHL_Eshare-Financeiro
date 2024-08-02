@@ -1,0 +1,742 @@
+<Activity mc:Ignorable="sap sap2010" x:Class="FilesUpload_Mbot" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:s="clr-namespace:System;assembly=System.Private.CoreLib" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <x:Members>
+    <x:Property Name="argOriginFolder" Type="InArgument(x:String)" />
+    <x:Property Name="argEShareWebBrowser" Type="InArgument(ui:Browser)" />
+    <x:Property Name="argUploadFolder" Type="InArgument(x:String)" />
+    <x:Property Name="in_Config" Type="InArgument(scg:Dictionary(x:String, x:Object))" />
+  </x:Members>
+  <VisualBasic.Settings>
+    <x:Null />
+  </VisualBasic.Settings>
+  <sap:VirtualizedContainerService.HintSize>1314.4,4643.2</sap:VirtualizedContainerService.HintSize>
+  <sap2010:WorkflowViewState.IdRef>FilesUpload_Mbot_1</sap2010:WorkflowViewState.IdRef>
+  <TextExpression.NamespacesForImplementation>
+    <scg:List x:TypeArguments="x:String" Capacity="44">
+      <x:String>Microsoft.VisualBasic</x:String>
+      <x:String>Microsoft.VisualBasic.Activities</x:String>
+      <x:String>System</x:String>
+      <x:String>System.Activities</x:String>
+      <x:String>System.Activities.Expressions</x:String>
+      <x:String>System.Activities.Statements</x:String>
+      <x:String>System.Activities.Validation</x:String>
+      <x:String>System.Activities.XamlIntegration</x:String>
+      <x:String>System.Collections</x:String>
+      <x:String>System.Collections.Generic</x:String>
+      <x:String>System.Collections.ObjectModel</x:String>
+      <x:String>System.Data</x:String>
+      <x:String>System.Diagnostics</x:String>
+      <x:String>System.Drawing</x:String>
+      <x:String>System.IO</x:String>
+      <x:String>System.Linq</x:String>
+      <x:String>System.Net.Mail</x:String>
+      <x:String>System.Text.RegularExpressions</x:String>
+      <x:String>System.Windows.Markup</x:String>
+      <x:String>System.Xml</x:String>
+      <x:String>System.Xml.Linq</x:String>
+      <x:String>UiPath.Core</x:String>
+      <x:String>UiPath.Core.Activities</x:String>
+      <x:String>GlobalVariablesNamespace</x:String>
+      <x:String>GlobalConstantsNamespace</x:String>
+      <x:String>UiPath.Platform.ResourceHandling</x:String>
+    </scg:List>
+  </TextExpression.NamespacesForImplementation>
+  <TextExpression.ReferencesForImplementation>
+    <scg:List x:TypeArguments="AssemblyReference" Capacity="84">
+      <AssemblyReference>Microsoft.VisualBasic</AssemblyReference>
+      <AssemblyReference>Microsoft.VisualBasic.Core</AssemblyReference>
+      <AssemblyReference>mscorlib</AssemblyReference>
+      <AssemblyReference>PresentationCore</AssemblyReference>
+      <AssemblyReference>PresentationFramework</AssemblyReference>
+      <AssemblyReference>System</AssemblyReference>
+      <AssemblyReference>System.Activities</AssemblyReference>
+      <AssemblyReference>System.Collections</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.Composition</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.TypeConverter</AssemblyReference>
+      <AssemblyReference>System.Core</AssemblyReference>
+      <AssemblyReference>System.Data</AssemblyReference>
+      <AssemblyReference>System.Data.DataSetExtensions</AssemblyReference>
+      <AssemblyReference>System.Drawing</AssemblyReference>
+      <AssemblyReference>System.Linq</AssemblyReference>
+      <AssemblyReference>System.ObjectModel</AssemblyReference>
+      <AssemblyReference>System.Private.CoreLib</AssemblyReference>
+      <AssemblyReference>System.ServiceModel</AssemblyReference>
+      <AssemblyReference>System.Text.RegularExpressions</AssemblyReference>
+      <AssemblyReference>System.ValueTuple</AssemblyReference>
+      <AssemblyReference>System.Xaml</AssemblyReference>
+      <AssemblyReference>System.Xml</AssemblyReference>
+      <AssemblyReference>System.Xml.Linq</AssemblyReference>
+      <AssemblyReference>UiPath.OCR.Activities.Design</AssemblyReference>
+      <AssemblyReference>UiPath.Platform</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.UiAutomation.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.UIAutomationCore</AssemblyReference>
+      <AssemblyReference>UiPath.UIAutomationNext</AssemblyReference>
+      <AssemblyReference>UiPath.Workflow</AssemblyReference>
+      <AssemblyReference>WindowsBase</AssemblyReference>
+      <AssemblyReference>UiPath.Studio.Constants</AssemblyReference>
+      <AssemblyReference>System.IO.FileSystem.Watcher</AssemblyReference>
+      <AssemblyReference>System.IO.Packaging</AssemblyReference>
+      <AssemblyReference>System.IO.FileSystem.AccessControl</AssemblyReference>
+      <AssemblyReference>System.IO.FileSystem.DriveInfo</AssemblyReference>
+      <AssemblyReference>NPOI</AssemblyReference>
+      <AssemblyReference>System.Memory.Data</AssemblyReference>
+      <AssemblyReference>System.Console</AssemblyReference>
+      <AssemblyReference>System.Configuration.ConfigurationManager</AssemblyReference>
+      <AssemblyReference>System.Security.Permissions</AssemblyReference>
+      <AssemblyReference>System.ComponentModel</AssemblyReference>
+      <AssemblyReference>System.Memory</AssemblyReference>
+      <AssemblyReference>System.Private.Uri</AssemblyReference>
+    </scg:List>
+  </TextExpression.ReferencesForImplementation>
+  <Sequence sap2010:Annotation.AnnotationText="Takes in a datatable of files and uploads them to eshare, on the current folder." DisplayName="UploadFile" sap:VirtualizedContainerService.HintSize="1144,4578.4" sap2010:WorkflowViewState.IdRef="Sequence_5">
+    <Sequence.Variables>
+      <Variable x:TypeArguments="x:String" Name="vSeachFile" />
+      <Variable x:TypeArguments="x:String" Name="vOriginFolderName" />
+      <Variable x:TypeArguments="ui:GenericValue" Name="erro" />
+      <Variable x:TypeArguments="x:Boolean" Name="primeiroArquivo" />
+      <Variable x:TypeArguments="s:String[]" Name="files" />
+      <Variable x:TypeArguments="s:String[]" Name="listFoldersFile" />
+      <Variable x:TypeArguments="x:Int32" Name="intQntFolder" />
+    </Sequence.Variables>
+    <sap:WorkflowViewStateService.ViewState>
+      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+        <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+      </scg:Dictionary>
+    </sap:WorkflowViewStateService.ViewState>
+    <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="1081.6,142.4" sap2010:WorkflowViewState.IdRef="LogMessage_3" Level="Info" Message="[&quot;INICIO upload referente a pasta: &quot;+argOriginFolder]" />
+    <Assign sap:VirtualizedContainerService.HintSize="1081.6,81.6" sap2010:WorkflowViewState.IdRef="Assign_14">
+      <Assign.To>
+        <OutArgument x:TypeArguments="s:String[]">[listFoldersFile]</OutArgument>
+      </Assign.To>
+      <Assign.Value>
+        <InArgument x:TypeArguments="s:String[]">[Split(argOriginFolder,"\")]</InArgument>
+      </Assign.Value>
+    </Assign>
+    <Assign sap:VirtualizedContainerService.HintSize="1081.6,81.6" sap2010:WorkflowViewState.IdRef="Assign_15">
+      <Assign.To>
+        <OutArgument x:TypeArguments="x:Int32">[intQntFolder]</OutArgument>
+      </Assign.To>
+      <Assign.Value>
+        <InArgument x:TypeArguments="x:Int32">[listFoldersFile.Count]</InArgument>
+      </Assign.Value>
+    </Assign>
+    <Assign sap:VirtualizedContainerService.HintSize="1081.6,81.6" sap2010:WorkflowViewState.IdRef="Assign_4">
+      <Assign.To>
+        <OutArgument x:TypeArguments="ui:GenericValue">[erro]</OutArgument>
+      </Assign.To>
+      <Assign.Value>
+        <InArgument x:TypeArguments="ui:GenericValue">[False]</InArgument>
+      </Assign.Value>
+    </Assign>
+    <Assign DisplayName="Flag para nao ficar sempre digitando a pasta" sap:VirtualizedContainerService.HintSize="1081.6,81.6" sap2010:WorkflowViewState.IdRef="Assign_6">
+      <Assign.To>
+        <OutArgument x:TypeArguments="x:Boolean">[primeiroArquivo]</OutArgument>
+      </Assign.To>
+      <Assign.Value>
+        <InArgument x:TypeArguments="x:Boolean">True</InArgument>
+      </Assign.Value>
+    </Assign>
+    <Assign sap:VirtualizedContainerService.HintSize="1081.6,81.6" sap2010:WorkflowViewState.IdRef="Assign_8">
+      <Assign.To>
+        <OutArgument x:TypeArguments="s:String[]">[files]</OutArgument>
+      </Assign.To>
+      <Assign.Value>
+        <InArgument x:TypeArguments="s:String[]">[Directory.GetFiles(argOriginFolder).AsEnumerable().Where(Function(a) Not a.ToString.EndsWith(".txt")).ToArray]</InArgument>
+      </Assign.Value>
+    </Assign>
+    <Sequence sap2010:Annotation.AnnotationText="Caso o nome de algum arquivo vinculado ao chamado apresente algum tipo de caractere que não seja aceito pelo sistema eShare, realiza a troca do caractere por &quot; &quot;.&#xA;&#xA;Caracteres inválido para lançamento no eShare:&#xA;\ / : * ? &quot; &lt; &gt; | # { } % ~ &amp;&#xA;" DisplayName="Renomeia o nome dos arquivos" sap:VirtualizedContainerService.HintSize="1081.6,2018.4" sap2010:WorkflowViewState.IdRef="Sequence_22">
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+      <ui:ForEach x:TypeArguments="x:String" CurrentIndex="{x:Null}" DisplayName="For Each" sap:VirtualizedContainerService.HintSize="1019.2,1814.4" sap2010:WorkflowViewState.IdRef="ForEach`1_3" Values="[files]">
+        <ui:ForEach.Body>
+          <ActivityAction x:TypeArguments="x:String">
+            <ActivityAction.Argument>
+              <DelegateInArgument x:TypeArguments="x:String" Name="item" />
+            </ActivityAction.Argument>
+            <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="985.6,1626.4" sap2010:WorkflowViewState.IdRef="Sequence_21">
+              <Sequence.Variables>
+                <Variable x:TypeArguments="x:String" Name="nomeDoArquivoTratado" />
+                <Variable x:TypeArguments="x:Boolean" Name="caractereInvalido" />
+              </Sequence.Variables>
+              <sap:WorkflowViewStateService.ViewState>
+                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                </scg:Dictionary>
+              </sap:WorkflowViewStateService.ViewState>
+              <Assign sap:VirtualizedContainerService.HintSize="942.4,81.6" sap2010:WorkflowViewState.IdRef="Assign_9">
+                <Assign.To>
+                  <OutArgument x:TypeArguments="x:String">[nomeDoArquivoTratado]</OutArgument>
+                </Assign.To>
+                <Assign.Value>
+                  <InArgument x:TypeArguments="x:String">[item.Substring(item.LastIndexOf("\"))]</InArgument>
+                </Assign.Value>
+              </Assign>
+              <Assign sap:VirtualizedContainerService.HintSize="942.4,81.6" sap2010:WorkflowViewState.IdRef="Assign_10">
+                <Assign.To>
+                  <OutArgument x:TypeArguments="x:String">[nomeDoArquivoTratado]</OutArgument>
+                </Assign.To>
+                <Assign.Value>
+                  <InArgument x:TypeArguments="x:String">[nomeDoArquivoTratado.Replace("\", "")]</InArgument>
+                </Assign.Value>
+              </Assign>
+              <Assign sap:VirtualizedContainerService.HintSize="942.4,81.6" sap2010:WorkflowViewState.IdRef="Assign_11">
+                <Assign.To>
+                  <OutArgument x:TypeArguments="x:Boolean">[caractereInvalido]</OutArgument>
+                </Assign.To>
+                <Assign.Value>
+                  <InArgument x:TypeArguments="x:Boolean">False</InArgument>
+                </Assign.Value>
+              </Assign>
+              <ui:IsMatch DisplayName="Is Match" sap:VirtualizedContainerService.HintSize="942.4,60" sap2010:WorkflowViewState.IdRef="IsMatch_1" Input="[nomeDoArquivoTratado]" IsBuilderTabModified="False" Pattern="([\\\/:*\?&lt;&gt;\|#\{\}\%~&amp;]+)" RegexOption="IgnoreCase, Compiled" Result="[caractereInvalido]" />
+              <If Condition="[caractereInvalido]" sap:VirtualizedContainerService.HintSize="942.4,1072" sap2010:WorkflowViewState.IdRef="If_8">
+                <sap:WorkflowViewStateService.ViewState>
+                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                    <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                    <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                  </scg:Dictionary>
+                </sap:WorkflowViewStateService.ViewState>
+                <If.Then>
+                  <Sequence sap:VirtualizedContainerService.HintSize="908.8,888.8" sap2010:WorkflowViewState.IdRef="Sequence_20">
+                    <Sequence.Variables>
+                      <Variable x:TypeArguments="x:Boolean" Name="arquivoExiste" />
+                    </Sequence.Variables>
+                    <sap:WorkflowViewStateService.ViewState>
+                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                      </scg:Dictionary>
+                    </sap:WorkflowViewStateService.ViewState>
+                    <ui:CopyFile ContinueOnError="{x:Null}" Destination="[item.Replace(nomeDoArquivoTratado,System.Text.RegularExpressions.Regex.Replace(nomeDoArquivoTratado,&quot;([\\\/:*\?&lt;&gt;\|#\{\}\%~&amp;]+)&quot;,&quot; &quot;))]" DisplayName="Copy File" sap:VirtualizedContainerService.HintSize="865.6,155.2" sap2010:WorkflowViewState.IdRef="CopyFile_1" Path="[item]" />
+                    <Delay Duration="00:00:01" sap:VirtualizedContainerService.HintSize="865.6,90.4" sap2010:WorkflowViewState.IdRef="Delay_1" />
+                    <ui:PathExists Resource="{x:Null}" DisplayName="Path Exists" Exists="[arquivoExiste]" sap:VirtualizedContainerService.HintSize="865.6,116" sap2010:WorkflowViewState.IdRef="PathExists_1" Path="[item.Replace(nomeDoArquivoTratado,System.Text.RegularExpressions.Regex.Replace(nomeDoArquivoTratado,&quot;([\\\/:*\?&lt;&gt;\|#\{\}\%~&amp;]+)&quot;,&quot; &quot;))]" PathType="File" />
+                    <If Condition="[arquivoExiste]" sap:VirtualizedContainerService.HintSize="865.6,317.6" sap2010:WorkflowViewState.IdRef="If_7">
+                      <If.Then>
+                        <ui:Delete ContinueOnError="{x:Null}" ResourceFile="{x:Null}" sap:VirtualizedContainerService.HintSize="334.4,134.4" sap2010:WorkflowViewState.IdRef="Delete_1" Path="[item]" />
+                      </If.Then>
+                      <If.Else>
+                        <Sequence DisplayName="" sap2010:WorkflowViewState.IdRef="Sequence_33" />
+                      </If.Else>
+                    </If>
+                  </Sequence>
+                </If.Then>
+                <If.Else>
+                  <Sequence DisplayName="" sap:VirtualizedContainerService.HintSize="300,82.4" sap2010:WorkflowViewState.IdRef="Sequence_34">
+                    <sap:WorkflowViewStateService.ViewState>
+                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                      </scg:Dictionary>
+                    </sap:WorkflowViewStateService.ViewState>
+                  </Sequence>
+                </If.Else>
+              </If>
+            </Sequence>
+          </ActivityAction>
+        </ui:ForEach.Body>
+      </ui:ForEach>
+    </Sequence>
+    <Assign sap:VirtualizedContainerService.HintSize="1081.6,81.6" sap2010:WorkflowViewState.IdRef="Assign_12">
+      <Assign.To>
+        <OutArgument x:TypeArguments="s:String[]">[files]</OutArgument>
+      </Assign.To>
+      <Assign.Value>
+        <InArgument x:TypeArguments="s:String[]">[Directory.GetFiles(argOriginFolder).AsEnumerable().Where(Function(a) Not a.ToString.EndsWith(".txt")).ToArray]</InArgument>
+      </Assign.Value>
+    </Assign>
+    <ui:ForEach x:TypeArguments="x:String" CurrentIndex="{x:Null}" DisplayName="Itera sobre os arquivos" sap:VirtualizedContainerService.HintSize="1081.6,1282.4" sap2010:WorkflowViewState.IdRef="ForEach`1_2" Values="[files]">
+      <ui:ForEach.Body>
+        <ActivityAction x:TypeArguments="x:String">
+          <ActivityAction.Argument>
+            <DelegateInArgument x:TypeArguments="x:String" Name="file" />
+          </ActivityAction.Argument>
+          <Sequence DisplayName="Realiza o upload dos arquivos" sap:VirtualizedContainerService.HintSize="528,1094.4" sap2010:WorkflowViewState.IdRef="Sequence_15">
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+            <ui:CommentOut DisplayName="Comment Out" sap:VirtualizedContainerService.HintSize="484.8,52.8" sap2010:WorkflowViewState.IdRef="CommentOut_1">
+              <ui:CommentOut.Body>
+                <Sequence DisplayName="Ignored Activities" sap:VirtualizedContainerService.HintSize="449.6,967.2" sap2010:WorkflowViewState.IdRef="Sequence_31">
+                  <sap:WorkflowViewStateService.ViewState>
+                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                      <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                    </scg:Dictionary>
+                  </sap:WorkflowViewStateService.ViewState>
+                  <ui:WaitUiElementAppear FoundElement="{x:Null}" WaitActive="{x:Null}" WaitVisible="{x:Null}" DisplayName="Find botão files - Toolbar eshare" sap:VirtualizedContainerService.HintSize="387.2,52.8" sap2010:WorkflowViewState.IdRef="WaitUiElementAppear_13">
+                    <ui:WaitUiElementAppear.Target>
+                      <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="4cbc12ef-0b96-49ee-aa5a-d1bd326c1519" InformativeScreenshot="6e9a32a77dc60ab97d1a6d80b6f3e625" Selector="&lt;html omit:title='ESQUADRA TRANSPORTE DE VALORES SEGURANCA LTDA-00011946-22167 - A*' /&gt;&lt;webctrl aaname='Files' parentid='Ribbon.Document-title' tag='SPAN' /&gt;">
+                        <ui:Target.TimeoutMS>
+                          <InArgument x:TypeArguments="x:Int32" />
+                        </ui:Target.TimeoutMS>
+                        <ui:Target.WaitForReady>
+                          <InArgument x:TypeArguments="ui:WaitForReady" />
+                        </ui:Target.WaitForReady>
+                      </ui:Target>
+                    </ui:WaitUiElementAppear.Target>
+                    <sap:WorkflowViewStateService.ViewState>
+                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                        <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                        <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                      </scg:Dictionary>
+                    </sap:WorkflowViewStateService.ViewState>
+                  </ui:WaitUiElementAppear>
+                  <ui:Click DelayBefore="{x:Null}" DelayMS="{x:Null}" SendWindowMessages="{x:Null}" SimulateClick="{x:Null}" AlterIfDisabled="True" ClickType="CLICK_SINGLE" DisplayName="Click files - Toolbar eshare" sap:VirtualizedContainerService.HintSize="387.2,52.8" sap2010:WorkflowViewState.IdRef="Click_16" KeyModifiers="None" MouseButton="BTN_LEFT">
+                    <ui:Click.CursorPosition>
+                      <ui:CursorPosition Position="Center">
+                        <ui:CursorPosition.OffsetX>
+                          <InArgument x:TypeArguments="x:Int32" />
+                        </ui:CursorPosition.OffsetX>
+                        <ui:CursorPosition.OffsetY>
+                          <InArgument x:TypeArguments="x:Int32" />
+                        </ui:CursorPosition.OffsetY>
+                      </ui:CursorPosition>
+                    </ui:Click.CursorPosition>
+                    <ui:Click.Target>
+                      <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="24c7d331-1143-46af-be29-d74a8425cf9f" InformativeScreenshot="6e9a32a77dc60ab97d1a6d80b6f3e625" Selector="&lt;html omit:title='ESQUADRA TRANSPORTE DE VALORES SEGURANCA LTDA-00011946-22167 - A*' /&gt;&lt;webctrl aaname='Files' parentid='Ribbon.Document-title' tag='SPAN' /&gt;">
+                        <ui:Target.TimeoutMS>
+                          <InArgument x:TypeArguments="x:Int32" />
+                        </ui:Target.TimeoutMS>
+                        <ui:Target.WaitForReady>
+                          <InArgument x:TypeArguments="ui:WaitForReady" />
+                        </ui:Target.WaitForReady>
+                      </ui:Target>
+                    </ui:Click.Target>
+                    <sap:WorkflowViewStateService.ViewState>
+                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                        <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                        <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                      </scg:Dictionary>
+                    </sap:WorkflowViewStateService.ViewState>
+                  </ui:Click>
+                  <ui:WaitUiElementAppear FoundElement="{x:Null}" WaitActive="{x:Null}" WaitVisible="{x:Null}" DisplayName="Find Upload button - Toolbar eshare" sap:VirtualizedContainerService.HintSize="387.2,52.8" sap2010:WorkflowViewState.IdRef="WaitUiElementAppear_14">
+                    <ui:WaitUiElementAppear.Target>
+                      <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="87c01cae-2c72-46bf-81c5-409c156b07de" InformativeScreenshot="e76d754aa1a7bdb7379728e9d84a6a5a" Selector="&lt;html omit:title='Earq Consultoria-0001-0001 - All Documents' /&gt;&lt;webctrl id='Ribbon.Documents.New.AddDocument-Large' tag='A' /&gt;" WaitForReady="COMPLETE">
+                        <ui:Target.TimeoutMS>
+                          <InArgument x:TypeArguments="x:Int32" />
+                        </ui:Target.TimeoutMS>
+                      </ui:Target>
+                    </ui:WaitUiElementAppear.Target>
+                    <sap:WorkflowViewStateService.ViewState>
+                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                        <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                        <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                      </scg:Dictionary>
+                    </sap:WorkflowViewStateService.ViewState>
+                  </ui:WaitUiElementAppear>
+                  <ui:Click DelayBefore="{x:Null}" DelayMS="{x:Null}" SendWindowMessages="{x:Null}" SimulateClick="{x:Null}" AlterIfDisabled="True" ClickType="CLICK_SINGLE" DisplayName="Click upload document button - Toolbar eshare" sap:VirtualizedContainerService.HintSize="387.2,52.8" sap2010:WorkflowViewState.IdRef="Click_17" KeyModifiers="None" MouseButton="BTN_LEFT">
+                    <ui:Click.CursorPosition>
+                      <ui:CursorPosition Position="Center">
+                        <ui:CursorPosition.OffsetX>
+                          <InArgument x:TypeArguments="x:Int32" />
+                        </ui:CursorPosition.OffsetX>
+                        <ui:CursorPosition.OffsetY>
+                          <InArgument x:TypeArguments="x:Int32" />
+                        </ui:CursorPosition.OffsetY>
+                      </ui:CursorPosition>
+                    </ui:Click.CursorPosition>
+                    <ui:Click.Target>
+                      <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="0dc6aed7-25e9-4497-ba34-eb16dd056d18" InformativeScreenshot="7f6264fcd30ec2371771d1dea87995a5" Selector="&lt;html omit:title='Earq Consultoria-0001-0001 - All Documents' /&gt;&lt;webctrl id='Ribbon.Documents.New.AddDocument-Large' tag='A' /&gt;">
+                        <ui:Target.TimeoutMS>
+                          <InArgument x:TypeArguments="x:Int32" />
+                        </ui:Target.TimeoutMS>
+                        <ui:Target.WaitForReady>
+                          <InArgument x:TypeArguments="ui:WaitForReady" />
+                        </ui:Target.WaitForReady>
+                      </ui:Target>
+                    </ui:Click.Target>
+                    <sap:WorkflowViewStateService.ViewState>
+                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                        <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                        <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                      </scg:Dictionary>
+                    </sap:WorkflowViewStateService.ViewState>
+                  </ui:Click>
+                  <ui:WaitUiElementAppear FoundElement="{x:Null}" WaitActive="{x:Null}" WaitVisible="{x:Null}" DisplayName="Find Add a document title  - Tela de escolha de arquivo eshare" sap:VirtualizedContainerService.HintSize="387.2,52.8" sap2010:WorkflowViewState.IdRef="WaitUiElementAppear_15">
+                    <ui:WaitUiElementAppear.Target>
+                      <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="328f2868-824b-4349-90aa-69d456de853d" InformativeScreenshot="007a926bdeb70baeb0b22e5854e4fdfb" Selector="&lt;html omit:title='Earq Consultoria-0001-0001 - All Documents' /&gt;&lt;webctrl id='dialogTitleSpan' tag='H1' /&gt;">
+                        <ui:Target.TimeoutMS>
+                          <InArgument x:TypeArguments="x:Int32" />
+                        </ui:Target.TimeoutMS>
+                        <ui:Target.WaitForReady>
+                          <InArgument x:TypeArguments="ui:WaitForReady" />
+                        </ui:Target.WaitForReady>
+                      </ui:Target>
+                    </ui:WaitUiElementAppear.Target>
+                    <sap:WorkflowViewStateService.ViewState>
+                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                        <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                        <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                      </scg:Dictionary>
+                    </sap:WorkflowViewStateService.ViewState>
+                  </ui:WaitUiElementAppear>
+                  <ui:Check ContinueOnError="{x:Null}" DelayAfter="{x:Null}" DelayBefore="{x:Null}" Action="Uncheck" AlterIfDisabled="True" DisplayName="uncheck overwrite  - Tela de escolha de arquivo eshare" sap:VirtualizedContainerService.HintSize="387.2,52.8" sap2010:WorkflowViewState.IdRef="Check_2">
+                    <ui:Check.Target>
+                      <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="a8e7af02-93b1-487b-b630-20c58097bf29" InformativeScreenshot="fa12bdd094fbb563351a25aa34162919" Selector="&lt;html omit:title='ESQUADRA TRANSPORTE DE VALORES SEGURANCA LTDA-00011946-22167 - A*' /&gt;&lt;webctrl id='ctl00_PlaceHolderMain_UploadDocumentSection_ctl05_OverwriteSingl*' tag='INPUT' /&gt;">
+                        <ui:Target.TimeoutMS>
+                          <InArgument x:TypeArguments="x:Int32" />
+                        </ui:Target.TimeoutMS>
+                        <ui:Target.WaitForReady>
+                          <InArgument x:TypeArguments="ui:WaitForReady" />
+                        </ui:Target.WaitForReady>
+                      </ui:Target>
+                    </ui:Check.Target>
+                    <sap:WorkflowViewStateService.ViewState>
+                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                        <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                        <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                      </scg:Dictionary>
+                    </sap:WorkflowViewStateService.ViewState>
+                  </ui:Check>
+                  <ui:Click DelayBefore="{x:Null}" DelayMS="{x:Null}" SendWindowMessages="{x:Null}" SimulateClick="{x:Null}" AlterIfDisabled="True" ClickType="CLICK_DOUBLE" DisplayName="Double Click Browse for File - Tela de escolha de arquivo eshare" sap:VirtualizedContainerService.HintSize="387.2,52.8" sap2010:WorkflowViewState.IdRef="Click_18" KeyModifiers="None" MouseButton="BTN_LEFT">
+                    <ui:Click.CursorPosition>
+                      <ui:CursorPosition Position="Center">
+                        <ui:CursorPosition.OffsetX>
+                          <InArgument x:TypeArguments="x:Int32" />
+                        </ui:CursorPosition.OffsetX>
+                        <ui:CursorPosition.OffsetY>
+                          <InArgument x:TypeArguments="x:Int32" />
+                        </ui:CursorPosition.OffsetY>
+                      </ui:CursorPosition>
+                    </ui:Click.CursorPosition>
+                    <ui:Click.Target>
+                      <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="0f962301-a1b9-4b3a-9a50-9c5e460a4e12" InformativeScreenshot="4bc086c24897b82d495ad45976bbf072" Selector="&lt;html omit:title='ESQUADRA TRANSPORTE DE VALORES SEGURANCA LTDA-00011946-22167 - A*' /&gt;&lt;webctrl id='ctl00_PlaceHolderMain_UploadDocumentSection_ctl05_InputFile' tag='INPUT' /&gt;">
+                        <ui:Target.TimeoutMS>
+                          <InArgument x:TypeArguments="x:Int32" />
+                        </ui:Target.TimeoutMS>
+                        <ui:Target.WaitForReady>
+                          <InArgument x:TypeArguments="ui:WaitForReady" />
+                        </ui:Target.WaitForReady>
+                      </ui:Target>
+                    </ui:Click.Target>
+                    <sap:WorkflowViewStateService.ViewState>
+                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                        <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                        <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                      </scg:Dictionary>
+                    </sap:WorkflowViewStateService.ViewState>
+                  </ui:Click>
+                  <ui:WindowScope ApplicationWindow="{x:Null}" SearchScope="{x:Null}" TimeoutMS="{x:Null}" Window="{x:Null}" DisplayName="Attach janela de upload" sap:VirtualizedContainerService.HintSize="387.2,52.8" sap2010:WorkflowViewState.IdRef="WindowScope_2" InformativeScreenshot="ae036f1fe68d85d2cde233964b427ad9" Selector="&lt;wnd app='iexplore.exe' cls='#32770' title='Choose File to Upload' /&gt;">
+                    <ui:WindowScope.Body>
+                      <ActivityAction x:TypeArguments="x:Object">
+                        <ActivityAction.Argument>
+                          <DelegateInArgument x:TypeArguments="x:Object" Name="ContextTarget" />
+                        </ActivityAction.Argument>
+                        <Sequence sap:VirtualizedContainerService.HintSize="923.2,2229.6" sap2010:WorkflowViewState.IdRef="Sequence_25">
+                          <Sequence.Variables>
+                            <Variable x:TypeArguments="x:Boolean" Name="isArquivoJaExistente" />
+                            <Variable x:TypeArguments="x:String" Name="nomeDoArquivoTratado" />
+                            <Variable x:TypeArguments="x:Boolean" Name="isErroPathArquivo" />
+                            <Variable x:TypeArguments="x:String" Name="mensagem" />
+                          </Sequence.Variables>
+                          <sap:WorkflowViewStateService.ViewState>
+                            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                              <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                            </scg:Dictionary>
+                          </sap:WorkflowViewStateService.ViewState>
+                          <Sequence DisplayName="Preenche o caminho do arquivo" sap:VirtualizedContainerService.HintSize="860.8,524.8" sap2010:WorkflowViewState.IdRef="Sequence_26">
+                            <Sequence.Variables>
+                              <Variable x:TypeArguments="ui:UiElement" Name="elementSaveFilename" />
+                            </Sequence.Variables>
+                            <sap:WorkflowViewStateService.ViewState>
+                              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                              </scg:Dictionary>
+                            </sap:WorkflowViewStateService.ViewState>
+                            <Delay Duration="00:00:03" sap:VirtualizedContainerService.HintSize="387.2,90.4" sap2010:WorkflowViewState.IdRef="Delay_2" />
+                            <ui:WaitUiElementAppear WaitActive="{x:Null}" WaitVisible="{x:Null}" DisplayName="Find Element filename" FoundElement="[elementSaveFilename]" sap:VirtualizedContainerService.HintSize="387.2,107.2" sap2010:WorkflowViewState.IdRef="WaitUiElementAppear_16">
+                              <ui:WaitUiElementAppear.Target>
+                                <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="d5787f85-11ef-4849-a0cf-945a095112aa" InformativeScreenshot="de4f619bee70ec173c0ca1d58205edab" Selector="&lt;wnd aaname='Explorer Pane' cls='DirectUIHWND' /&gt;&lt;nav up='2' /&gt;&lt;wnd ctrlid='1148' idx='1' /&gt;&lt;wnd ctrlid='1148' /&gt;&lt;wnd aaname='File name:' cls='Edit' /&gt;" WaitForReady="COMPLETE">
+                                  <ui:Target.TimeoutMS>
+                                    <InArgument x:TypeArguments="x:Int32" />
+                                  </ui:Target.TimeoutMS>
+                                </ui:Target>
+                              </ui:WaitUiElementAppear.Target>
+                            </ui:WaitUiElementAppear>
+                            <ui:TypeInto ClickBeforeTyping="{x:Null}" DelayBefore="{x:Null}" DelayBetweenKeys="{x:Null}" DelayMS="{x:Null}" EmptyField="{x:Null}" SendWindowMessages="{x:Null}" SimulateType="{x:Null}" Activate="True" AlterIfDisabled="True" DisplayName="Type Into" sap:VirtualizedContainerService.HintSize="387.2,135.2" sap2010:WorkflowViewState.IdRef="TypeInto_1" Text="[file]">
+                              <ui:TypeInto.Target>
+                                <ui:Target ClippingRegion="{x:Null}" Selector="{x:Null}" Element="[elementSaveFilename]" Id="7a7adbea-e698-41a6-800e-53de6a6959f1" WaitForReady="COMPLETE">
+                                  <ui:Target.TimeoutMS>
+                                    <InArgument x:TypeArguments="x:Int32" />
+                                  </ui:Target.TimeoutMS>
+                                </ui:Target>
+                              </ui:TypeInto.Target>
+                            </ui:TypeInto>
+                          </Sequence>
+                          <ui:Click DelayBefore="{x:Null}" DelayMS="{x:Null}" SendWindowMessages="{x:Null}" SimulateClick="{x:Null}" AlterIfDisabled="True" ClickType="CLICK_SINGLE" DisplayName="Click 'Button Open' Tela de upload file eshare" sap:VirtualizedContainerService.HintSize="860.8,107.2" sap2010:WorkflowViewState.IdRef="Click_12" KeyModifiers="None" MouseButton="BTN_LEFT">
+                            <ui:Click.CursorPosition>
+                              <ui:CursorPosition Position="Center">
+                                <ui:CursorPosition.OffsetX>
+                                  <InArgument x:TypeArguments="x:Int32" />
+                                </ui:CursorPosition.OffsetX>
+                                <ui:CursorPosition.OffsetY>
+                                  <InArgument x:TypeArguments="x:Int32" />
+                                </ui:CursorPosition.OffsetY>
+                              </ui:CursorPosition>
+                            </ui:Click.CursorPosition>
+                            <ui:Click.Target>
+                              <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="b148b9b3-7d57-4859-a71c-859cdb69e7a3" InformativeScreenshot="9bed6f069ffd19dd6c75fc0707d366d1" Selector="&lt;wnd omit:ctrlid='1' title='&amp;amp;Open' /&gt;">
+                                <ui:Target.TimeoutMS>
+                                  <InArgument x:TypeArguments="x:Int32" />
+                                </ui:Target.TimeoutMS>
+                                <ui:Target.WaitForReady>
+                                  <InArgument x:TypeArguments="ui:WaitForReady" />
+                                </ui:Target.WaitForReady>
+                              </ui:Target>
+                            </ui:Click.Target>
+                          </ui:Click>
+                          <ui:Click DelayBefore="{x:Null}" DelayMS="{x:Null}" SendWindowMessages="{x:Null}" SimulateClick="{x:Null}" AlterIfDisabled="True" ClickType="CLICK_SINGLE" DisplayName="Click Ok Tela de escolha de arquivo Eshare" sap:VirtualizedContainerService.HintSize="860.8,107.2" sap2010:WorkflowViewState.IdRef="Click_13" KeyModifiers="None" MouseButton="BTN_LEFT">
+                            <ui:Click.CursorPosition>
+                              <ui:CursorPosition Position="Center">
+                                <ui:CursorPosition.OffsetX>
+                                  <InArgument x:TypeArguments="x:Int32" />
+                                </ui:CursorPosition.OffsetX>
+                                <ui:CursorPosition.OffsetY>
+                                  <InArgument x:TypeArguments="x:Int32" />
+                                </ui:CursorPosition.OffsetY>
+                              </ui:CursorPosition>
+                            </ui:Click.CursorPosition>
+                            <ui:Click.Target>
+                              <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="b64e02b6-4950-48eb-9f73-5b72442fb0ec" InformativeScreenshot="71ea68ca70f22f40ed74d7e2eff926a4" Selector="&lt;html omit:title='ESQUADRA TRANSPORTE DE VALORES SEGURANCA LTDA-00011946-22167 - A*' /&gt;&lt;webctrl id='ctl00_PlaceHolderMain_ctl03_RptControls_btnOK' tag='INPUT' /&gt;">
+                                <ui:Target.TimeoutMS>
+                                  <InArgument x:TypeArguments="x:Int32" />
+                                </ui:Target.TimeoutMS>
+                                <ui:Target.WaitForReady>
+                                  <InArgument x:TypeArguments="ui:WaitForReady" />
+                                </ui:Target.WaitForReady>
+                              </ui:Target>
+                            </ui:Click.Target>
+                          </ui:Click>
+                          <Sequence sap2010:Annotation.AnnotationText="trata mensagem e estoura erro caso o tam. do nome do arq. seja muito grande&#xA;" DisplayName="Erro tam. arq." sap:VirtualizedContainerService.HintSize="860.8,502.4" sap2010:WorkflowViewState.IdRef="Sequence_27">
+                            <sap:WorkflowViewStateService.ViewState>
+                              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+                                <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                              </scg:Dictionary>
+                            </sap:WorkflowViewStateService.ViewState>
+                            <ui:UiElementExists DisplayName="Erro tamanho do path do arquivo" Exists="[isErroPathArquivo]" sap:VirtualizedContainerService.HintSize="387.2,107.2" sap2010:WorkflowViewState.IdRef="UiElementExists_1">
+                              <ui:UiElementExists.Target>
+                                <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="a9957346-3a9c-4a3b-8664-319ba275fff2" InformativeScreenshot="50c778acac4c6f20dd368736345aaf83" Selector="&lt;html omit:title='ESQUADRA TRANSPORTE DE VALORES SEGURANCA LTDA-00011946-22167 - A*' /&gt;&lt;webctrl innertext='The specified file or folder name is too long. The URL path for all files and folders must be 260 characters or less (and no more than 128 characters for any single file or folder name in the URL). Please type a shorter file or folder name. ' /&gt;" TimeoutMS="5000">
+                                  <ui:Target.WaitForReady>
+                                    <InArgument x:TypeArguments="ui:WaitForReady" />
+                                  </ui:Target.WaitForReady>
+                                </ui:Target>
+                              </ui:UiElementExists.Target>
+                            </ui:UiElementExists>
+                            <If Condition="[isErroPathArquivo]" sap:VirtualizedContainerService.HintSize="387.2,183.2" sap2010:WorkflowViewState.IdRef="If_9">
+                              <sap:WorkflowViewStateService.ViewState>
+                                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                  <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                                </scg:Dictionary>
+                              </sap:WorkflowViewStateService.ViewState>
+                              <If.Then>
+                                <Sequence sap:VirtualizedContainerService.HintSize="376,434.666666666667" sap2010:WorkflowViewState.IdRef="Sequence_24">
+                                  <Sequence.Variables>
+                                    <Variable x:TypeArguments="ui:GenericValue" Name="erro" />
+                                  </Sequence.Variables>
+                                  <sap:WorkflowViewStateService.ViewState>
+                                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                      <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                    </scg:Dictionary>
+                                  </sap:WorkflowViewStateService.ViewState>
+                                  <Assign sap:VirtualizedContainerService.HintSize="334,62" sap2010:WorkflowViewState.IdRef="Assign_13">
+                                    <Assign.To>
+                                      <OutArgument x:TypeArguments="ui:GenericValue">[erro]</OutArgument>
+                                    </Assign.To>
+                                    <Assign.Value>
+                                      <InArgument x:TypeArguments="ui:GenericValue">[True]</InArgument>
+                                    </Assign.Value>
+                                  </Assign>
+                                  <ui:Click DelayBefore="{x:Null}" DelayMS="{x:Null}" SendWindowMessages="{x:Null}" SimulateClick="{x:Null}" AlterIfDisabled="True" ClickType="CLICK_SINGLE" DisplayName="Click fechar" sap:VirtualizedContainerService.HintSize="334,106" sap2010:WorkflowViewState.IdRef="Click_14" KeyModifiers="None" MouseButton="BTN_LEFT">
+                                    <ui:Click.CursorPosition>
+                                      <ui:CursorPosition Position="Center">
+                                        <ui:CursorPosition.OffsetX>
+                                          <InArgument x:TypeArguments="x:Int32" />
+                                        </ui:CursorPosition.OffsetX>
+                                        <ui:CursorPosition.OffsetY>
+                                          <InArgument x:TypeArguments="x:Int32" />
+                                        </ui:CursorPosition.OffsetY>
+                                      </ui:CursorPosition>
+                                    </ui:Click.CursorPosition>
+                                    <ui:Click.Target>
+                                      <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="e53b8667-d940-4b70-b3bf-a85bb6586039" InformativeScreenshot="080d82faa7f865532504c6ca1508d98e" Selector="&lt;html omit:title='ESQUADRA TRANSPORTE DE VALORES SEGURANCA LTDA-00011946-22167 - A*' /&gt;&lt;webctrl idx='*' parentid='DlgClose*' tag='SPAN' /&gt;">
+                                        <ui:Target.TimeoutMS>
+                                          <InArgument x:TypeArguments="x:Int32" />
+                                        </ui:Target.TimeoutMS>
+                                        <ui:Target.WaitForReady>
+                                          <InArgument x:TypeArguments="ui:WaitForReady" />
+                                        </ui:Target.WaitForReady>
+                                      </ui:Target>
+                                    </ui:Click.Target>
+                                  </ui:Click>
+                                  <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="334,94.6666666666667" sap2010:WorkflowViewState.IdRef="LogMessage_4" Level="Info" Message="[&quot;Upload do arquivo: &quot;+file+&quot; não pode ser realizado pois o tamanho do nome do arquivo não é suportado.&quot;]" />
+                                </Sequence>
+                              </If.Then>
+                            </If>
+                          </Sequence>
+                          <Sequence sap2010:Annotation.AnnotationText="Caso o arquivo já exista não realiza o upload e não apaga o arquivo zip original da pasta da rede&#xA;caso o upload seja feito apaga o zip da pasta&#xA;" DisplayName="Verifica se o arquivo já existe" sap:VirtualizedContainerService.HintSize="860.8,760" sap2010:WorkflowViewState.IdRef="Sequence_30">
+                            <sap:WorkflowViewStateService.ViewState>
+                              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+                              </scg:Dictionary>
+                            </sap:WorkflowViewStateService.ViewState>
+                            <ui:UiElementExists DisplayName="Element Exists" Exists="[isArquivoJaExistente]" sap:VirtualizedContainerService.HintSize="798,68" sap2010:WorkflowViewState.IdRef="UiElementExists_2">
+                              <ui:UiElementExists.Target>
+                                <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="5799c8d4-c7df-4ff0-a5bf-b655781fb9d5" Selector="&lt;html /&gt;&lt;webctrl id='ctl00_PlaceHolderMain_LabelMessage' tag='SPAN' innertext='A file with the name * already exists. It was last modified *' /&gt;" TimeoutMS="5000">
+                                  <ui:Target.WaitForReady>
+                                    <InArgument x:TypeArguments="ui:WaitForReady" />
+                                  </ui:Target.WaitForReady>
+                                </ui:Target>
+                              </ui:UiElementExists.Target>
+                            </ui:UiElementExists>
+                            <If Condition="[isArquivoJaExistente]" sap:VirtualizedContainerService.HintSize="798,480" sap2010:WorkflowViewState.IdRef="If_10">
+                              <If.Then>
+                                <Sequence sap:VirtualizedContainerService.HintSize="376,329" sap2010:WorkflowViewState.IdRef="Sequence_28">
+                                  <sap:WorkflowViewStateService.ViewState>
+                                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                      <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                    </scg:Dictionary>
+                                  </sap:WorkflowViewStateService.ViewState>
+                                  <ui:Click DelayBefore="{x:Null}" DelayMS="{x:Null}" SendWindowMessages="{x:Null}" SimulateClick="{x:Null}" AlterIfDisabled="True" ClickType="CLICK_SINGLE" DisplayName="Click Voltar" sap:VirtualizedContainerService.HintSize="334,106" sap2010:WorkflowViewState.IdRef="Click_15" KeyModifiers="None" MouseButton="BTN_LEFT">
+                                    <ui:Click.CursorPosition>
+                                      <ui:CursorPosition Position="Center">
+                                        <ui:CursorPosition.OffsetX>
+                                          <InArgument x:TypeArguments="x:Int32" />
+                                        </ui:CursorPosition.OffsetX>
+                                        <ui:CursorPosition.OffsetY>
+                                          <InArgument x:TypeArguments="x:Int32" />
+                                        </ui:CursorPosition.OffsetY>
+                                      </ui:CursorPosition>
+                                    </ui:Click.CursorPosition>
+                                    <ui:Click.Target>
+                                      <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="aa992e8d-5566-4372-bc68-bb151179f520" InformativeScreenshot="565e084e8cb7525cd9e74b5fa56fc26c" Selector="&lt;html omit:title='ESQUADRA TRANSPORTE DE VALORES SEGURANCA LTDA-00011946-22167 - A*' idx='1' /&gt;&lt;webctrl parentid='DlgClose*' tag='SPAN' idx='1' /&gt;">
+                                        <ui:Target.TimeoutMS>
+                                          <InArgument x:TypeArguments="x:Int32" />
+                                        </ui:Target.TimeoutMS>
+                                        <ui:Target.WaitForReady>
+                                          <InArgument x:TypeArguments="ui:WaitForReady" />
+                                        </ui:Target.WaitForReady>
+                                      </ui:Target>
+                                    </ui:Click.Target>
+                                  </ui:Click>
+                                  <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="334,91" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Info" Message="[&quot;Upload do arquivo: &quot;+file+&quot; não pode ser realizado pois já havia um arquivo com o memso nome no eShare.&quot;]" />
+                                </Sequence>
+                              </If.Then>
+                              <If.Else>
+                                <Sequence sap:VirtualizedContainerService.HintSize="376,307" sap2010:WorkflowViewState.IdRef="Sequence_29">
+                                  <sap:WorkflowViewStateService.ViewState>
+                                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                      <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                    </scg:Dictionary>
+                                  </sap:WorkflowViewStateService.ViewState>
+                                  <Delay Duration="00:00:40" sap:VirtualizedContainerService.HintSize="334,22" sap2010:WorkflowViewState.IdRef="Delay_3" />
+                                  <ui:Delete ContinueOnError="{x:Null}" ResourceFile="{x:Null}" sap:VirtualizedContainerService.HintSize="334,22" sap2010:WorkflowViewState.IdRef="Delete_2" Path="[file]" />
+                                  <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="334,91" sap2010:WorkflowViewState.IdRef="LogMessage_2" Level="Info" Message="[&quot;Upload do arquivo: &quot;+file+&quot; Realizado com  sucesso. Arquivo apagado na pasta da rede.&quot;]" />
+                                </Sequence>
+                              </If.Else>
+                            </If>
+                          </Sequence>
+                        </Sequence>
+                      </ActivityAction>
+                    </ui:WindowScope.Body>
+                    <sap:WorkflowViewStateService.ViewState>
+                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                        <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                        <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                      </scg:Dictionary>
+                    </sap:WorkflowViewStateService.ViewState>
+                  </ui:WindowScope>
+                  <If sap2010:Annotation.AnnotationText="Lança um erro depois de feito o upload de todos os possiveis arquivos" Condition="[erro]" DisplayName="Ocorreu um erro no processo de download" sap:VirtualizedContainerService.HintSize="387.2,112.8" sap2010:WorkflowViewState.IdRef="If_5">
+                    <sap:WorkflowViewStateService.ViewState>
+                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                        <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+                        <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                        <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                      </scg:Dictionary>
+                    </sap:WorkflowViewStateService.ViewState>
+                    <If.Then>
+                      <Throw Exception="[New BusinessRuleException(&quot;The specified file or folder name is too long. The URL path for all files and folders must be 260 characters or less (and no more than 128 characters for any single file or folder name in the URL). Please type a shorter file or folder name. &quot;)]" sap:VirtualizedContainerService.HintSize="334.4,90.4" sap2010:WorkflowViewState.IdRef="Throw_1" />
+                    </If.Then>
+                    <If.Else>
+                      <Sequence DisplayName="" sap2010:WorkflowViewState.IdRef="Sequence_37" />
+                    </If.Else>
+                  </If>
+                </Sequence>
+              </ui:CommentOut.Body>
+              <sap:WorkflowViewStateService.ViewState>
+                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                  <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                  <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                </scg:Dictionary>
+              </sap:WorkflowViewStateService.ViewState>
+            </ui:CommentOut>
+            <ui:CommentOut DisplayName="Comment Out" sap:VirtualizedContainerService.HintSize="484.8,533.6" sap2010:WorkflowViewState.IdRef="CommentOut_2">
+              <ui:CommentOut.Body>
+                <Sequence DisplayName="Ignored Activities" sap:VirtualizedContainerService.HintSize="449.6,455.2" sap2010:WorkflowViewState.IdRef="Sequence_35">
+                  <sap:WorkflowViewStateService.ViewState>
+                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                      <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                    </scg:Dictionary>
+                  </sap:WorkflowViewStateService.ViewState>
+                  <If Condition="[in_Config(&quot;Mode&quot;).ToString.Equals(&quot;PROD&quot;)]" DisplayName="If - Antigo (MoveFile)" sap:VirtualizedContainerService.HintSize="387.2,343.2" sap2010:WorkflowViewState.IdRef="If_11">
+                    <sap:WorkflowViewStateService.ViewState>
+                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                        <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                      </scg:Dictionary>
+                    </sap:WorkflowViewStateService.ViewState>
+                    <If.Then>
+                      <ui:MoveFile ContinueOnError="{x:Null}" DestinationResource="{x:Null}" PathResource="{x:Null}" Destination="[Path.Combine(in_Config(&quot;RaizPastaLocal&quot;).ToString.Replace(&quot;##USERNAME##&quot;, Environment.UserName), listFoldersFile(intQntFolder-3), (listFoldersFile(intQntFolder-2).Replace(&quot;. &quot;, &quot; - &quot;)), listFoldersFile(intQntFolder-1))]" DisplayName="Move File" sap:VirtualizedContainerService.HintSize="333.6,160" sap2010:WorkflowViewState.IdRef="MoveFile_1" Path="[file]" />
+                    </If.Then>
+                    <If.Else>
+                      <Sequence sap:VirtualizedContainerService.HintSize="376.8,370.4" sap2010:WorkflowViewState.IdRef="Sequence_32">
+                        <sap:WorkflowViewStateService.ViewState>
+                          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                          </scg:Dictionary>
+                        </sap:WorkflowViewStateService.ViewState>
+                        <ui:CreateDirectory ContinueOnError="{x:Null}" Output="{x:Null}" DisplayName="Create Folder" sap:VirtualizedContainerService.HintSize="333.6,80.8" sap2010:WorkflowViewState.IdRef="CreateDirectory_1" Path="[Path.Combine(in_Config(&quot;RaizPastaLocal_QA-PPD&quot;).ToString.Replace(&quot;##USERNAME##&quot;, Environment.UserName), listFoldersFile(intQntFolder-3), (listFoldersFile(intQntFolder-2).Replace(&quot;. &quot;, &quot; - &quot;)), listFoldersFile(intQntFolder-1))]" />
+                        <ui:MoveFile ContinueOnError="{x:Null}" DestinationResource="{x:Null}" PathResource="{x:Null}" Destination="[Path.Combine(in_Config(&quot;RaizPastaLocal_QA-PPD&quot;).ToString.Replace(&quot;##USERNAME##&quot;, Environment.UserName), listFoldersFile(intQntFolder-3), (listFoldersFile(intQntFolder-2).Replace(&quot;. &quot;, &quot; - &quot;)), listFoldersFile(intQntFolder-1))]" DisplayName="Move File" sap:VirtualizedContainerService.HintSize="333.6,160" sap2010:WorkflowViewState.IdRef="MoveFile_2" Path="[file]" />
+                      </Sequence>
+                    </If.Else>
+                  </If>
+                </Sequence>
+              </ui:CommentOut.Body>
+            </ui:CommentOut>
+            <If Condition="[in_Config(&quot;Mode&quot;).ToString.Equals(&quot;PROD&quot;)]" DisplayName="If - Novo (CopyFile)" sap:VirtualizedContainerService.HintSize="484.8,338.4" sap2010:WorkflowViewState.IdRef="If_12">
+              <sap:WorkflowViewStateService.ViewState>
+                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                  <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                </scg:Dictionary>
+              </sap:WorkflowViewStateService.ViewState>
+              <If.Then>
+                <ui:CopyFile ContinueOnError="{x:Null}" Destination="[Path.Combine(in_Config(&quot;RaizPastaLocal&quot;).ToString.Replace(&quot;##USERNAME##&quot;, Environment.UserName), listFoldersFile(intQntFolder-3), (listFoldersFile(intQntFolder-2).Replace(&quot;. &quot;, &quot; - &quot;)), listFoldersFile(intQntFolder-1))]" DisplayName="Copy File" sap:VirtualizedContainerService.HintSize="333.6,155.2" sap2010:WorkflowViewState.IdRef="CopyFile_2" Path="[file]" />
+              </If.Then>
+              <If.Else>
+                <Sequence sap:VirtualizedContainerService.HintSize="376.8,370.4" sap2010:WorkflowViewState.IdRef="Sequence_36">
+                  <sap:WorkflowViewStateService.ViewState>
+                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                      <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                    </scg:Dictionary>
+                  </sap:WorkflowViewStateService.ViewState>
+                  <ui:CreateDirectory ContinueOnError="{x:Null}" Output="{x:Null}" DisplayName="Create Folder" sap:VirtualizedContainerService.HintSize="333.6,80.8" sap2010:WorkflowViewState.IdRef="CreateDirectory_2" Path="[Path.Combine(in_Config(&quot;RaizPastaLocal_QA-PPD&quot;).ToString.Replace(&quot;##USERNAME##&quot;, Environment.UserName), listFoldersFile(intQntFolder-3), (listFoldersFile(intQntFolder-2).Replace(&quot;. &quot;, &quot; - &quot;)), listFoldersFile(intQntFolder-1))]" />
+                  <ui:MoveFile ContinueOnError="{x:Null}" DestinationResource="{x:Null}" PathResource="{x:Null}" Destination="[Path.Combine(in_Config(&quot;RaizPastaLocal_QA-PPD&quot;).ToString.Replace(&quot;##USERNAME##&quot;, Environment.UserName), listFoldersFile(intQntFolder-3), (listFoldersFile(intQntFolder-2).Replace(&quot;. &quot;, &quot; - &quot;)), listFoldersFile(intQntFolder-1))]" DisplayName="Move File" sap:VirtualizedContainerService.HintSize="333.6,160" sap2010:WorkflowViewState.IdRef="MoveFile_3" Path="[file]" />
+                </Sequence>
+              </If.Else>
+            </If>
+          </Sequence>
+        </ActivityAction>
+      </ui:ForEach.Body>
+    </ui:ForEach>
+    <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="1081.6,142.4" sap2010:WorkflowViewState.IdRef="LogMessage_5" Level="Info" Message="[&quot;FIM upload referente a pasta: &quot;+argOriginFolder]" />
+  </Sequence>
+</Activity>

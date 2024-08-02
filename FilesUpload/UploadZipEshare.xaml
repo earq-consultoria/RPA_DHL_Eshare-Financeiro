@@ -1,0 +1,688 @@
+<Activity mc:Ignorable="sap sap2010" x:Class="UploadZipEshare" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:s="clr-namespace:System;assembly=System.Private.CoreLib" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib" xmlns:sic="clr-namespace:System.IO.Compression;assembly=System.IO.Compression.ZipFile" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <x:Members>
+    <x:Property Name="argNumeroDocumento" Type="InArgument(x:String)" />
+    <x:Property Name="argFinancingFolderUrl" Type="InArgument(x:String)" />
+    <x:Property Name="argEshareExpirationDate" Type="InArgument(x:String)" />
+    <x:Property Name="argCodigoTomador" Type="InArgument(x:String)" />
+    <x:Property Name="argCnpjFilial" Type="InArgument(x:String)" />
+    <x:Property Name="argRazaoSocialFornecedor" Type="InArgument(x:String)" />
+    <x:Property Name="argNumeroRI" Type="InArgument(x:String)" />
+    <x:Property Name="argOriginFolderPath" Type="InArgument(x:String)" />
+    <x:Property Name="in_Config" Type="InArgument(scg:Dictionary(x:String, x:Object))" />
+    <x:Property Name="argProcessoExportacaoId" Type="InArgument(x:String)" />
+    <x:Property Name="argCodigoFilialOracle" Type="InArgument(x:String)" />
+    <x:Property Name="argDataExecucao" Type="InArgument(x:String)" />
+  </x:Members>
+  <VisualBasic.Settings>
+    <x:Null />
+  </VisualBasic.Settings>
+  <sap:VirtualizedContainerService.HintSize>1388,8686</sap:VirtualizedContainerService.HintSize>
+  <sap2010:WorkflowViewState.IdRef>UploadZipEshare_1</sap2010:WorkflowViewState.IdRef>
+  <TextExpression.NamespacesForImplementation>
+    <scg:List x:TypeArguments="x:String" Capacity="46">
+      <x:String>GlobalConstantsNamespace</x:String>
+      <x:String>GlobalVariablesNamespace</x:String>
+      <x:String>Microsoft.VisualBasic</x:String>
+      <x:String>Microsoft.VisualBasic.Activities</x:String>
+      <x:String>Microsoft.VisualBasic.CompilerServices</x:String>
+      <x:String>System</x:String>
+      <x:String>System.Activities</x:String>
+      <x:String>System.Activities.Expressions</x:String>
+      <x:String>System.Activities.Statements</x:String>
+      <x:String>System.Activities.Validation</x:String>
+      <x:String>System.Activities.XamlIntegration</x:String>
+      <x:String>System.Collections</x:String>
+      <x:String>System.Collections.Generic</x:String>
+      <x:String>System.Collections.ObjectModel</x:String>
+      <x:String>System.Data</x:String>
+      <x:String>System.Diagnostics</x:String>
+      <x:String>System.Drawing</x:String>
+      <x:String>System.Globalization</x:String>
+      <x:String>System.IO</x:String>
+      <x:String>System.Linq</x:String>
+      <x:String>System.Net.Mail</x:String>
+      <x:String>System.Windows.Markup</x:String>
+      <x:String>System.Xml</x:String>
+      <x:String>System.Xml.Linq</x:String>
+      <x:String>UiPath.Core</x:String>
+      <x:String>UiPath.Core.Activities</x:String>
+    </scg:List>
+  </TextExpression.NamespacesForImplementation>
+  <TextExpression.ReferencesForImplementation>
+    <scg:List x:TypeArguments="AssemblyReference" Capacity="42">
+      <AssemblyReference>Microsoft.VisualBasic</AssemblyReference>
+      <AssemblyReference>Microsoft.VisualBasic.Core</AssemblyReference>
+      <AssemblyReference>Microsoft.VisualBasic.Forms</AssemblyReference>
+      <AssemblyReference>mscorlib</AssemblyReference>
+      <AssemblyReference>NPOI</AssemblyReference>
+      <AssemblyReference>PresentationCore</AssemblyReference>
+      <AssemblyReference>PresentationFramework</AssemblyReference>
+      <AssemblyReference>System</AssemblyReference>
+      <AssemblyReference>System.Activities</AssemblyReference>
+      <AssemblyReference>System.CodeDom</AssemblyReference>
+      <AssemblyReference>System.Collections</AssemblyReference>
+      <AssemblyReference>System.ComponentModel</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.Composition</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.TypeConverter</AssemblyReference>
+      <AssemblyReference>System.Configuration.ConfigurationManager</AssemblyReference>
+      <AssemblyReference>System.Console</AssemblyReference>
+      <AssemblyReference>System.Core</AssemblyReference>
+      <AssemblyReference>System.Data</AssemblyReference>
+      <AssemblyReference>System.Data.DataSetExtensions</AssemblyReference>
+      <AssemblyReference>System.Drawing</AssemblyReference>
+      <AssemblyReference>System.Linq</AssemblyReference>
+      <AssemblyReference>System.Memory</AssemblyReference>
+      <AssemblyReference>System.Memory.Data</AssemblyReference>
+      <AssemblyReference>System.ObjectModel</AssemblyReference>
+      <AssemblyReference>System.Private.CoreLib</AssemblyReference>
+      <AssemblyReference>System.Private.Uri</AssemblyReference>
+      <AssemblyReference>System.Security.Permissions</AssemblyReference>
+      <AssemblyReference>System.ServiceModel</AssemblyReference>
+      <AssemblyReference>System.Text.RegularExpressions</AssemblyReference>
+      <AssemblyReference>System.ValueTuple</AssemblyReference>
+      <AssemblyReference>System.Xaml</AssemblyReference>
+      <AssemblyReference>System.Xml</AssemblyReference>
+      <AssemblyReference>System.Xml.Linq</AssemblyReference>
+      <AssemblyReference>UiPath.OCR.Activities.Design</AssemblyReference>
+      <AssemblyReference>UiPath.Platform</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.UiAutomation.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.UIAutomationCore</AssemblyReference>
+      <AssemblyReference>UiPath.UIAutomationNext</AssemblyReference>
+      <AssemblyReference>UiPath.Workflow</AssemblyReference>
+      <AssemblyReference>WindowsBase</AssemblyReference>
+    </scg:List>
+  </TextExpression.ReferencesForImplementation>
+  <Sequence DisplayName="UploadZipEshare" sap:VirtualizedContainerService.HintSize="1398,8501" sap2010:WorkflowViewState.IdRef="Sequence_1">
+    <Sequence.Variables>
+      <Variable x:TypeArguments="x:String" Name="strMês" />
+      <Variable x:TypeArguments="s:String[]" Name="vExpiringDate" />
+    </Sequence.Variables>
+    <sap:WorkflowViewStateService.ViewState>
+      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+      </scg:Dictionary>
+    </sap:WorkflowViewStateService.ViewState>
+    <Sequence sap2010:Annotation.AnnotationText="Captura a lista de pastas onde serão compactadas as pastas.&#xA;" DisplayName="Upload dos zips" sap:VirtualizedContainerService.HintSize="1336,8390" sap2010:WorkflowViewState.IdRef="Sequence_3">
+      <Sequence.Variables>
+        <Variable x:TypeArguments="x:Boolean" Name="arquivoZipList" />
+        <Variable x:TypeArguments="x:String" Name="TextoTXT" />
+        <Variable x:TypeArguments="scg:IList(x:String)" Name="foldersZip" />
+      </Sequence.Variables>
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+      <ui:CommentOut DisplayName="Comment Out" sap:VirtualizedContainerService.HintSize="1274,52" sap2010:WorkflowViewState.IdRef="CommentOut_1">
+        <ui:CommentOut.Body>
+          <Sequence DisplayName="Ignored Activities" sap:VirtualizedContainerService.HintSize="400,196" sap2010:WorkflowViewState.IdRef="Sequence_17">
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+            <ui:MessageBox Caption="{x:Null}" ChosenButton="{x:Null}" AutoCloseAfter="00:00:00" DisplayName="Message Box" sap:VirtualizedContainerService.HintSize="338,85" sap2010:WorkflowViewState.IdRef="MessageBox_1" Text="[&quot;Pastas criadas.&quot;]" />
+          </Sequence>
+        </ui:CommentOut.Body>
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </ui:CommentOut>
+      <Sequence sap2010:Annotation.AnnotationText="Recupra a lista de pastas onde estão as pastas que serão compactadas em .zip &#xA;" DisplayName="Captura da lista de Pastas" sap:VirtualizedContainerService.HintSize="1274,1017" sap2010:WorkflowViewState.IdRef="Sequence_10">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+        <ui:PathExists Resource="{x:Null}" DisplayName="Path Exists" Exists="[arquivoZipList]" sap:VirtualizedContainerService.HintSize="756,115" sap2010:WorkflowViewState.IdRef="PathExists_1" Path="[in_Config(&quot;PathPastaCompartilhada&quot;+&quot;_&quot;+in_Config(&quot;Mode&quot;).ToString).ToString+argDataExecucao+&quot;\&quot;+&quot;ZipFolderList.txt&quot;]" PathType="File" />
+        <If Condition="[arquivoZipList]" sap:VirtualizedContainerService.HintSize="756,402.666666666667" sap2010:WorkflowViewState.IdRef="If_1">
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+              <x:Boolean x:Key="IsPinned">False</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+          <If.Then>
+            <ui:ReadTextFile File="{x:Null}" Content="[TextoTXT]" DisplayName="Read Text File" FileName="[in_Config(&quot;PathPastaCompartilhada&quot;+&quot;_&quot;+in_Config(&quot;Mode&quot;).ToString).ToString+argDataExecucao+&quot;\&quot;+&quot;ZipFolderList.txt&quot;]" sap:VirtualizedContainerService.HintSize="334,134.666666666667" sap2010:WorkflowViewState.IdRef="ReadTextFile_1" />
+          </If.Then>
+          <If.Else>
+            <Sequence sap:VirtualizedContainerService.HintSize="376,248.666666666667" sap2010:WorkflowViewState.IdRef="Sequence_2">
+              <sap:WorkflowViewStateService.ViewState>
+                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                </scg:Dictionary>
+              </sap:WorkflowViewStateService.ViewState>
+              <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="334,94.6666666666667" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Error" Message="[&quot;Arquivo  com lista de path's das pastas a serem zipadas não encontrado. (&quot;+in_Config(&quot;PathPastaCompartilhada&quot;+&quot;_&quot;+in_Config(&quot;Mode&quot;).ToString).ToString+argDataExecucao+&quot;\&quot;+&quot;ZipFolderList.txt).&quot;]" />
+              <Throw Exception="[new BusinessRuleException(&quot;Arquivo  com lista de path's das pastas a serem zipadas não encontrado. (&quot;+in_Config(&quot;PathPastaCompartilhada&quot;+&quot;_&quot;+in_Config(&quot;Mode&quot;).ToString).ToString+argDataExecucao+&quot;\&quot;+&quot;ZipFolderList.txt).&quot;)]" sap:VirtualizedContainerService.HintSize="334,22" sap2010:WorkflowViewState.IdRef="Throw_1" />
+            </Sequence>
+          </If.Else>
+        </If>
+        <Assign sap:VirtualizedContainerService.HintSize="756,62" sap2010:WorkflowViewState.IdRef="Assign_7">
+          <Assign.To>
+            <OutArgument x:TypeArguments="scg:IList(x:String)">[foldersZip]</OutArgument>
+          </Assign.To>
+          <Assign.Value>
+            <InArgument x:TypeArguments="scg:IList(x:String)">[New System.Collections.Generic.List(Of String)]</InArgument>
+          </Assign.Value>
+        </Assign>
+        <Assign sap:VirtualizedContainerService.HintSize="756,62" sap2010:WorkflowViewState.IdRef="Assign_8">
+          <Assign.To>
+            <OutArgument x:TypeArguments="scg:IList(x:String)">[foldersZip]</OutArgument>
+          </Assign.To>
+          <Assign.Value>
+            <InArgument x:TypeArguments="s:String[]">[Split(System.Text.RegularExpressions.Regex.Replace(TextoTXT.Trim,"[\n\r]+",""),";")]</InArgument>
+          </Assign.Value>
+        </Assign>
+        <Assign sap:VirtualizedContainerService.HintSize="756,62" sap2010:WorkflowViewState.IdRef="Assign_9">
+          <Assign.To>
+            <OutArgument x:TypeArguments="scg:IList(x:String)">[foldersZip]</OutArgument>
+          </Assign.To>
+          <Assign.Value>
+            <InArgument x:TypeArguments="scg:IList(x:String)">[foldersZip.Distinct().ToList]</InArgument>
+          </Assign.Value>
+        </Assign>
+      </Sequence>
+      <Sequence sap2010:Annotation.AnnotationText="Realiza a compactação de todas as pastas da lista  diretório&#xA;" DisplayName="Compactação das pastas" sap:VirtualizedContainerService.HintSize="1274,2039" sap2010:WorkflowViewState.IdRef="Sequence_11">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+        <ui:ForEach x:TypeArguments="x:String" CurrentIndex="{x:Null}" DisplayName="For Each" sap:VirtualizedContainerService.HintSize="1143,1886" sap2010:WorkflowViewState.IdRef="ForEach`1_2" Values="[foldersZip]">
+          <ui:ForEach.Body>
+            <ActivityAction x:TypeArguments="x:String">
+              <ActivityAction.Argument>
+                <DelegateInArgument x:TypeArguments="x:String" Name="folder" />
+              </ActivityAction.Argument>
+              <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="1064.66666666667,1676" sap2010:WorkflowViewState.IdRef="Sequence_9">
+                <sap:WorkflowViewStateService.ViewState>
+                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                    <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                  </scg:Dictionary>
+                </sap:WorkflowViewStateService.ViewState>
+                <If Condition="[not folder.Trim=&quot;&quot;]" sap:VirtualizedContainerService.HintSize="1022.66666666667,1584" sap2010:WorkflowViewState.IdRef="If_6">
+                  <If.Then>
+                    <Sequence sap:VirtualizedContainerService.HintSize="876.666666666667,1430" sap2010:WorkflowViewState.IdRef="Sequence_8">
+                      <Sequence.Variables>
+                        <Variable x:TypeArguments="s:String[]" Name="directoryList" />
+                      </Sequence.Variables>
+                      <sap:WorkflowViewStateService.ViewState>
+                        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                        </scg:Dictionary>
+                      </sap:WorkflowViewStateService.ViewState>
+                      <Assign sap:VirtualizedContainerService.HintSize="834.666666666667,62" sap2010:WorkflowViewState.IdRef="Assign_10">
+                        <Assign.To>
+                          <OutArgument x:TypeArguments="s:String[]">[directoryList]</OutArgument>
+                        </Assign.To>
+                        <Assign.Value>
+                          <InArgument x:TypeArguments="s:String[]">[Directory.GetDirectories(folder)]</InArgument>
+                        </Assign.Value>
+                      </Assign>
+                      <ui:ForEach x:TypeArguments="x:String" CurrentIndex="{x:Null}" DisplayName="For Each" sap:VirtualizedContainerService.HintSize="834.666666666667,1236" sap2010:WorkflowViewState.IdRef="ForEach`1_1" Values="[directoryList]">
+                        <ui:ForEach.Body>
+                          <ActivityAction x:TypeArguments="x:String">
+                            <ActivityAction.Argument>
+                              <DelegateInArgument x:TypeArguments="x:String" Name="zipFolder" />
+                            </ActivityAction.Argument>
+                            <Sequence sap2010:Annotation.AnnotationText="Realiza a compressão das pastas e se caso tenha sucesso em compactar em .zip deleta a pasta original&#xA;" DisplayName="Compressão das pastas" sap:VirtualizedContainerService.HintSize="798,1097.33333333333" sap2010:WorkflowViewState.IdRef="Sequence_7">
+                              <Sequence.Variables>
+                                <Variable x:TypeArguments="x:Boolean" Name="arquivoZipCriado" />
+                                <Variable x:TypeArguments="x:String" Name="zipPath" />
+                                <Variable x:TypeArguments="x:String" Name="extractPath" />
+                              </Sequence.Variables>
+                              <sap:WorkflowViewStateService.ViewState>
+                                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                  <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+                                  <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                                </scg:Dictionary>
+                              </sap:WorkflowViewStateService.ViewState>
+                              <Assign sap:VirtualizedContainerService.HintSize="756,62" sap2010:WorkflowViewState.IdRef="Assign_11">
+                                <Assign.To>
+                                  <OutArgument x:TypeArguments="x:String">[zipPath]</OutArgument>
+                                </Assign.To>
+                                <Assign.Value>
+                                  <InArgument x:TypeArguments="x:String">[zipFolder]</InArgument>
+                                </Assign.Value>
+                              </Assign>
+                              <Assign sap:VirtualizedContainerService.HintSize="756,62" sap2010:WorkflowViewState.IdRef="Assign_12">
+                                <Assign.To>
+                                  <OutArgument x:TypeArguments="x:String">[extractPath]</OutArgument>
+                                </Assign.To>
+                                <Assign.Value>
+                                  <InArgument x:TypeArguments="x:String">[zipFolder+".zip"]</InArgument>
+                                </Assign.Value>
+                              </Assign>
+                              <InvokeMethod DisplayName="Invoke method" sap:VirtualizedContainerService.HintSize="756,137.333333333333" sap2010:WorkflowViewState.IdRef="InvokeMethod_1" MethodName="CreateFromDirectory" TargetType="sic:ZipFile">
+                                <InArgument x:TypeArguments="x:String">[zipPath]</InArgument>
+                                <InArgument x:TypeArguments="x:String">[extractPath]</InArgument>
+                              </InvokeMethod>
+                              <ui:PathExists Resource="{x:Null}" DisplayName="Path Exists" Exists="[arquivoZipCriado]" sap:VirtualizedContainerService.HintSize="756,90.6666666666667" sap2010:WorkflowViewState.IdRef="PathExists_2" Path="[extractPath]" PathType="File" />
+                              <If sap2010:Annotation.AnnotationText="Verifica se o arquivo ZIP foi criado se foi deleta a pasta original não compactada&#xA;" Condition="[arquivoZipCriado]" DisplayName="Verifica se criou o zip" sap:VirtualizedContainerService.HintSize="756,448" sap2010:WorkflowViewState.IdRef="If_5">
+                                <sap:WorkflowViewStateService.ViewState>
+                                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                    <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+                                  </scg:Dictionary>
+                                </sap:WorkflowViewStateService.ViewState>
+                                <If.Then>
+                                  <Sequence sap:VirtualizedContainerService.HintSize="376,248.666666666667" sap2010:WorkflowViewState.IdRef="Sequence_6">
+                                    <sap:WorkflowViewStateService.ViewState>
+                                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                      </scg:Dictionary>
+                                    </sap:WorkflowViewStateService.ViewState>
+                                    <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="334,94.6666666666667" sap2010:WorkflowViewState.IdRef="LogMessage_2" Level="Info" Message="[&quot;Arquivo zip (&quot;+extractPath+&quot;) criado com sucesso.&quot;]" />
+                                    <ui:Delete ContinueOnError="{x:Null}" ResourceFile="{x:Null}" sap:VirtualizedContainerService.HintSize="334,22" sap2010:WorkflowViewState.IdRef="Delete_1" Path="[zipPath]" />
+                                  </Sequence>
+                                </If.Then>
+                                <If.Else>
+                                  <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="334,94.6666666666667" sap2010:WorkflowViewState.IdRef="LogMessage_3" Level="Info" Message="[&quot;Erro na criação do arquivo zip (&quot;+extractPath+&quot;).&quot;]" />
+                                </If.Else>
+                              </If>
+                            </Sequence>
+                          </ActivityAction>
+                        </ui:ForEach.Body>
+                        <sap:WorkflowViewStateService.ViewState>
+                          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                          </scg:Dictionary>
+                        </sap:WorkflowViewStateService.ViewState>
+                      </ui:ForEach>
+                    </Sequence>
+                  </If.Then>
+                </If>
+              </Sequence>
+            </ActivityAction>
+          </ui:ForEach.Body>
+        </ui:ForEach>
+      </Sequence>
+      <Sequence sap2010:Annotation.AnnotationText="Realiza o upload dos zips no eShare do financeiro.&#xA;" DisplayName="Realiza o Upload dos Zips " sap:VirtualizedContainerService.HintSize="1274,5009" sap2010:WorkflowViewState.IdRef="Sequence_16">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+        <ui:ForEach x:TypeArguments="x:String" CurrentIndex="{x:Null}" DisplayName="For Each" sap:VirtualizedContainerService.HintSize="1212,4856" sap2010:WorkflowViewState.IdRef="ForEach`1_4" Values="[foldersZip]">
+          <ui:ForEach.Body>
+            <ActivityAction x:TypeArguments="x:String">
+              <ActivityAction.Argument>
+                <DelegateInArgument x:TypeArguments="x:String" Name="folder" />
+              </ActivityAction.Argument>
+              <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="1134,4646" sap2010:WorkflowViewState.IdRef="Sequence_15">
+                <sap:WorkflowViewStateService.ViewState>
+                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                    <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                  </scg:Dictionary>
+                </sap:WorkflowViewStateService.ViewState>
+                <If Condition="[not folder.Trim=&quot;&quot;]" sap:VirtualizedContainerService.HintSize="1072,4535" sap2010:WorkflowViewState.IdRef="If_8">
+                  <If.Then>
+                    <Sequence sap:VirtualizedContainerService.HintSize="994,4259" sap2010:WorkflowViewState.IdRef="Sequence_14">
+                      <Sequence.Variables>
+                        <Variable x:TypeArguments="s:String[]" Name="directoryList" />
+                        <Variable x:TypeArguments="ui:Browser" Name="vEsharePage" />
+                      </Sequence.Variables>
+                      <sap:WorkflowViewStateService.ViewState>
+                        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                        </scg:Dictionary>
+                      </sap:WorkflowViewStateService.ViewState>
+                      <Assign DisplayName="Expiring date" sap:VirtualizedContainerService.HintSize="932,61" sap2010:WorkflowViewState.IdRef="Assign_16">
+                        <Assign.To>
+                          <OutArgument x:TypeArguments="s:String[]">[vExpiringDate]</OutArgument>
+                        </Assign.To>
+                        <Assign.Value>
+                          <InArgument x:TypeArguments="s:String[]">[Split(folder.Replace(in_Config("PathPastaCompartilhada"+"_"+in_Config("Mode").ToString).ToString+argDataExecucao+"\",""), "\")]</InArgument>
+                        </Assign.Value>
+                        <sap:WorkflowViewStateService.ViewState>
+                          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                          </scg:Dictionary>
+                        </sap:WorkflowViewStateService.ViewState>
+                      </Assign>
+                      <ui:CommentOut DisplayName="Comment Out Upload Eshare browser" sap:VirtualizedContainerService.HintSize="610,52.6666666666667" sap2010:WorkflowViewState.IdRef="CommentOut_2">
+                        <ui:CommentOut.Body>
+                          <Sequence DisplayName="Ignored Activities" sap:VirtualizedContainerService.HintSize="602,144.666666666667" sap2010:WorkflowViewState.IdRef="Sequence_27">
+                            <sap:WorkflowViewStateService.ViewState>
+                              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                              </scg:Dictionary>
+                            </sap:WorkflowViewStateService.ViewState>
+                            <ui:OpenBrowser AutomaticallyDownloadWebDriver="{x:Null}" CommunicationMethod="{x:Null}" Hidden="{x:Null}" Private="{x:Null}" BrowserType="IE" DisplayName="Open ehsare" sap:VirtualizedContainerService.HintSize="200,52.6666666666667" sap2010:WorkflowViewState.IdRef="OpenBrowser_1" NewSession="True" UiBrowser="[vEsharePage]" Url="[argFinancingFolderUrl]">
+                              <ui:OpenBrowser.Body>
+                                <ActivityAction x:TypeArguments="x:Object">
+                                  <ActivityAction.Argument>
+                                    <DelegateInArgument x:TypeArguments="x:Object" Name="ContextTarget" />
+                                  </ActivityAction.Argument>
+                                  <Sequence DisplayName="Cria as pastas do eShare até o upload" sap:VirtualizedContainerService.HintSize="526,1254" sap2010:WorkflowViewState.IdRef="Sequence_5">
+                                    <Sequence.Variables>
+                                      <Variable x:TypeArguments="x:String" Name="vBranchNumber" />
+                                      <Variable x:TypeArguments="x:String" Name="mensagem" />
+                                      <Variable x:TypeArguments="x:String" Name="pastaMes" />
+                                    </Sequence.Variables>
+                                    <sap:WorkflowViewStateService.ViewState>
+                                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                      </scg:Dictionary>
+                                    </sap:WorkflowViewStateService.ViewState>
+                                    <Delay Duration="00:00:05" sap:VirtualizedContainerService.HintSize="484,22" sap2010:WorkflowViewState.IdRef="Delay_1" />
+                                    <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Validate year folder" sap:VirtualizedContainerService.HintSize="484,86.6666666666667" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_1" UnSafe="False" WorkflowFileName="FilesUpload\ValidateFolder.xaml">
+                                      <ui:InvokeWorkflowFile.Arguments>
+                                        <InArgument x:TypeArguments="x:String" x:Key="argFolderName">[vExpiringDate(0)]</InArgument>
+                                        <InArgument x:TypeArguments="ui:Browser" x:Key="argEsharePage">[vEsharePage]</InArgument>
+                                        <InOutArgument x:TypeArguments="x:String" x:Key="argMensagem">[mensagem]</InOutArgument>
+                                      </ui:InvokeWorkflowFile.Arguments>
+                                      <sap:WorkflowViewStateService.ViewState>
+                                        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                        </scg:Dictionary>
+                                      </sap:WorkflowViewStateService.ViewState>
+                                    </ui:InvokeWorkflowFile>
+                                    <If Condition="[Not mensagem=&quot;&quot;]" sap:VirtualizedContainerService.HintSize="484,210.666666666667" sap2010:WorkflowViewState.IdRef="If_2">
+                                      <sap:WorkflowViewStateService.ViewState>
+                                        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                                        </scg:Dictionary>
+                                      </sap:WorkflowViewStateService.ViewState>
+                                      <If.Then>
+                                        <Throw Exception="[new BusinessRuleException(mensagem)]" sap:VirtualizedContainerService.HintSize="200,22" sap2010:WorkflowViewState.IdRef="Throw_2" />
+                                      </If.Then>
+                                    </If>
+                                    <Assign sap:VirtualizedContainerService.HintSize="484,62" sap2010:WorkflowViewState.IdRef="Assign_17">
+                                      <Assign.To>
+                                        <OutArgument x:TypeArguments="x:String">[pastaMes]</OutArgument>
+                                      </Assign.To>
+                                      <Assign.Value>
+                                        <InArgument x:TypeArguments="x:String">[vExpiringDate(1)]</InArgument>
+                                      </Assign.Value>
+                                    </Assign>
+                                    <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Validate month folder" sap:VirtualizedContainerService.HintSize="484,86.6666666666667" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_2" UnSafe="False" WorkflowFileName="FilesUpload\ValidateFolder.xaml">
+                                      <ui:InvokeWorkflowFile.Arguments>
+                                        <InArgument x:TypeArguments="x:String" x:Key="argFolderName">[pastaMes]</InArgument>
+                                        <InArgument x:TypeArguments="ui:Browser" x:Key="argEsharePage">[vEsharePage]</InArgument>
+                                        <InOutArgument x:TypeArguments="x:String" x:Key="argMensagem">[mensagem]</InOutArgument>
+                                      </ui:InvokeWorkflowFile.Arguments>
+                                      <sap:WorkflowViewStateService.ViewState>
+                                        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                        </scg:Dictionary>
+                                      </sap:WorkflowViewStateService.ViewState>
+                                    </ui:InvokeWorkflowFile>
+                                    <If Condition="[Not mensagem=&quot;&quot;]" sap:VirtualizedContainerService.HintSize="484,52.6666666666667" sap2010:WorkflowViewState.IdRef="If_3">
+                                      <sap:WorkflowViewStateService.ViewState>
+                                        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                          <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                                          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                                        </scg:Dictionary>
+                                      </sap:WorkflowViewStateService.ViewState>
+                                      <If.Then>
+                                        <Throw Exception="[new BusinessRuleException(mensagem)]" sap:VirtualizedContainerService.HintSize="200,22" sap2010:WorkflowViewState.IdRef="Throw_3" />
+                                      </If.Then>
+                                    </If>
+                                    <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Validate  tomador folder" sap:VirtualizedContainerService.HintSize="484,89.3333333333333" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_3" UnSafe="False" WorkflowFileName="FilesUpload\ValidateFolder.xaml">
+                                      <ui:InvokeWorkflowFile.Arguments>
+                                        <InArgument x:TypeArguments="x:String" x:Key="argFolderName">[vExpiringDate(2)]</InArgument>
+                                        <InArgument x:TypeArguments="ui:Browser" x:Key="argEsharePage">[vEsharePage]</InArgument>
+                                        <InOutArgument x:TypeArguments="x:String" x:Key="argMensagem">[mensagem]</InOutArgument>
+                                      </ui:InvokeWorkflowFile.Arguments>
+                                      <sap:WorkflowViewStateService.ViewState>
+                                        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                        </scg:Dictionary>
+                                      </sap:WorkflowViewStateService.ViewState>
+                                    </ui:InvokeWorkflowFile>
+                                    <If Condition="[Not mensagem=&quot;&quot;]" sap:VirtualizedContainerService.HintSize="484,52.6666666666667" sap2010:WorkflowViewState.IdRef="If_4">
+                                      <sap:WorkflowViewStateService.ViewState>
+                                        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                          <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                                          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                                        </scg:Dictionary>
+                                      </sap:WorkflowViewStateService.ViewState>
+                                      <If.Then>
+                                        <Throw Exception="[new BusinessRuleException(mensagem)]" sap:VirtualizedContainerService.HintSize="200,22" sap2010:WorkflowViewState.IdRef="Throw_4" />
+                                      </If.Then>
+                                    </If>
+                                    <ui:Comment sap:VirtualizedContainerService.HintSize="484,55.3333333333333" sap2010:WorkflowViewState.IdRef="Comment_1" Text="// Valida a pasta agrupadora&#xA;" />
+                                    <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Invoke FilesUpload_Mbot workflow" sap:VirtualizedContainerService.HintSize="484,86.6666666666667" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_4" UnSafe="False" WorkflowFileName="FilesUpload\FilesUpload_Mbot.xaml">
+                                      <ui:InvokeWorkflowFile.Arguments>
+                                        <InArgument x:TypeArguments="x:String" x:Key="argOriginFolder">[folder]</InArgument>
+                                        <InArgument x:TypeArguments="ui:Browser" x:Key="argEShareWebBrowser">[vEsharePage]</InArgument>
+                                        <InArgument x:TypeArguments="x:String" x:Key="argUploadFolder" />
+                                        <InArgument x:TypeArguments="scg:Dictionary(x:String, x:Object)" x:Key="in_Config">[in_Config]</InArgument>
+                                      </ui:InvokeWorkflowFile.Arguments>
+                                    </ui:InvokeWorkflowFile>
+                                  </Sequence>
+                                </ActivityAction>
+                              </ui:OpenBrowser.Body>
+                              <sap:WorkflowViewStateService.ViewState>
+                                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                  <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                                  <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                                </scg:Dictionary>
+                              </sap:WorkflowViewStateService.ViewState>
+                            </ui:OpenBrowser>
+                          </Sequence>
+                        </ui:CommentOut.Body>
+                        <sap:WorkflowViewStateService.ViewState>
+                          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                            <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                          </scg:Dictionary>
+                        </sap:WorkflowViewStateService.ViewState>
+                      </ui:CommentOut>
+                      <Sequence DisplayName="Upload files to sharepoint [NOVO]" sap:VirtualizedContainerService.HintSize="932,3827" sap2010:WorkflowViewState.IdRef="Sequence_22">
+                        <sap:WorkflowViewStateService.ViewState>
+                          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                          </scg:Dictionary>
+                        </sap:WorkflowViewStateService.ViewState>
+                        <Sequence DisplayName="Validate year folder" sap:VirtualizedContainerService.HintSize="870,823" sap2010:WorkflowViewState.IdRef="Sequence_18">
+                          <Sequence.Variables>
+                            <Variable x:TypeArguments="x:Boolean" Name="bAno" />
+                          </Sequence.Variables>
+                          <sap:WorkflowViewStateService.ViewState>
+                            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                              <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                            </scg:Dictionary>
+                          </sap:WorkflowViewStateService.ViewState>
+                          <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="767,141" sap2010:WorkflowViewState.IdRef="LogMessage_4" Level="Info" Message="[&quot;Verificando se pasta de ano existe.&quot;]" />
+                          <ui:PathExists Resource="{x:Null}" DisplayName="Path Exists" Exists="[bAno]" sap:VirtualizedContainerService.HintSize="767,115" sap2010:WorkflowViewState.IdRef="PathExists_3" Path="[Path.Combine(in_Config(&quot;RaizPastaLocal&quot;).ToString, Now.ToString(&quot;yyyy&quot;)).Replace(&quot;##USERNAME##&quot;,Environment.UserName.ToString)]" PathType="File" />
+                          <If Condition="[Not bAno]" DisplayName="Not bAno" sap:VirtualizedContainerService.HintSize="767,376" sap2010:WorkflowViewState.IdRef="If_9">
+                            <sap:WorkflowViewStateService.ViewState>
+                              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                              </scg:Dictionary>
+                            </sap:WorkflowViewStateService.ViewState>
+                            <If.Then>
+                              <ui:CreateDirectory ContinueOnError="{x:Null}" Output="{x:Null}" DisplayName="Create Folder" sap:VirtualizedContainerService.HintSize="334,80" sap2010:WorkflowViewState.IdRef="CreateDirectory_1" Path="[Path.Combine(in_Config(&quot;RaizPastaLocal&quot;).ToString, Now.ToString(&quot;yyyy&quot;)).Replace(&quot;##USERNAME##&quot;,Environment.UserName.ToString)]" />
+                            </If.Then>
+                          </If>
+                        </Sequence>
+                        <Sequence DisplayName="Validate month folder" sap:VirtualizedContainerService.HintSize="870,924" sap2010:WorkflowViewState.IdRef="Sequence_19">
+                          <Sequence.Variables>
+                            <Variable x:TypeArguments="x:Boolean" Name="bMes" />
+                          </Sequence.Variables>
+                          <sap:WorkflowViewStateService.ViewState>
+                            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                              <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                            </scg:Dictionary>
+                          </sap:WorkflowViewStateService.ViewState>
+                          <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="808,141" sap2010:WorkflowViewState.IdRef="LogMessage_5" Level="Info" Message="[&quot;Verificando se pasta de mês existe.&quot;]" />
+                          <Assign sap:VirtualizedContainerService.HintSize="808,61" sap2010:WorkflowViewState.IdRef="Assign_18">
+                            <Assign.To>
+                              <OutArgument x:TypeArguments="x:String">[strMês]</OutArgument>
+                            </Assign.To>
+                            <Assign.Value>
+                              <InArgument x:TypeArguments="x:String">[Now.ToString("MM - ") &amp; ((Now.ToString("MMMM", System.Globalization.CultureInfo.CreateSpecificCulture("pt-BR"))).substring(0,1).ToUpper+(Now.ToString("MMMM", System.Globalization.CultureInfo.CreateSpecificCulture("pt-BR"))).substring(1).toLower)]</InArgument>
+                            </Assign.Value>
+                          </Assign>
+                          <ui:PathExists Resource="{x:Null}" DisplayName="Path Exists" Exists="[bMes]" sap:VirtualizedContainerService.HintSize="808,115" sap2010:WorkflowViewState.IdRef="PathExists_4" Path="[Path.Combine(in_Config(&quot;RaizPastaLocal&quot;).ToString, Now.ToString(&quot;yyyy&quot;), strMês).Replace(&quot;##USERNAME##&quot;,Environment.UserName.ToString)]" PathType="File" />
+                          <If Condition="[Not bMes]" DisplayName="Not bMes" sap:VirtualizedContainerService.HintSize="808,376" sap2010:WorkflowViewState.IdRef="If_10">
+                            <If.Then>
+                              <ui:CreateDirectory ContinueOnError="{x:Null}" Output="{x:Null}" DisplayName="Create Folder" sap:VirtualizedContainerService.HintSize="334,80" sap2010:WorkflowViewState.IdRef="CreateDirectory_2" Path="[Path.Combine(in_Config(&quot;RaizPastaLocal&quot;).ToString, Now.ToString(&quot;yyyy&quot;), strMês).Replace(&quot;##USERNAME##&quot;,Environment.UserName.ToString)]" />
+                            </If.Then>
+                          </If>
+                        </Sequence>
+                        <Sequence DisplayName="Validate tomador folder" sap:VirtualizedContainerService.HintSize="870,1670" sap2010:WorkflowViewState.IdRef="Sequence_23">
+                          <Sequence.Variables>
+                            <Variable x:TypeArguments="x:Boolean" Name="bMes" />
+                          </Sequence.Variables>
+                          <sap:WorkflowViewStateService.ViewState>
+                            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                              <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                            </scg:Dictionary>
+                          </sap:WorkflowViewStateService.ViewState>
+                          <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="526,52.6666666666667" sap2010:WorkflowViewState.IdRef="LogMessage_6" Level="Info" Message="[&quot;Verificando se pasta do tomador existe.&quot;]">
+                            <sap:WorkflowViewStateService.ViewState>
+                              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                                <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                              </scg:Dictionary>
+                            </sap:WorkflowViewStateService.ViewState>
+                          </ui:LogMessage>
+                          <Sequence DisplayName="ENE" sap:VirtualizedContainerService.HintSize="526,462" sap2010:WorkflowViewState.IdRef="Sequence_24">
+                            <Sequence.Variables>
+                              <Variable x:TypeArguments="x:Boolean" Name="bENE" />
+                            </Sequence.Variables>
+                            <sap:WorkflowViewStateService.ViewState>
+                              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                              </scg:Dictionary>
+                            </sap:WorkflowViewStateService.ViewState>
+                            <ui:PathExists Resource="{x:Null}" DisplayName="Path Exists" Exists="[bENE]" sap:VirtualizedContainerService.HintSize="484,90.6666666666667" sap2010:WorkflowViewState.IdRef="PathExists_5" Path="[Path.Combine(in_Config(&quot;RaizPastaLocal&quot;).ToString, Now.ToString(&quot;yyyy&quot;), strMês, &quot;ENE&quot;).Replace(&quot;##USERNAME##&quot;,Environment.UserName.ToString)]" PathType="File">
+                              <sap:WorkflowViewStateService.ViewState>
+                                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                  <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                                </scg:Dictionary>
+                              </sap:WorkflowViewStateService.ViewState>
+                            </ui:PathExists>
+                            <If Condition="[Not bENE]" DisplayName="Not bMes" sap:VirtualizedContainerService.HintSize="484,239.333333333333" sap2010:WorkflowViewState.IdRef="If_11">
+                              <sap:WorkflowViewStateService.ViewState>
+                                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                  <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                                </scg:Dictionary>
+                              </sap:WorkflowViewStateService.ViewState>
+                              <If.Then>
+                                <ui:CreateDirectory ContinueOnError="{x:Null}" Output="{x:Null}" DisplayName="Create Folder" sap:VirtualizedContainerService.HintSize="334,85.3333333333333" sap2010:WorkflowViewState.IdRef="CreateDirectory_3" Path="[Path.Combine(in_Config(&quot;RaizPastaLocal&quot;).ToString, Now.ToString(&quot;yyyy&quot;), strMês, &quot;ENE&quot;).Replace(&quot;##USERNAME##&quot;,Environment.UserName.ToString)]" />
+                              </If.Then>
+                            </If>
+                          </Sequence>
+                          <Sequence DisplayName="DOX" sap:VirtualizedContainerService.HintSize="526,462" sap2010:WorkflowViewState.IdRef="Sequence_25">
+                            <Sequence.Variables>
+                              <Variable x:TypeArguments="x:Boolean" Name="bENE" />
+                              <Variable x:TypeArguments="x:Boolean" Name="bDOX" />
+                            </Sequence.Variables>
+                            <sap:WorkflowViewStateService.ViewState>
+                              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                              </scg:Dictionary>
+                            </sap:WorkflowViewStateService.ViewState>
+                            <ui:PathExists Resource="{x:Null}" DisplayName="Path Exists" Exists="[bDOX]" sap:VirtualizedContainerService.HintSize="484,90.6666666666667" sap2010:WorkflowViewState.IdRef="PathExists_6" Path="[Path.Combine(in_Config(&quot;RaizPastaLocal&quot;).ToString, Now.ToString(&quot;yyyy&quot;), strMês, &quot;DOX&quot;).Replace(&quot;##USERNAME##&quot;,Environment.UserName.ToString)]" PathType="File">
+                              <sap:WorkflowViewStateService.ViewState>
+                                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                  <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                                </scg:Dictionary>
+                              </sap:WorkflowViewStateService.ViewState>
+                            </ui:PathExists>
+                            <If Condition="[Not bDOX]" DisplayName="Not bMes" sap:VirtualizedContainerService.HintSize="484,239.333333333333" sap2010:WorkflowViewState.IdRef="If_12">
+                              <sap:WorkflowViewStateService.ViewState>
+                                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                  <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                                </scg:Dictionary>
+                              </sap:WorkflowViewStateService.ViewState>
+                              <If.Then>
+                                <ui:CreateDirectory ContinueOnError="{x:Null}" Output="{x:Null}" DisplayName="Create Folder" sap:VirtualizedContainerService.HintSize="334,85.3333333333333" sap2010:WorkflowViewState.IdRef="CreateDirectory_4" Path="[Path.Combine(in_Config(&quot;RaizPastaLocal&quot;).ToString, Now.ToString(&quot;yyyy&quot;), strMês, &quot;DOX&quot;).Replace(&quot;##USERNAME##&quot;,Environment.UserName.ToString)]" />
+                              </If.Then>
+                            </If>
+                          </Sequence>
+                          <Sequence DisplayName="DHL" sap:VirtualizedContainerService.HintSize="526,462" sap2010:WorkflowViewState.IdRef="Sequence_26">
+                            <Sequence.Variables>
+                              <Variable x:TypeArguments="x:Boolean" Name="bENE" />
+                              <Variable x:TypeArguments="x:Boolean" Name="bDOX" />
+                              <Variable x:TypeArguments="x:Boolean" Name="bDHL" />
+                            </Sequence.Variables>
+                            <sap:WorkflowViewStateService.ViewState>
+                              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                              </scg:Dictionary>
+                            </sap:WorkflowViewStateService.ViewState>
+                            <ui:PathExists Resource="{x:Null}" DisplayName="Path Exists" Exists="[bDHL]" sap:VirtualizedContainerService.HintSize="484,90.6666666666667" sap2010:WorkflowViewState.IdRef="PathExists_7" Path="[Path.Combine(in_Config(&quot;RaizPastaLocal&quot;).ToString, Now.ToString(&quot;yyyy&quot;), strMês, &quot;DHL&quot;).Replace(&quot;##USERNAME##&quot;,Environment.UserName.ToString)]" PathType="File">
+                              <sap:WorkflowViewStateService.ViewState>
+                                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                  <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                                </scg:Dictionary>
+                              </sap:WorkflowViewStateService.ViewState>
+                            </ui:PathExists>
+                            <If Condition="[Not bDHL]" DisplayName="Not bMes" sap:VirtualizedContainerService.HintSize="484,239.333333333333" sap2010:WorkflowViewState.IdRef="If_13">
+                              <sap:WorkflowViewStateService.ViewState>
+                                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                  <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                                </scg:Dictionary>
+                              </sap:WorkflowViewStateService.ViewState>
+                              <If.Then>
+                                <ui:CreateDirectory ContinueOnError="{x:Null}" Output="{x:Null}" DisplayName="Create Folder" sap:VirtualizedContainerService.HintSize="334,85.3333333333333" sap2010:WorkflowViewState.IdRef="CreateDirectory_5" Path="[Path.Combine(in_Config(&quot;RaizPastaLocal&quot;).ToString, Now.ToString(&quot;yyyy&quot;), strMês, &quot;DHL&quot;).Replace(&quot;##USERNAME##&quot;,Environment.UserName.ToString)]" />
+                              </If.Then>
+                            </If>
+                          </Sequence>
+                        </Sequence>
+                        <Sequence DisplayName="Upload files" sap:VirtualizedContainerService.HintSize="568,178.666666666667" sap2010:WorkflowViewState.IdRef="Sequence_21">
+                          <sap:WorkflowViewStateService.ViewState>
+                            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                              <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                            </scg:Dictionary>
+                          </sap:WorkflowViewStateService.ViewState>
+                          <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Invoke FilesUpload_Mbot workflow" sap:VirtualizedContainerService.HintSize="334,86.6666666666667" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_6" UnSafe="False" WorkflowFileName="FilesUpload\FilesUpload_Mbot.xaml">
+                            <ui:InvokeWorkflowFile.Arguments>
+                              <InArgument x:TypeArguments="x:String" x:Key="argOriginFolder">[folder]</InArgument>
+                              <InArgument x:TypeArguments="ui:Browser" x:Key="argEShareWebBrowser" />
+                              <InArgument x:TypeArguments="x:String" x:Key="argUploadFolder" />
+                              <InArgument x:TypeArguments="scg:Dictionary(x:String, x:Object)" x:Key="in_Config">[in_Config]</InArgument>
+                            </ui:InvokeWorkflowFile.Arguments>
+                          </ui:InvokeWorkflowFile>
+                        </Sequence>
+                      </Sequence>
+                      <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Invoke CloseAllApplications workflow" sap:VirtualizedContainerService.HintSize="610,86.6666666666667" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_5" UnSafe="False" WorkflowFileName="Framework\CloseAllApplications.xaml">
+                        <ui:InvokeWorkflowFile.Arguments>
+                          <scg:Dictionary x:TypeArguments="x:String, Argument" />
+                        </ui:InvokeWorkflowFile.Arguments>
+                      </ui:InvokeWorkflowFile>
+                    </Sequence>
+                  </If.Then>
+                </If>
+              </Sequence>
+            </ActivityAction>
+          </ui:ForEach.Body>
+        </ui:ForEach>
+      </Sequence>
+    </Sequence>
+  </Sequence>
+</Activity>

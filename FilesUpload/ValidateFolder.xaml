@@ -1,0 +1,645 @@
+<Activity mc:Ignorable="sap sap2010" x:Class="ValidateFolder" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:s="clr-namespace:System;assembly=System.Private.CoreLib" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <x:Members>
+    <x:Property Name="argFolderName" Type="InArgument(x:String)" />
+    <x:Property Name="argEsharePage" Type="InArgument(ui:Browser)" />
+    <x:Property Name="argMensagem" Type="InOutArgument(x:String)" />
+  </x:Members>
+  <VisualBasic.Settings>
+    <x:Null />
+  </VisualBasic.Settings>
+  <sap:VirtualizedContainerService.HintSize>2647,5584</sap:VirtualizedContainerService.HintSize>
+  <sap2010:WorkflowViewState.IdRef>ValidateFolder_1</sap2010:WorkflowViewState.IdRef>
+  <TextExpression.NamespacesForImplementation>
+    <scg:List x:TypeArguments="x:String" Capacity="46">
+      <x:String>Microsoft.VisualBasic</x:String>
+      <x:String>Microsoft.VisualBasic.Activities</x:String>
+      <x:String>Microsoft.VisualBasic.CompilerServices</x:String>
+      <x:String>System</x:String>
+      <x:String>System.Activities</x:String>
+      <x:String>System.Activities.Expressions</x:String>
+      <x:String>System.Activities.Statements</x:String>
+      <x:String>System.Activities.Validation</x:String>
+      <x:String>System.Activities.XamlIntegration</x:String>
+      <x:String>System.Collections</x:String>
+      <x:String>System.Collections.Generic</x:String>
+      <x:String>System.Collections.ObjectModel</x:String>
+      <x:String>System.Data</x:String>
+      <x:String>System.Diagnostics</x:String>
+      <x:String>System.Drawing</x:String>
+      <x:String>System.IO</x:String>
+      <x:String>System.Linq</x:String>
+      <x:String>System.Net.Mail</x:String>
+      <x:String>System.Text.RegularExpressions</x:String>
+      <x:String>System.Windows.Markup</x:String>
+      <x:String>System.Xml</x:String>
+      <x:String>System.Xml.Linq</x:String>
+      <x:String>UiPath.Core</x:String>
+      <x:String>UiPath.Core.Activities</x:String>
+    </scg:List>
+  </TextExpression.NamespacesForImplementation>
+  <TextExpression.ReferencesForImplementation>
+    <scg:List x:TypeArguments="AssemblyReference" Capacity="40">
+      <AssemblyReference>Microsoft.VisualBasic</AssemblyReference>
+      <AssemblyReference>mscorlib</AssemblyReference>
+      <AssemblyReference>PresentationCore</AssemblyReference>
+      <AssemblyReference>PresentationFramework</AssemblyReference>
+      <AssemblyReference>System</AssemblyReference>
+      <AssemblyReference>System.Activities</AssemblyReference>
+      <AssemblyReference>System.Collections</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.Composition</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.TypeConverter</AssemblyReference>
+      <AssemblyReference>System.Core</AssemblyReference>
+      <AssemblyReference>System.Data</AssemblyReference>
+      <AssemblyReference>System.Data.DataSetExtensions</AssemblyReference>
+      <AssemblyReference>System.Drawing</AssemblyReference>
+      <AssemblyReference>System.Linq</AssemblyReference>
+      <AssemblyReference>System.ObjectModel</AssemblyReference>
+      <AssemblyReference>System.Private.CoreLib</AssemblyReference>
+      <AssemblyReference>System.ServiceModel</AssemblyReference>
+      <AssemblyReference>System.Text.RegularExpressions</AssemblyReference>
+      <AssemblyReference>System.ValueTuple</AssemblyReference>
+      <AssemblyReference>System.Xaml</AssemblyReference>
+      <AssemblyReference>System.Xml</AssemblyReference>
+      <AssemblyReference>System.Xml.Linq</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.UiAutomation.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.UIAutomationNext</AssemblyReference>
+      <AssemblyReference>UiPath.Workflow</AssemblyReference>
+      <AssemblyReference>WindowsBase</AssemblyReference>
+    </scg:List>
+  </TextExpression.ReferencesForImplementation>
+  <Sequence sap2010:Annotation.AnnotationText="Validates if a folder exists and clicks it, if it doesnt exist creates it and clicks it." DisplayName="ValidateFolder" sap:VirtualizedContainerService.HintSize="2627,5444" sap2010:WorkflowViewState.IdRef="Sequence_1">
+    <sap:WorkflowViewStateService.ViewState>
+      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+        <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+      </scg:Dictionary>
+    </sap:WorkflowViewStateService.ViewState>
+    <TryCatch DisplayName="Try Catch" sap:VirtualizedContainerService.HintSize="2585,5324" sap2010:WorkflowViewState.IdRef="TryCatch_1">
+      <TryCatch.Try>
+        <Sequence DisplayName="Find or create folder" sap:VirtualizedContainerService.HintSize="2547,5092" sap2010:WorkflowViewState.IdRef="Sequence_4">
+          <Sequence.Variables>
+            <Variable x:TypeArguments="x:Boolean" Name="vElementExists" />
+            <Variable x:TypeArguments="ui:UiElement" Name="vFolderElement" />
+            <Variable x:TypeArguments="x:Boolean" Name="pastaAno" />
+          </Sequence.Variables>
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+              <x:Boolean x:Key="IsPinned">False</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+          <Delay Duration="00:00:01" sap:VirtualizedContainerService.HintSize="2505,22" sap2010:WorkflowViewState.IdRef="Delay_1" />
+          <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Invoke Logger workflow" sap:VirtualizedContainerService.HintSize="2505,87" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_1" UnSafe="False" WorkflowFileName="Util/Logger.xaml">
+            <ui:InvokeWorkflowFile.Arguments>
+              <InArgument x:TypeArguments="x:String" x:Key="vMensagemLog">["[INFO] Validating if tomador folder exists: " + argFolderName]</InArgument>
+            </ui:InvokeWorkflowFile.Arguments>
+          </ui:InvokeWorkflowFile>
+          <Assign sap:VirtualizedContainerService.HintSize="2505,60" sap2010:WorkflowViewState.IdRef="Assign_1">
+            <Assign.To>
+              <OutArgument x:TypeArguments="x:String">[argFolderName]</OutArgument>
+            </Assign.To>
+            <Assign.Value>
+              <InArgument x:TypeArguments="x:String">[System.Text.RegularExpressions.Regex.Replace(argFolderName, " {2,}", " ")]</InArgument>
+            </Assign.Value>
+          </Assign>
+          <ui:UiElementExists DisplayName="Especific folder exists" Exists="[vElementExists]" sap:VirtualizedContainerService.HintSize="2505,68" sap2010:WorkflowViewState.IdRef="UiElementExists_2">
+            <ui:UiElementExists.Target>
+              <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="74938fd8-f351-4786-af9e-f8b3f2f6c288" Selector="&lt;html omit:title='01 - TESTE ROBOTIZAÇÃO - DATA ENTRY - All Documents' /&gt;&lt;webctrl omit:id='19272' tag='DIV' class='ms-vb  itx' colName='Name' innertext='{{argFolderName}}' /&gt;" TimeoutMS="2000" WaitForReady="COMPLETE" />
+            </ui:UiElementExists.Target>
+          </ui:UiElementExists>
+          <If Condition="[vElementExists]" sap:VirtualizedContainerService.HintSize="2505,1015" sap2010:WorkflowViewState.IdRef="If_3">
+            <If.Else>
+              <Sequence sap:VirtualizedContainerService.HintSize="418,865" sap2010:WorkflowViewState.IdRef="Sequence_8">
+                <sap:WorkflowViewStateService.ViewState>
+                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                    <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                  </scg:Dictionary>
+                </sap:WorkflowViewStateService.ViewState>
+                <ui:CommentOut DisplayName="Comment Out" sap:VirtualizedContainerService.HintSize="376,52" sap2010:WorkflowViewState.IdRef="CommentOut_1">
+                  <ui:CommentOut.Body>
+                    <Sequence DisplayName="Ignored Activities" sap:VirtualizedContainerService.HintSize="376,151" sap2010:WorkflowViewState.IdRef="Sequence_10">
+                      <sap:WorkflowViewStateService.ViewState>
+                        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                        </scg:Dictionary>
+                      </sap:WorkflowViewStateService.ViewState>
+                      <ui:IsMatch DisplayName="Is Match" sap:VirtualizedContainerService.HintSize="334,59" sap2010:WorkflowViewState.IdRef="IsMatch_1" Input="[argFolderName]" IsBuilderTabModified="False" Pattern="^(\d{4}|\d{1,2}\s?\.\s?\w{4,9})$" RegexOption="IgnoreCase, Compiled" Result="[pastaAno]" />
+                    </Sequence>
+                  </ui:CommentOut.Body>
+                  <sap:WorkflowViewStateService.ViewState>
+                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                      <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                      <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                    </scg:Dictionary>
+                  </sap:WorkflowViewStateService.ViewState>
+                </ui:CommentOut>
+                <ui:CommentOut DisplayName="Comment Out" sap:VirtualizedContainerService.HintSize="376,52" sap2010:WorkflowViewState.IdRef="CommentOut_2">
+                  <ui:CommentOut.Body>
+                    <Sequence DisplayName="Ignored Activities" sap:VirtualizedContainerService.HintSize="526,299" sap2010:WorkflowViewState.IdRef="Sequence_11">
+                      <sap:WorkflowViewStateService.ViewState>
+                        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                        </scg:Dictionary>
+                      </sap:WorkflowViewStateService.ViewState>
+                      <If Condition="[argFolderName=&quot;DHL&quot; Or argFolderName=&quot;DOX&quot; Or argFolderName=&quot;ENE&quot; Or pastaAno=True]" sap:VirtualizedContainerService.HintSize="484,207" sap2010:WorkflowViewState.IdRef="If_2" />
+                    </Sequence>
+                  </ui:CommentOut.Body>
+                  <sap:WorkflowViewStateService.ViewState>
+                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                      <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                      <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                    </scg:Dictionary>
+                  </sap:WorkflowViewStateService.ViewState>
+                </ui:CommentOut>
+                <Sequence sap2010:Annotation.AnnotationText="Como pode haver mais de uma página de pastas criada procura pela pasta especifica a ser criada &#xA;" DisplayName="Procura pela pasta " sap:VirtualizedContainerService.HintSize="376,481" sap2010:WorkflowViewState.IdRef="Sequence_6">
+                  <sap:WorkflowViewStateService.ViewState>
+                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                      <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                      <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+                    </scg:Dictionary>
+                  </sap:WorkflowViewStateService.ViewState>
+                  <ui:SetValue ContinueOnError="{x:Null}" DelayAfter="{x:Null}" DelayBefore="{x:Null}" AlterIfDisabled="True" DisplayName="Set Text 'INPUT  inplaceSearchDiv...'" sap:VirtualizedContainerService.HintSize="334,134" sap2010:WorkflowViewState.IdRef="SetValue_1" Text="[argFolderName]">
+                    <ui:SetValue.Target>
+                      <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="29cd529b-8332-4a52-a794-04311f3e32a7" InformativeScreenshot="4d348b7c64b3dc330e3f470e4ed321d6" Selector="&lt;html title='*- All Documents' /&gt;&lt;webctrl id='inplaceSearchDiv_WPQ2_lsinput' tag='INPUT' /&gt;">
+                        <ui:Target.TimeoutMS>
+                          <InArgument x:TypeArguments="x:Int32" />
+                        </ui:Target.TimeoutMS>
+                        <ui:Target.WaitForReady>
+                          <InArgument x:TypeArguments="ui:WaitForReady" />
+                        </ui:Target.WaitForReady>
+                      </ui:Target>
+                    </ui:SetValue.Target>
+                  </ui:SetValue>
+                  <ui:SendHotkey ClickBeforeTyping="{x:Null}" DelayBefore="{x:Null}" DelayBetweenKeys="{x:Null}" DelayMS="{x:Null}" EmptyField="{x:Null}" SendWindowMessages="{x:Null}" Activate="True" DisplayName="Send Hotkey 'INPUT  inplaceSearchDiv...'" sap:VirtualizedContainerService.HintSize="334,155" sap2010:WorkflowViewState.IdRef="SendHotkey_1" Key="enter" KeyModifiers="None" SpecialKey="True">
+                    <ui:SendHotkey.Target>
+                      <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="e8c08374-e250-4262-9323-667f9bd563a5" InformativeScreenshot="3f6b8fa0f6a632eb4e13028c276a6470" Selector="&lt;html title='*- All Documents' /&gt;&lt;webctrl id='inplaceSearchDiv_WPQ2_lsinput' tag='INPUT' /&gt;">
+                        <ui:Target.TimeoutMS>
+                          <InArgument x:TypeArguments="x:Int32" />
+                        </ui:Target.TimeoutMS>
+                        <ui:Target.WaitForReady>
+                          <InArgument x:TypeArguments="ui:WaitForReady" />
+                        </ui:Target.WaitForReady>
+                      </ui:Target>
+                    </ui:SendHotkey.Target>
+                  </ui:SendHotkey>
+                </Sequence>
+                <ui:UiElementExists DisplayName="Especific folder exists" Exists="[vElementExists]" sap:VirtualizedContainerService.HintSize="376,68" sap2010:WorkflowViewState.IdRef="UiElementExists_1">
+                  <ui:UiElementExists.Target>
+                    <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="cadaab14-76ce-413e-8c20-3b598026cd15" Selector="&lt;html omit:title='01 - TESTE ROBOTIZAÇÃO - DATA ENTRY - All Documents' /&gt;&lt;webctrl omit:id='19272' tag='DIV' class='ms-vb  itx' colName='Name' innertext='{{argFolderName}}' /&gt;" TimeoutMS="10000" WaitForReady="COMPLETE" />
+                  </ui:UiElementExists.Target>
+                </ui:UiElementExists>
+              </Sequence>
+            </If.Else>
+          </If>
+          <If Condition="[vElementExists]" DisplayName="If specific folder exists" sap:VirtualizedContainerService.HintSize="2505,3548" sap2010:WorkflowViewState.IdRef="If_1">
+            <If.Then>
+              <Sequence sap2010:Annotation.AnnotationText="Caso a pasta exista e foi encontrada, clica na pasta&#xA;" sap:VirtualizedContainerService.HintSize="376,350" sap2010:WorkflowViewState.IdRef="Sequence_2">
+                <sap:WorkflowViewStateService.ViewState>
+                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                    <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                    <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+                    <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                  </scg:Dictionary>
+                </sap:WorkflowViewStateService.ViewState>
+                <ui:WaitUiElementAppear WaitActive="{x:Null}" WaitVisible="{x:Null}" DisplayName="Find specific folder" FoundElement="[vFolderElement]" sap:VirtualizedContainerService.HintSize="334,106" sap2010:WorkflowViewState.IdRef="WaitUiElementAppear_1">
+                  <ui:WaitUiElementAppear.Target>
+                    <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="b31af54e-add3-48e1-8b14-e6e464536b62" InformativeScreenshot="1353b22b45bacade55288cba4b171353" Selector="&lt;html omit:title='TESTE PASTA ESPECIFICA 82017 - All Documents' /&gt;&lt;webctrl omit:aaname='2017, Folder' omit:parentid='19434' tag='A' colName='Name' innertext='{{argFolderName}}' /&gt;" WaitForReady="COMPLETE">
+                      <ui:Target.TimeoutMS>
+                        <InArgument x:TypeArguments="x:Int32" />
+                      </ui:Target.TimeoutMS>
+                    </ui:Target>
+                  </ui:WaitUiElementAppear.Target>
+                </ui:WaitUiElementAppear>
+                <ui:Click DelayMS="{x:Null}" SendWindowMessages="{x:Null}" SimulateClick="{x:Null}" AlterIfDisabled="True" ClickType="CLICK_SINGLE" DelayBefore="1500" DisplayName="" sap:VirtualizedContainerService.HintSize="334,68" sap2010:WorkflowViewState.IdRef="Click_1" KeyModifiers="None" MouseButton="BTN_LEFT">
+                  <ui:Click.CursorPosition>
+                    <ui:CursorPosition Position="Center">
+                      <ui:CursorPosition.OffsetX>
+                        <InArgument x:TypeArguments="x:Int32" />
+                      </ui:CursorPosition.OffsetX>
+                      <ui:CursorPosition.OffsetY>
+                        <InArgument x:TypeArguments="x:Int32" />
+                      </ui:CursorPosition.OffsetY>
+                    </ui:CursorPosition>
+                  </ui:Click.CursorPosition>
+                  <ui:Click.Target>
+                    <ui:Target ClippingRegion="{x:Null}" Selector="{x:Null}" Element="[vFolderElement]" Id="9a63573d-1385-42ce-9b7c-6720469a04cc">
+                      <ui:Target.TimeoutMS>
+                        <InArgument x:TypeArguments="x:Int32" />
+                      </ui:Target.TimeoutMS>
+                      <ui:Target.WaitForReady>
+                        <InArgument x:TypeArguments="ui:WaitForReady" />
+                      </ui:Target.WaitForReady>
+                    </ui:Target>
+                  </ui:Click.Target>
+                </ui:Click>
+              </Sequence>
+            </If.Then>
+            <If.Else>
+              <Sequence sap2010:Annotation.AnnotationText="Caso a pasta não exista mesmo após a tentativa de buscar pelo nome da pasta, realiza a criação da pasta.&#xA;" sap:VirtualizedContainerService.HintSize="2084,3398" sap2010:WorkflowViewState.IdRef="Sequence_3">
+                <sap:WorkflowViewStateService.ViewState>
+                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                    <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                    <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+                    <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                  </scg:Dictionary>
+                </sap:WorkflowViewStateService.ViewState>
+                <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Create specific folder" sap:VirtualizedContainerService.HintSize="2042,87" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_2" UnSafe="False" WorkflowFileName="Util\CreateNewFolder.xaml">
+                  <ui:InvokeWorkflowFile.Arguments>
+                    <InArgument x:TypeArguments="x:String" x:Key="argFolderName">[argFolderName]</InArgument>
+                    <InArgument x:TypeArguments="ui:Browser" x:Key="argESharePage">[argEsharePage]</InArgument>
+                    <OutArgument x:TypeArguments="x:String" x:Key="argMensagem">[argMensagem]</OutArgument>
+                  </ui:InvokeWorkflowFile.Arguments>
+                </ui:InvokeWorkflowFile>
+                <ui:CommentOut DisplayName="Comment Out" sap:VirtualizedContainerService.HintSize="2042,52" sap2010:WorkflowViewState.IdRef="CommentOut_3">
+                  <ui:CommentOut.Body>
+                    <Sequence DisplayName="Ignored Activities" sap:VirtualizedContainerService.HintSize="526,301" sap2010:WorkflowViewState.IdRef="Sequence_21">
+                      <sap:WorkflowViewStateService.ViewState>
+                        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                        </scg:Dictionary>
+                      </sap:WorkflowViewStateService.ViewState>
+                      <If Condition="[Not argMensagem.Trim=&quot;&quot;]" sap:VirtualizedContainerService.HintSize="484,209" sap2010:WorkflowViewState.IdRef="If_6">
+                        <If.Then>
+                          <Throw Exception="[new BusinessRuleException(argMensagem)]" sap:VirtualizedContainerService.HintSize="200,22" sap2010:WorkflowViewState.IdRef="Throw_1" />
+                        </If.Then>
+                      </If>
+                    </Sequence>
+                  </ui:CommentOut.Body>
+                  <sap:WorkflowViewStateService.ViewState>
+                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                      <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                      <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                    </scg:Dictionary>
+                  </sap:WorkflowViewStateService.ViewState>
+                </ui:CommentOut>
+                <ui:UiElementExists DisplayName="Especific folder exists" Exists="[vElementExists]" sap:VirtualizedContainerService.HintSize="2042,68" sap2010:WorkflowViewState.IdRef="UiElementExists_3">
+                  <ui:UiElementExists.Target>
+                    <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="95ec79d3-ea50-488d-be48-765c59f12d7c" Selector="&lt;html omit:title='01 - TESTE ROBOTIZAÇÃO - DATA ENTRY - All Documents' /&gt;&lt;webctrl omit:id='19272' tag='DIV' class='ms-vb  itx' colName='Name' innertext='{{argFolderName}}' /&gt;" TimeoutMS="10000" WaitForReady="COMPLETE" />
+                  </ui:UiElementExists.Target>
+                </ui:UiElementExists>
+                <If Condition="[vElementExists]" sap:VirtualizedContainerService.HintSize="2042,631" sap2010:WorkflowViewState.IdRef="If_4">
+                  <If.Else>
+                    <Sequence sap2010:Annotation.AnnotationText="Como pode haver mais de uma página de pastas criada procura pela pasta especifica a ser criada &#xA;" DisplayName="Procura pela pasta " sap:VirtualizedContainerService.HintSize="376,481" sap2010:WorkflowViewState.IdRef="Sequence_9">
+                      <sap:WorkflowViewStateService.ViewState>
+                        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                          <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+                        </scg:Dictionary>
+                      </sap:WorkflowViewStateService.ViewState>
+                      <ui:SetValue ContinueOnError="{x:Null}" DelayAfter="{x:Null}" DelayBefore="{x:Null}" AlterIfDisabled="True" DisplayName="Set Text 'INPUT  inplaceSearchDiv...'" sap:VirtualizedContainerService.HintSize="334,134" sap2010:WorkflowViewState.IdRef="SetValue_2" Text="[argFolderName]">
+                        <ui:SetValue.Target>
+                          <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="8b935033-0554-4178-b406-2c2e5f48cf92" InformativeScreenshot="4d348b7c64b3dc330e3f470e4ed321d6" Selector="&lt;html title='*- All Documents' /&gt;&lt;webctrl id='inplaceSearchDiv_WPQ2_lsinput' tag='INPUT' /&gt;">
+                            <ui:Target.TimeoutMS>
+                              <InArgument x:TypeArguments="x:Int32" />
+                            </ui:Target.TimeoutMS>
+                            <ui:Target.WaitForReady>
+                              <InArgument x:TypeArguments="ui:WaitForReady" />
+                            </ui:Target.WaitForReady>
+                          </ui:Target>
+                        </ui:SetValue.Target>
+                      </ui:SetValue>
+                      <ui:SendHotkey ClickBeforeTyping="{x:Null}" DelayBefore="{x:Null}" DelayBetweenKeys="{x:Null}" DelayMS="{x:Null}" EmptyField="{x:Null}" SendWindowMessages="{x:Null}" Activate="True" DisplayName="Send Hotkey 'INPUT  inplaceSearchDiv...'" sap:VirtualizedContainerService.HintSize="334,155" sap2010:WorkflowViewState.IdRef="SendHotkey_2" Key="enter" KeyModifiers="None" SpecialKey="True">
+                        <ui:SendHotkey.Target>
+                          <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="2267f271-6497-443a-8a7c-eab306991698" InformativeScreenshot="3f6b8fa0f6a632eb4e13028c276a6470" Selector="&lt;html title='*- All Documents' /&gt;&lt;webctrl id='inplaceSearchDiv_WPQ2_lsinput' tag='INPUT' /&gt;">
+                            <ui:Target.TimeoutMS>
+                              <InArgument x:TypeArguments="x:Int32" />
+                            </ui:Target.TimeoutMS>
+                            <ui:Target.WaitForReady>
+                              <InArgument x:TypeArguments="ui:WaitForReady" />
+                            </ui:Target.WaitForReady>
+                          </ui:Target>
+                        </ui:SendHotkey.Target>
+                      </ui:SendHotkey>
+                    </Sequence>
+                  </If.Else>
+                </If>
+                <If sap2010:Annotation.AnnotationText="Caso não encontre na primeira página tenta encontrar na proxima pagina do eShare&#xA;" Condition="[vElementExists]" sap:VirtualizedContainerService.HintSize="2042,2264" sap2010:WorkflowViewState.IdRef="If_5">
+                  <sap:WorkflowViewStateService.ViewState>
+                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                      <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+                    </scg:Dictionary>
+                  </sap:WorkflowViewStateService.ViewState>
+                  <If.Then>
+                    <Sequence sap:VirtualizedContainerService.HintSize="376,306" sap2010:WorkflowViewState.IdRef="Sequence_12">
+                      <sap:WorkflowViewStateService.ViewState>
+                        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                        </scg:Dictionary>
+                      </sap:WorkflowViewStateService.ViewState>
+                      <ui:WaitUiElementAppear WaitActive="{x:Null}" WaitVisible="{x:Null}" DisplayName="Find specific folder" FoundElement="[vFolderElement]" sap:VirtualizedContainerService.HintSize="334,106" sap2010:WorkflowViewState.IdRef="WaitUiElementAppear_2">
+                        <ui:WaitUiElementAppear.Target>
+                          <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="0f825a05-65eb-435e-b6b7-8caa82b6b55f" InformativeScreenshot="1353b22b45bacade55288cba4b171353" Selector="&lt;html omit:title='TESTE PASTA ESPECIFICA 82017 - All Documents' /&gt;&lt;webctrl omit:aaname='2017, Folder' omit:parentid='19434' tag='A' colName='Name' innertext='{{argFolderName}}' /&gt;" WaitForReady="COMPLETE">
+                            <ui:Target.TimeoutMS>
+                              <InArgument x:TypeArguments="x:Int32" />
+                            </ui:Target.TimeoutMS>
+                          </ui:Target>
+                        </ui:WaitUiElementAppear.Target>
+                      </ui:WaitUiElementAppear>
+                      <ui:Click DelayMS="{x:Null}" SendWindowMessages="{x:Null}" SimulateClick="{x:Null}" AlterIfDisabled="True" ClickType="CLICK_SINGLE" DelayBefore="1500" DisplayName="" sap:VirtualizedContainerService.HintSize="334,68" sap2010:WorkflowViewState.IdRef="Click_2" KeyModifiers="None" MouseButton="BTN_LEFT">
+                        <ui:Click.CursorPosition>
+                          <ui:CursorPosition Position="Center">
+                            <ui:CursorPosition.OffsetX>
+                              <InArgument x:TypeArguments="x:Int32" />
+                            </ui:CursorPosition.OffsetX>
+                            <ui:CursorPosition.OffsetY>
+                              <InArgument x:TypeArguments="x:Int32" />
+                            </ui:CursorPosition.OffsetY>
+                          </ui:CursorPosition>
+                        </ui:Click.CursorPosition>
+                        <ui:Click.Target>
+                          <ui:Target Selector="{x:Null}" Element="[vFolderElement]" Id="007ff164-ee44-468f-b9ec-cd5e5db2c9fd">
+                            <ui:Target.ClippingRegion>
+                              <ui:Region Rectangle="0, 0, 0, 0" />
+                            </ui:Target.ClippingRegion>
+                            <ui:Target.TimeoutMS>
+                              <InArgument x:TypeArguments="x:Int32" />
+                            </ui:Target.TimeoutMS>
+                            <ui:Target.WaitForReady>
+                              <InArgument x:TypeArguments="ui:WaitForReady" />
+                            </ui:Target.WaitForReady>
+                          </ui:Target>
+                        </ui:Click.Target>
+                      </ui:Click>
+                    </Sequence>
+                  </If.Then>
+                  <If.Else>
+                    <Sequence sap:VirtualizedContainerService.HintSize="1621,2070" sap2010:WorkflowViewState.IdRef="Sequence_16">
+                      <Sequence.Variables>
+                        <Variable x:TypeArguments="x:Boolean" Name="proximaPaginaExiste" />
+                      </Sequence.Variables>
+                      <sap:WorkflowViewStateService.ViewState>
+                        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                        </scg:Dictionary>
+                      </sap:WorkflowViewStateService.ViewState>
+                      <ui:UiElementExists DisplayName="Element Exists 'A  javascript:'" Exists="[proximaPaginaExiste]" sap:VirtualizedContainerService.HintSize="1579,106" sap2010:WorkflowViewState.IdRef="UiElementExists_6">
+                        <ui:UiElementExists.Target>
+                          <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="4e5c2df7-3590-4b71-93d8-49fd9e7f9bb8" InformativeScreenshot="7a2a950a2fb1d880d162a2360036db62" Selector="&lt;html title='*- All Documents' /&gt;&lt;webctrl parentid='pagingWPQ2next' tag='A' /&gt;" TimeoutMS="2000">
+                            <ui:Target.WaitForReady>
+                              <InArgument x:TypeArguments="ui:WaitForReady" />
+                            </ui:Target.WaitForReady>
+                          </ui:Target>
+                        </ui:UiElementExists.Target>
+                      </ui:UiElementExists>
+                      <If Condition="[proximaPaginaExiste]" sap:VirtualizedContainerService.HintSize="1579,1832" sap2010:WorkflowViewState.IdRef="If_10">
+                        <If.Then>
+                          <Sequence sap:VirtualizedContainerService.HintSize="1230,1682" sap2010:WorkflowViewState.IdRef="Sequence_19">
+                            <sap:WorkflowViewStateService.ViewState>
+                              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                              </scg:Dictionary>
+                            </sap:WorkflowViewStateService.ViewState>
+                            <ui:Click DelayBefore="{x:Null}" DelayMS="{x:Null}" SendWindowMessages="{x:Null}" SimulateClick="{x:Null}" AlterIfDisabled="True" ClickType="CLICK_SINGLE" DisplayName="Click 'A  javascript:'" sap:VirtualizedContainerService.HintSize="1188,106" sap2010:WorkflowViewState.IdRef="Click_3" KeyModifiers="None" MouseButton="BTN_LEFT">
+                              <ui:Click.CursorPosition>
+                                <ui:CursorPosition Position="Center">
+                                  <ui:CursorPosition.OffsetX>
+                                    <InArgument x:TypeArguments="x:Int32" />
+                                  </ui:CursorPosition.OffsetX>
+                                  <ui:CursorPosition.OffsetY>
+                                    <InArgument x:TypeArguments="x:Int32" />
+                                  </ui:CursorPosition.OffsetY>
+                                </ui:CursorPosition>
+                              </ui:Click.CursorPosition>
+                              <ui:Click.Target>
+                                <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="3237f0ae-ede7-4654-8b95-78eccf0297f1" InformativeScreenshot="0a9a1e991d0323102164fe2c7fb4d230" Selector="&lt;html title='*- All Documents' /&gt;&lt;webctrl parentid='pagingWPQ2next' tag='A' /&gt;">
+                                  <ui:Target.TimeoutMS>
+                                    <InArgument x:TypeArguments="x:Int32" />
+                                  </ui:Target.TimeoutMS>
+                                  <ui:Target.WaitForReady>
+                                    <InArgument x:TypeArguments="ui:WaitForReady" />
+                                  </ui:Target.WaitForReady>
+                                </ui:Target>
+                              </ui:Click.Target>
+                            </ui:Click>
+                            <ui:UiElementExists DisplayName="Especific folder exists" Exists="[vElementExists]" sap:VirtualizedContainerService.HintSize="1188,68" sap2010:WorkflowViewState.IdRef="UiElementExists_4">
+                              <ui:UiElementExists.Target>
+                                <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="ade876bf-4d72-426e-9e06-be3c28997a41" Selector="&lt;html omit:title='01 - TESTE ROBOTIZAÇÃO - DATA ENTRY - All Documents' /&gt;&lt;webctrl omit:id='19272' tag='DIV' class='ms-vb  itx' colName='Name' innertext='{{argFolderName}}' /&gt;" TimeoutMS="10000" WaitForReady="COMPLETE" />
+                              </ui:UiElementExists.Target>
+                            </ui:UiElementExists>
+                            <If sap2010:Annotation.AnnotationText="Caso não encontre na primeira página tenta encontrar na proxima pagina do eShare&#xA;" Condition="[vElementExists]" sap:VirtualizedContainerService.HintSize="1188,1336" sap2010:WorkflowViewState.IdRef="If_8">
+                              <sap:WorkflowViewStateService.ViewState>
+                                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                  <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+                                </scg:Dictionary>
+                              </sap:WorkflowViewStateService.ViewState>
+                              <If.Then>
+                                <Sequence sap:VirtualizedContainerService.HintSize="376,306" sap2010:WorkflowViewState.IdRef="Sequence_13">
+                                  <sap:WorkflowViewStateService.ViewState>
+                                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                      <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                    </scg:Dictionary>
+                                  </sap:WorkflowViewStateService.ViewState>
+                                  <ui:WaitUiElementAppear WaitActive="{x:Null}" WaitVisible="{x:Null}" DisplayName="Find specific folder" FoundElement="[vFolderElement]" sap:VirtualizedContainerService.HintSize="334,106" sap2010:WorkflowViewState.IdRef="WaitUiElementAppear_3">
+                                    <ui:WaitUiElementAppear.Target>
+                                      <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="1d34e74d-e7b3-4de9-a4d0-097f037d1c05" InformativeScreenshot="1353b22b45bacade55288cba4b171353" Selector="&lt;html omit:title='TESTE PASTA ESPECIFICA 82017 - All Documents' /&gt;&lt;webctrl omit:aaname='2017, Folder' omit:parentid='19434' tag='A' colName='Name' innertext='{{argFolderName}}' /&gt;" WaitForReady="COMPLETE">
+                                        <ui:Target.TimeoutMS>
+                                          <InArgument x:TypeArguments="x:Int32" />
+                                        </ui:Target.TimeoutMS>
+                                      </ui:Target>
+                                    </ui:WaitUiElementAppear.Target>
+                                  </ui:WaitUiElementAppear>
+                                  <ui:Click DelayMS="{x:Null}" SendWindowMessages="{x:Null}" SimulateClick="{x:Null}" AlterIfDisabled="True" ClickType="CLICK_SINGLE" DelayBefore="1500" DisplayName="" sap:VirtualizedContainerService.HintSize="334,68" sap2010:WorkflowViewState.IdRef="Click_4" KeyModifiers="None" MouseButton="BTN_LEFT">
+                                    <ui:Click.CursorPosition>
+                                      <ui:CursorPosition Position="Center">
+                                        <ui:CursorPosition.OffsetX>
+                                          <InArgument x:TypeArguments="x:Int32" />
+                                        </ui:CursorPosition.OffsetX>
+                                        <ui:CursorPosition.OffsetY>
+                                          <InArgument x:TypeArguments="x:Int32" />
+                                        </ui:CursorPosition.OffsetY>
+                                      </ui:CursorPosition>
+                                    </ui:Click.CursorPosition>
+                                    <ui:Click.Target>
+                                      <ui:Target Selector="{x:Null}" Element="[vFolderElement]" Id="9fa176df-a637-4e45-afe3-38aa1c97bc17">
+                                        <ui:Target.ClippingRegion>
+                                          <ui:Region Rectangle="0, 0, 0, 0" />
+                                        </ui:Target.ClippingRegion>
+                                        <ui:Target.TimeoutMS>
+                                          <InArgument x:TypeArguments="x:Int32" />
+                                        </ui:Target.TimeoutMS>
+                                        <ui:Target.WaitForReady>
+                                          <InArgument x:TypeArguments="ui:WaitForReady" />
+                                        </ui:Target.WaitForReady>
+                                      </ui:Target>
+                                    </ui:Click.Target>
+                                  </ui:Click>
+                                </Sequence>
+                              </If.Then>
+                              <If.Else>
+                                <Sequence sap:VirtualizedContainerService.HintSize="767,1142" sap2010:WorkflowViewState.IdRef="Sequence_15">
+                                  <sap:WorkflowViewStateService.ViewState>
+                                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                      <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                    </scg:Dictionary>
+                                  </sap:WorkflowViewStateService.ViewState>
+                                  <ui:UiElementExists DisplayName="Element Exists 'A  javascript:'" Exists="[proximaPaginaExiste]" sap:VirtualizedContainerService.HintSize="725,106" sap2010:WorkflowViewState.IdRef="UiElementExists_7">
+                                    <ui:UiElementExists.Target>
+                                      <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="bf3a02f7-347a-49f5-9a0d-af2f437975dc" InformativeScreenshot="7a2a950a2fb1d880d162a2360036db62" Selector="&lt;html title='*- All Documents' /&gt;&lt;webctrl parentid='pagingWPQ2next' tag='A' /&gt;" TimeoutMS="2000">
+                                        <ui:Target.WaitForReady>
+                                          <InArgument x:TypeArguments="ui:WaitForReady" />
+                                        </ui:Target.WaitForReady>
+                                      </ui:Target>
+                                    </ui:UiElementExists.Target>
+                                  </ui:UiElementExists>
+                                  <If Condition="[proximaPaginaExiste]" sap:VirtualizedContainerService.HintSize="725,256" sap2010:WorkflowViewState.IdRef="If_9">
+                                    <If.Then>
+                                      <ui:Click DelayBefore="{x:Null}" DelayMS="{x:Null}" SendWindowMessages="{x:Null}" SimulateClick="{x:Null}" AlterIfDisabled="True" ClickType="CLICK_SINGLE" DisplayName="Click 'A  javascript:'" sap:VirtualizedContainerService.HintSize="334,106" sap2010:WorkflowViewState.IdRef="Click_7" KeyModifiers="None" MouseButton="BTN_LEFT">
+                                        <ui:Click.CursorPosition>
+                                          <ui:CursorPosition Position="Center">
+                                            <ui:CursorPosition.OffsetX>
+                                              <InArgument x:TypeArguments="x:Int32" />
+                                            </ui:CursorPosition.OffsetX>
+                                            <ui:CursorPosition.OffsetY>
+                                              <InArgument x:TypeArguments="x:Int32" />
+                                            </ui:CursorPosition.OffsetY>
+                                          </ui:CursorPosition>
+                                        </ui:Click.CursorPosition>
+                                        <ui:Click.Target>
+                                          <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="ed3a9262-8219-4750-b02a-1142b85d39a3" InformativeScreenshot="0a9a1e991d0323102164fe2c7fb4d230" Selector="&lt;html title='*- All Documents' /&gt;&lt;webctrl parentid='pagingWPQ2next' tag='A' /&gt;">
+                                            <ui:Target.TimeoutMS>
+                                              <InArgument x:TypeArguments="x:Int32" />
+                                            </ui:Target.TimeoutMS>
+                                            <ui:Target.WaitForReady>
+                                              <InArgument x:TypeArguments="ui:WaitForReady" />
+                                            </ui:Target.WaitForReady>
+                                          </ui:Target>
+                                        </ui:Click.Target>
+                                      </ui:Click>
+                                    </If.Then>
+                                  </If>
+                                  <ui:UiElementExists DisplayName="Especific folder exists" Exists="[vElementExists]" sap:VirtualizedContainerService.HintSize="725,68" sap2010:WorkflowViewState.IdRef="UiElementExists_5">
+                                    <ui:UiElementExists.Target>
+                                      <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="09feaa6a-08ba-4f94-ac8b-dbf9dbece136" Selector="&lt;html omit:title='01 - TESTE ROBOTIZAÇÃO - DATA ENTRY - All Documents' /&gt;&lt;webctrl omit:id='19272' tag='DIV' class='ms-vb  itx' colName='Name' innertext='{{argFolderName}}' /&gt;" TimeoutMS="10000" WaitForReady="COMPLETE" />
+                                    </ui:UiElementExists.Target>
+                                  </ui:UiElementExists>
+                                  <If sap2010:Annotation.AnnotationText="Caso não encontre na primeira página tenta encontrar na proxima pagina do eShare&#xA;" Condition="[vElementExists]" sap:VirtualizedContainerService.HintSize="725,500" sap2010:WorkflowViewState.IdRef="If_7">
+                                    <sap:WorkflowViewStateService.ViewState>
+                                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                        <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+                                      </scg:Dictionary>
+                                    </sap:WorkflowViewStateService.ViewState>
+                                    <If.Then>
+                                      <Sequence sap:VirtualizedContainerService.HintSize="376,306" sap2010:WorkflowViewState.IdRef="Sequence_14">
+                                        <sap:WorkflowViewStateService.ViewState>
+                                          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                          </scg:Dictionary>
+                                        </sap:WorkflowViewStateService.ViewState>
+                                        <ui:WaitUiElementAppear WaitActive="{x:Null}" WaitVisible="{x:Null}" DisplayName="Find specific folder" FoundElement="[vFolderElement]" sap:VirtualizedContainerService.HintSize="334,106" sap2010:WorkflowViewState.IdRef="WaitUiElementAppear_4">
+                                          <ui:WaitUiElementAppear.Target>
+                                            <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="12c93258-9b49-469e-b0f3-267fa82d5a74" InformativeScreenshot="1353b22b45bacade55288cba4b171353" Selector="&lt;html omit:title='TESTE PASTA ESPECIFICA 82017 - All Documents' /&gt;&lt;webctrl omit:aaname='2017, Folder' omit:parentid='19434' tag='A' colName='Name' innertext='{{argFolderName}}' /&gt;" WaitForReady="COMPLETE">
+                                              <ui:Target.TimeoutMS>
+                                                <InArgument x:TypeArguments="x:Int32" />
+                                              </ui:Target.TimeoutMS>
+                                            </ui:Target>
+                                          </ui:WaitUiElementAppear.Target>
+                                        </ui:WaitUiElementAppear>
+                                        <ui:Click DelayMS="{x:Null}" SendWindowMessages="{x:Null}" SimulateClick="{x:Null}" AlterIfDisabled="True" ClickType="CLICK_SINGLE" DelayBefore="1500" DisplayName="" sap:VirtualizedContainerService.HintSize="334,68" sap2010:WorkflowViewState.IdRef="Click_6" KeyModifiers="None" MouseButton="BTN_LEFT">
+                                          <ui:Click.CursorPosition>
+                                            <ui:CursorPosition Position="Center">
+                                              <ui:CursorPosition.OffsetX>
+                                                <InArgument x:TypeArguments="x:Int32" />
+                                              </ui:CursorPosition.OffsetX>
+                                              <ui:CursorPosition.OffsetY>
+                                                <InArgument x:TypeArguments="x:Int32" />
+                                              </ui:CursorPosition.OffsetY>
+                                            </ui:CursorPosition>
+                                          </ui:Click.CursorPosition>
+                                          <ui:Click.Target>
+                                            <ui:Target Selector="{x:Null}" Element="[vFolderElement]" Id="0d7fc118-b4a4-4783-b25c-e2a2e67d1a32">
+                                              <ui:Target.ClippingRegion>
+                                                <ui:Region Rectangle="0, 0, 0, 0" />
+                                              </ui:Target.ClippingRegion>
+                                              <ui:Target.TimeoutMS>
+                                                <InArgument x:TypeArguments="x:Int32" />
+                                              </ui:Target.TimeoutMS>
+                                              <ui:Target.WaitForReady>
+                                                <InArgument x:TypeArguments="ui:WaitForReady" />
+                                              </ui:Target.WaitForReady>
+                                            </ui:Target>
+                                          </ui:Click.Target>
+                                        </ui:Click>
+                                      </Sequence>
+                                    </If.Then>
+                                    <If.Else>
+                                      <Sequence sap:VirtualizedContainerService.HintSize="304,214" sap2010:WorkflowViewState.IdRef="Sequence_18">
+                                        <sap:WorkflowViewStateService.ViewState>
+                                          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                          </scg:Dictionary>
+                                        </sap:WorkflowViewStateService.ViewState>
+                                        <Assign sap:VirtualizedContainerService.HintSize="262,60" sap2010:WorkflowViewState.IdRef="Assign_4">
+                                          <Assign.To>
+                                            <OutArgument x:TypeArguments="x:String">[argMensagem]</OutArgument>
+                                          </Assign.To>
+                                          <Assign.Value>
+                                            <InArgument x:TypeArguments="x:String">["Não foi possível encontrar a pasta " + argFolderName+"."]</InArgument>
+                                          </Assign.Value>
+                                        </Assign>
+                                        <Throw Exception="[new BusinessRuleException(argMensagem)]" sap:VirtualizedContainerService.HintSize="262,22" sap2010:WorkflowViewState.IdRef="Throw_2" />
+                                      </Sequence>
+                                    </If.Else>
+                                  </If>
+                                </Sequence>
+                              </If.Else>
+                            </If>
+                          </Sequence>
+                        </If.Then>
+                        <If.Else>
+                          <Sequence sap:VirtualizedContainerService.HintSize="304,214" sap2010:WorkflowViewState.IdRef="Sequence_20">
+                            <sap:WorkflowViewStateService.ViewState>
+                              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                              </scg:Dictionary>
+                            </sap:WorkflowViewStateService.ViewState>
+                            <Assign sap:VirtualizedContainerService.HintSize="262,60" sap2010:WorkflowViewState.IdRef="Assign_5">
+                              <Assign.To>
+                                <OutArgument x:TypeArguments="x:String">[argMensagem]</OutArgument>
+                              </Assign.To>
+                              <Assign.Value>
+                                <InArgument x:TypeArguments="x:String">["Não foi possível encontrar a pasta " + argFolderName+"."]</InArgument>
+                              </Assign.Value>
+                            </Assign>
+                            <Throw Exception="[new BusinessRuleException(argMensagem)]" sap:VirtualizedContainerService.HintSize="262,22" sap2010:WorkflowViewState.IdRef="Throw_3" />
+                          </Sequence>
+                        </If.Else>
+                      </If>
+                    </Sequence>
+                  </If.Else>
+                </If>
+              </Sequence>
+            </If.Else>
+          </If>
+        </Sequence>
+      </TryCatch.Try>
+      <TryCatch.Catches>
+        <Catch x:TypeArguments="s:Exception" sap:VirtualizedContainerService.HintSize="2551,22" sap2010:WorkflowViewState.IdRef="Catch`1_1">
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+              <x:Boolean x:Key="IsPinned">False</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+          <ActivityAction x:TypeArguments="s:Exception">
+            <ActivityAction.Argument>
+              <DelegateInArgument x:TypeArguments="s:Exception" Name="exception" />
+            </ActivityAction.Argument>
+            <Sequence sap:VirtualizedContainerService.HintSize="376,179" sap2010:WorkflowViewState.IdRef="Sequence_17">
+              <sap:WorkflowViewStateService.ViewState>
+                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                </scg:Dictionary>
+              </sap:WorkflowViewStateService.ViewState>
+              <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Log error detail" sap:VirtualizedContainerService.HintSize="334,87" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_3" UnSafe="False" WorkflowFileName="Util/Logger.xaml">
+                <ui:InvokeWorkflowFile.Arguments>
+                  <InArgument x:TypeArguments="x:String" x:Key="vMensagemLog">["[ERROR] In validate folder sequence folder: " + argFolderName + Environment.NewLine + exception.StackTrace]</InArgument>
+                </ui:InvokeWorkflowFile.Arguments>
+              </ui:InvokeWorkflowFile>
+            </Sequence>
+          </ActivityAction>
+        </Catch>
+      </TryCatch.Catches>
+    </TryCatch>
+  </Sequence>
+</Activity>
